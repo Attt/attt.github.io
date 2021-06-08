@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
     <!-- title -->
 
 
@@ -13,24 +13,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <meta name="author" content="John Doe">
+    <meta name="author" content="attt">
     <meta name="renderer" content="webkit">
-    <meta name="copyright" content="John Doe">
+    <meta name="copyright" content="attt">
     
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
     <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:title" content="Attt&#39;s Studio">
+<meta property="og:url" content="http://attt.github.io/index.html">
+<meta property="og:site_name" content="Attt&#39;s Studio">
+<meta property="og:locale">
+<meta property="article:author" content="attt">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>fi3ework&#39;s Studio</title>
+    <title>Attt&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -219,7 +219,7 @@
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
     
-    <a class="home-link" href=/>attt's Studio.</a>
+    <a class="home-link" href=/>Attt's Studio.</a>
 </header>
     <div class="wrapper">
         <div class="site-intro" style="
@@ -245,7 +245,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            attt's Studio.
+            Attt's Studio.
             <!-- 文章页  -->
             
         </h1>
@@ -254,7 +254,7 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                考え前に、まず動く。
+                迷う前に、まず動く。
             
             <!-- 文章页  -->
             
@@ -389,17 +389,47 @@ Run server1$ hexo ...
         </div>
     </article>
     
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/05/29/fgo-1/" >
+            
+                <span>Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）</span>
+        </a>
+        <div class="abstract-content">
+            
+“该方法仅作研究，造成任何后果概不负责 :)”
+
+分析&lt; 1.17.1版本fgo使用旧版的unity3D开发，并且所有的战斗都是在本地进行计算，只有战斗配置和战斗结果数据会与服务器通信，因此旧版本的游戏中如果要修改战斗数据，只需要解开APK获取managed文件夹中的U3D相关dll，然后通过reflector解开Assembly-csharp.dll就可以修改离线的战斗参数或对象属性甚至是界面资源。
+修改过UI的版本被很多黑屁眼的二道贩子在淘宝各种高调出售…..
+
+（国服某修改版）
+跳跳们成功引起官方注意后，随即在之后的高版本中加入了特定数据点检查、有条件战斗log上传机制和服...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
     <!-- paginator  -->
     
 </main>
             <!-- profile -->
             
             <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/Misaka.jpg >
+    <img class="profile-avatar" alt="avatar" src= /avatar/avatar.png >
     <div class="profile-name">attt</div>
     
     <div class="profile-signature">
-        witness me
+        雪がどうして白いか知っているか
     </div>
     
     
@@ -594,9 +624,16 @@ Run server1$ hexo ...
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 1
+        Total : 2
         </div>
         <!-- search  -->
         
@@ -613,6 +650,20 @@ Run server1$ hexo ...
     
         <li class="archive-post-item">
             <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2018/05/29/fgo-1/" >Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）</a>
         </li>
     
     </div>
@@ -662,7 +713,7 @@ jsonContent:
     <script>
     var siteMeta = {
         root: "/",
-        author: "John Doe"
+        author: "attt"
     }
 </script>
     <!-- CDN failover -->
