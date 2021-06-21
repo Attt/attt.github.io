@@ -355,23 +355,78 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/06/08/hello-world/" >
+        <a class="abstract-title" href = "/2021/06/21/BinaryExponentiationAlgAndBinaryMultiplicationAlg/" >
             
-                <span>Hello World</span>
+                <span>[Untitled Post]</span>
         </a>
         <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+            
 
-More info: Writing
-Run server1$ hexo ...
+Binary Exponentiation Alg &amp; Binary Multiplication AlgBinary Exponentiation Alg 快速幂（二进制幂、平方幂）
+将幂分解:$x^a = x ^{(a)_{bin}} = x^{a1} * x^{a2} * x^{a3}$，让等价幂之间有倍数关系（因为是二进制），利用乘数的幂之间的关系，大幅简化运算（减少重复的计算）
+
+假设$x^n$ ，通常求幂方法是$x^n = x * x * x * … * x$  (n个x), 复杂度是O(n)。快速幂的做法是$x^n = x^n = x ^ {(n){bin}} ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/06/08</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/06/21</span>
             </div>
             <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/06/09/HashMap/" >
+            
+                <span>HashMap</span>
+        </a>
+        <div class="abstract-content">
+            知识点
+底层的原理
+
+put get resize factor threshold
+
+为什么使用数组+链表（树）
+
+使用的hash算法是什么？简单和hash槽长度取模？
+
+hash值高低16位异或，然后和当前长度n减1进行与运算
+
+补充说明：为什么是异或
+123456本质是信息的平衡，此处将高低异或本就是考虑到如果只是和n-1进行与运算，那么原来hash值的高位的信息很容易丢失，异或运算需要两者的信息产生差异，而与运算、或运算极大可能是其中一者的信息。
+
+
+hash冲突几种解决方案
+
+用LinkedList代替数组可以吗，为什么不用，ArrayList呢？
+
+jdk1.8中修改点，为什...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/06/09</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Map">Map</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HashMap">HashMap</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "数据结构">数据结构</a>
+    
+</div>
             
         </div>
     </article>
@@ -434,7 +489,7 @@ Run server1$ hexo ...
             
                 <span class="iconfont-archer wechat" title=wechat>
                   
-                  <img class="profile-qr" src="/assets/example_qr.png" />
+                  <img class="profile-qr" src="/assets/wechat_qr.jpg" />
                 </span>
             
         
@@ -521,9 +576,16 @@ Run server1$ hexo ...
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 2
+        Total : 3
         </div>
         <!-- search  -->
         
@@ -539,7 +601,12 @@ Run server1$ hexo ...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/hello-world/" >Hello World</a>
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2021/06/21/BinaryExponentiationAlgAndBinaryMultiplicationAlg/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/09</span><a class="archive-post-title" href= "/2021/06/09/HashMap/" >HashMap</a>
         </li>
     
     
@@ -560,6 +627,14 @@ Run server1$ hexo ...
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap"><span class="iconfont-archer">&#xe606;</span>HashMap</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -593,6 +668,10 @@ jsonContent:
 </div>
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
+    
+        <span class="sidebar-category-name" data-categories="Java/数据结构"><span class="iconfont-archer">&#xe60a;</span>Java/数据结构</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
