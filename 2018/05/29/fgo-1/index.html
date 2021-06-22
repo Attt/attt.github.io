@@ -420,11 +420,12 @@ height:50vh;
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
             <main class="main post-page">
+    
     <article class="article-entry">
         <blockquote>
 <p>“该方法仅作研究，造成任何后果概不负责 :)”</p>
 </blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="lt-1-17-1版本"><a href="#lt-1-17-1版本" class="headerlink" title="&lt; 1.17.1版本"></a>&lt; 1.17.1版本</h3><p>fgo使用旧版的unity3D开发，并且所有的战斗都是在<em><strong>本地进行</strong></em>计算，只有战斗配置和战斗结果数据会与服务器通信，因此旧版本的游戏中如果要修改战斗数据，只需要解开APK获取managed文件夹中的U3D相关dll，然后通过reflector解开<strong>Assembly-csharp.dll</strong>就可以修改离线的战斗参数或对象属性甚至是界面资源。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="lt-1-17-1版本"><a href="#lt-1-17-1版本" class="headerlink" title="&lt; 1.17.1版本"></a>&lt; 1.17.1版本</h3><p>fgo使用旧版的unity3D开发，并且所有的战斗都是在<strong><em>本地进行</em></strong>计算，只有战斗配置和战斗结果数据会与服务器通信，因此旧版本的游戏中如果要修改战斗数据，只需要解开APK获取managed文件夹中的U3D相关dll，然后通过reflector解开<strong>Assembly-csharp.dll</strong>就可以修改离线的战斗参数或对象属性甚至是界面资源。</p>
 <p>修改过UI的版本被很多黑屁眼的二道贩子在淘宝各种高调出售…..</p>
 <p><img src="/images/fgo-1/fgo-1-1.gif" alt="emmm"></p>
 <p>（国服某修改版）</p>
@@ -432,7 +433,7 @@ height:50vh;
 <h3 id="1-17-1版本"><a href="#1-17-1版本" class="headerlink" title="1.17.1版本"></a>1.17.1版本</h3><p>从1.17.1版本开始，fgo就开始对Assembly-csharp.dll进行了加壳处理（日服甚至还有反root和各种运行校验），加密后的文件无法直接使用reflector反编，需要分析libmono.dll和本地调用相关代码，然后通过运行时抽取内存中的dump内容来“脱壳”，大大增加了修改难度。（神烦…</p>
 <h3 id="简短分析"><a href="#简短分析" class="headerlink" title="简短分析"></a>简短分析</h3><p>最新的1.20.0版本据说是什么动态加密，解密更加困难，因此当前版本脱壳这条路肯定不是一件轻松的差事。</p>
 <blockquote>
-<p>懒是第一生产力。 —-鲁迅</p>
+<p>懒是第一生产力。 ——鲁迅</p>
 </blockquote>
 <p>脱壳操作可以获取未加密dll，利用强大的reflector，可以说近乎于获得了源码，但是获得源码最大的意义并不是修改本地数据，而是可以自定各种资源（增加菜单或者按钮之类的）。  </p>
 <p>那么无法修改<strong>Assembly-csharp.dll</strong>的情况下，还能愉快的cheat吗？</p>
@@ -453,7 +454,7 @@ height:50vh;
 <p>接下来看一看抓到的获取战斗配置的请求（正常的程序由于规范化都会不可避免的在提交参数或者接口中暴露接口的作用，比如下面的key=battlesetup）</p>
 <p><img src="/images/fgo-1/fgo-1-4.png" alt="fiddler"></p>
 <p>查看返回body，仅包含%3D(=)、A-z0-9+/等字符可以猜测是BASE64加密，先解开看看有没有别的加密。</p>
-<p><img src="/images/fgo-1/fgo-1-5.png"></p>
+<p><img src="/images/fgo-1/fgo-1-5.png" alt=""></p>
 <p>直接就是原始的JSON格式数据了，可以说是很奈斯了。</p>
 <p>接下来格式化JSON看看获取了哪些数据。</p>
 <p><img src="/images/fgo-1/fgo-1-6.png" alt="json-formatted"></p>
@@ -675,7 +676,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2021/06/21/BinaryExponentiationAlgAndBinaryMultiplicationAlg/" >[Untitled Post]</a>
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2021/06/21/BinaryExponentiationAlgAndBinaryMultiplicationAlg/" >快速幂、快速乘模板</a>
         </li>
     
     
@@ -701,6 +702,16 @@ top:50vh;
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Binary Exponentiation"><span class="iconfont-archer">&#xe606;</span>Binary Exponentiation</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Multiplication"><span class="iconfont-archer">&#xe606;</span>Binary Multiplication</span>
+    
+        <span class="sidebar-tag-name" data-tags="快速幂"><span class="iconfont-archer">&#xe606;</span>快速幂</span>
+    
+        <span class="sidebar-tag-name" data-tags="快速乘法"><span class="iconfont-archer">&#xe606;</span>快速乘法</span>
+    
+        <span class="sidebar-tag-name" data-tags="算法"><span class="iconfont-archer">&#xe606;</span>算法</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
@@ -742,6 +753,8 @@ jsonContent:
 </div>
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="算法"><span class="iconfont-archer">&#xe60a;</span>算法</span>
     
         <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
     
