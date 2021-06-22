@@ -408,7 +408,38 @@ jdk1.8中修改点...
     
     <!-- paginator  -->
     
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+      </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
 </main>
+
             <!-- profile -->
             
         </div>
@@ -446,7 +477,9 @@ jdk1.8中修改点...
         
     
         
-    
+            
+                <a href="//www.zhihu.com/people/pex-at" class="iconfont-archer zhihu" target="_blank" title=zhihu></a>
+            
         
     
         
@@ -466,11 +499,23 @@ jdk1.8中修改点...
         
     
         
+            
+                <a href="//space.bilibili.com/397487" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
     
         
     
         
     
+        
+    
+        
+            
+                <a href="/%5Bobject%20Object%5D" class="iconfont-archer friends" target="_blank" title=friends></a>
+            
         
     
 
