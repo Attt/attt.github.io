@@ -20,25 +20,17 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="知识点 底层的原理  put get resize factor threshold  为什么使用数组+链表（树）  使用的hash算法是什么？简单和hash槽长度取模？  hash值高低16位异或，然后和当前长度n减1进行与运算  补充说明：为什么是异或 123456本质是信息的平衡，此处将高低异或本就是考虑到如果只是和n-1进行与运算，那么原来hash值的高位的信息很容易丢失，异或运算需要两者">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HashMap">
-<meta property="og:url" content="http://attt.github.io/2021/06/09/HashMap/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Attt&#39;s Studio">
+<meta property="og:url" content="http://attt.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
 <meta property="og:site_name" content="Attt&#39;s Studio">
-<meta property="og:description" content="知识点 底层的原理  put get resize factor threshold  为什么使用数组+链表（树）  使用的hash算法是什么？简单和hash槽长度取模？  hash值高低16位异或，然后和当前长度n减1进行与运算  补充说明：为什么是异或 123456本质是信息的平衡，此处将高低异或本就是考虑到如果只是和n-1进行与运算，那么原来hash值的高位的信息很容易丢失，异或运算需要两者">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-06-09T02:50:18.000Z">
-<meta property="article:modified_time" content="2021-06-21T14:43:33.217Z">
 <meta property="article:author" content="attt">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Map">
-<meta property="article:tag" content="HashMap">
-<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>HashMap · Attt&#39;s Studio</title>
+    <title>Attt&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -220,23 +212,12 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Attt&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">HashMap</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Attt's Studio.</a>
 </header>
@@ -248,80 +229,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            HashMap
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Map">Map</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "HashMap">HashMap</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "数据结构">数据结构</a>
-    
-</div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">954</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2021/06/09</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -422,130 +347,79 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
+            <main class="main index-page">
     
-    <article class="article-entry">
-        <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
-<li><p>底层的原理</p>
-</li>
-<li><p>put get resize factor threshold</p>
-</li>
-<li><p>为什么使用数组+链表（树）</p>
-</li>
-<li><p>使用的hash算法是什么？简单和hash槽长度取模？</p>
-<ol>
-<li><p>hash值高低16位异或，然后和当前长度n减1进行与运算</p>
-</li>
-<li><p>补充说明：为什么是异或</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">本质是信息的平衡，此处将高低异或</span><br><span class="line">本就是考虑到如果只是和n-1进行与</span><br><span class="line">运算，那么原来hash值的高位的信息</span><br><span class="line">很容易丢失，异或运算需要两者的信</span><br><span class="line">息产生差异，而与运算、或运算极大</span><br><span class="line">可能是其中一者的信息。</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li><p>hash冲突几种解决方案</p>
-</li>
-<li><p>用LinkedList代替数组可以吗，为什么不用，ArrayList呢？</p>
-</li>
-<li><p>jdk1.8中修改点，为什么</p>
-<ol>
-<li>引入了红黑树，在严重碰撞的情况下会有更好的查找效率</li>
-<li>高低位异或，使得碰撞概率降低</li>
-<li>改为尾插法<ol>
-<li>其实头插法的初衷也挺扯的，“最后一次插入的节点有较大的几率会被先访问”这句话本身没有错，但是hash碰撞这件事本身就是应该通过规范的编码和选取hash算法来避免的，在这个前提下发生碰撞的概率应该很低，但是头插法引入的链表倒置问题却会有更大的概率产生</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>为什么会线程不安全，举例</p>
-<ol>
-<li><p>本质是什么呢？剥离hash map的其他细节，本质就是利用<code>临时链表</code>的<code>头插法</code>单向链表的倒置本身就是线程不安全的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">举个例子，假设现在有链表a-&gt;b，两个线程都要对该链表进行倒置，线程1到达b节点，将b</span><br><span class="line">节点的后指针指向a，然后线程1挂起，此时线程2到达a节点，由于此时临时链表已经有b节</span><br><span class="line">点了，移动a节点使得a节点的后指针指向b(头插),至此循环产生。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>补充说明：<code>临时链表</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">比如要倒置a-&gt;b，先产生一个空头节点（临时指针），然后遍历原链表：a头插入空节点为</span><br><span class="line">a-&gt;nil，b头插入临时链表为b-&gt;a-&gt;nil</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>补充说明：<code>头插法</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在链表插入新元素的时候从头部插入，区别于“尾插法”</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>补充说明：线程不安全除了扩容还体现在丢值</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">比如线程1插入c元素，线程2插入d元素，两者槽位相同，槽中的链表为a-&gt;b，线程1修改c</span><br><span class="line">的后指针指向a，c-&gt;a-&gt;b然后挂起，线程2修改d的后指针指向a，d-&gt;a-&gt;b, 然后挂起，</span><br><span class="line">线程1将c作为头节点，执行结束，线程2将d作为头节点，结束。此时在槽中只能找到d、</span><br><span class="line">a、b，因为c节点已经被线程2的操作‘覆盖’了。</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>java8的尾插法就能保证线程安全了吗？</p>
-<ol>
-<li>不能，如上述补充说明最后一条描述的，还是会有丢值问题出现，如果要并发写入，应使用concurrentHashMap</li>
-</ol>
-</li>
-<li><p>为什么扩容是2倍</p>
-<ol>
-<li>因为hash的时候是要用hash值去和n-1进行与运算的（n为原长度），如果是2的幂减1则所有位都为1，与运算分布更加均匀</li>
-</ol>
-</li>
-<li><p>为什么在解决hash冲突时候，不直接用红黑树，而是先用链表，再用红黑树</p>
-<ol>
-<li>红黑树的插入和删除会有平衡操作，额外的开销</li>
-</ol>
-</li>
-<li><p>当链表转为红黑树，什么时候退化为链表，为什么</p>
-<ol>
-<li>链表长度大于8的时候会转化为红黑树，小于6退回链表，隔7是考虑尽量避免频繁的插入删除造成的频繁转换</li>
-</ol>
-</li>
-</ol>
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/06/23/Bits/" >
+            
+                <span>位运算</span>
+        </a>
+        <div class="abstract-content">
+            二进制中1的个数 (Numbers in 1 bits)
+请实现一个函数，输入一个整数（以二进制串形式），输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。
 
-    </article>
-    <!-- license  -->
-    
-        <div class="license-wrapper">
-            <p>原文作者：<a href="http://attt.github.io">attt</a>
-            <p>原文链接：<a href="http://attt.github.io/2021/06/09/HashMap/">http://attt.github.io/2021/06/09/HashMap/</a>
-            <p>发表日期：<a href="http://attt.github.io/2021/06/09/HashMap/">June 9th 2021, 10:50:18 am</a>
-            <p>更新日期：<a href="http://attt.github.io/2021/06/09/HashMap/">June 21st 2021, 10:43:33 pm</a>
-            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+BF思路遍历每一位，判断是1，计数器+1，复杂度O(n)
+代码1234567int hammingWeight(int n)&#123;  int ans = 0;  for (int i = 0; i &lt; 32; i++) &#123;      ans += ((n &gt;&gt; i) &amp; 1);  &#125;  return ...
         </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/06/23</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "算法">算法</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "二进制">二进制</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "leetcode">leetcode</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "位运算">位运算</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2021/06/21/BinaryExponentiationAlgAndBinaryMultiplicationAlg/" title= "快速幂、快速乘模板">
-                    <div class="nextTitle">快速幂、快速乘模板</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/05/29/fgo-1/" title= "Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）">
-                    <div class="prevTitle">Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
     
     
-    <!-- gitalk评论 -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
 
-    <!-- utteranc评论 -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
 
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+      </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
-    
-    
-
-    <!-- 评论 -->
-
-    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
-    
 </main>
 
             <!-- profile -->
@@ -645,24 +519,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">知识点</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -857,8 +713,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
