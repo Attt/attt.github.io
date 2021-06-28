@@ -209,7 +209,8 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Attt's Studio" type="application/atom+xml">
+</head>
 
     
     
@@ -358,32 +359,10 @@
     <article class="index-post">
         <a class="abstract-title" href = "/2021/06/09/HashMap/" >
             
-                <span>HashMap</span>
+                <span>HashMap杂谈</span>
         </a>
         <div class="abstract-content">
-            知识点
-底层的原理
-
-put get resize factor threshold
-
-为什么使用数组+链表（树）
-
-使用的hash算法是什么？简单和hash槽长度取模？
-
-hash值高低16位异或，然后和当前长度n减1进行与运算
-
-补充说明：为什么是异或
-123456本质是信息的平衡，此处将高低异或本就是考虑到如果只是和n-1进行与运算，那么原来hash值的高位的信息很容易丢失，异或运算需要两者的信息产生差异，而与运算、或运算极大可能是其中一者的信息。
-
-
-
-
-
-hash冲突几种解决方案
-
-用LinkedList代替数组可以吗，为什么不用，ArrayList呢？
-
-jdk1.8中修改点...
+            HashMap相关的关键点以及8中的一些变化
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -512,6 +491,10 @@ jdk1.8中修改点...
         
     
         
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
     
         
             
@@ -585,6 +568,8 @@ jdk1.8中修改点...
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 4
@@ -613,7 +598,7 @@ jdk1.8中修改点...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/09</span><a class="archive-post-title" href= "/2021/06/09/HashMap/" >HashMap</a>
+            <span class="archive-post-date">06/09</span><a class="archive-post-title" href= "/2021/06/09/HashMap/" >HashMap杂谈</a>
         </li>
     
     
@@ -627,7 +612,7 @@ jdk1.8中修改点...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2018/05/29/fgo-1/" >Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）</a>
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2018/05/29/fgo-1/" >Fate/Grand Order 免逆向战斗数据修改</a>
         </li>
     
     </div>
@@ -635,9 +620,21 @@ jdk1.8中修改点...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Binary Exponentiation"><span class="iconfont-archer">&#xe606;</span>Binary Exponentiation</span>
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
-        <span class="sidebar-tag-name" data-tags="Binary Multiplication"><span class="iconfont-archer">&#xe606;</span>Binary Multiplication</span>
+        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap"><span class="iconfont-archer">&#xe606;</span>HashMap</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="hack"><span class="iconfont-archer">&#xe606;</span>hack</span>
+    
+        <span class="sidebar-tag-name" data-tags="gossip"><span class="iconfont-archer">&#xe606;</span>gossip</span>
+    
+        <span class="sidebar-tag-name" data-tags="interception"><span class="iconfont-archer">&#xe606;</span>interception</span>
+    
+        <span class="sidebar-tag-name" data-tags="位运算"><span class="iconfont-archer">&#xe606;</span>位运算</span>
     
         <span class="sidebar-tag-name" data-tags="快速幂"><span class="iconfont-archer">&#xe606;</span>快速幂</span>
     
@@ -648,16 +645,6 @@ jdk1.8中修改点...
         <span class="sidebar-tag-name" data-tags="二进制"><span class="iconfont-archer">&#xe606;</span>二进制</span>
     
         <span class="sidebar-tag-name" data-tags="leetcode"><span class="iconfont-archer">&#xe606;</span>leetcode</span>
-    
-        <span class="sidebar-tag-name" data-tags="位运算"><span class="iconfont-archer">&#xe606;</span>位运算</span>
-    
-        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
-    
-        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
-    
-        <span class="sidebar-tag-name" data-tags="HashMap"><span class="iconfont-archer">&#xe606;</span>HashMap</span>
-    
-        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -692,13 +679,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="算法"><span class="iconfont-archer">&#xe60a;</span>算法</span>
-    
         <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
     
-        <span class="sidebar-category-name" data-categories="算法/位运算"><span class="iconfont-archer">&#xe60a;</span>算法/位运算</span>
+        <span class="sidebar-category-name" data-categories="hack"><span class="iconfont-archer">&#xe60a;</span>hack</span>
+    
+        <span class="sidebar-category-name" data-categories="算法"><span class="iconfont-archer">&#xe60a;</span>算法</span>
     
         <span class="sidebar-category-name" data-categories="Java/数据结构"><span class="iconfont-archer">&#xe60a;</span>Java/数据结构</span>
+    
+        <span class="sidebar-category-name" data-categories="算法/位运算"><span class="iconfont-archer">&#xe60a;</span>算法/位运算</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

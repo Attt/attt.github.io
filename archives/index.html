@@ -209,7 +209,8 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Attt's Studio" type="application/atom+xml">
+</head>
 
     
     
@@ -361,11 +362,7 @@
                 <span>位运算</span>
         </a>
         <div class="abstract-content">
-            二进制中1的个数 (Numbers in 1 bits)
-请实现一个函数，输入一个整数（以二进制串形式），输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。
-
-BF思路遍历每一位，判断是1，计数器+1，复杂度O(n)
-代码1234567int hammingWeight(int n)&#123;  int ans = 0;  for (int i = 0; i &lt; 32; i++) &#123;      ans += ((n &gt;&gt; i) &amp; 1);  &#125;  return ...
+            leetcode中关于进制的一些问题和思路
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -376,13 +373,13 @@ BF思路遍历每一位，判断是1，计数器+1，复杂度O(n)
             
             <div class= abstract-tags >
     
+        <a class="post-tag" href="javascript:void(0);" data-tags = "位运算">位运算</a>
+    
         <a class="post-tag" href="javascript:void(0);" data-tags = "算法">算法</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "二进制">二进制</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "位运算">位运算</a>
     
 </div>
             
@@ -400,13 +397,7 @@ BF思路遍历每一位，判断是1，计数器+1，复杂度O(n)
                 <span>快速幂、快速乘模板</span>
         </a>
         <div class="abstract-content">
-            
-Binary Exponentiation &amp; Binary Multiplication 
-
-快速幂（Binary Exponentiation、二进制幂、平方幂）算法理解
-将幂分解： x^a = x^{(a)_{bin}} = x^{a_1} * x^{a_2} * x^{a_3}（其中 $^{(a)_{bin}}$ 是 $^a$ 的等价二进制，其中$^{a1}$、$^{a2}$、$^{a3}$是二进制各个位）让等价幂之间有倍数关系（因为是二进制），利用乘数的幂之间的关系，大幅简化运算（减少重复的计算）
-
-假设$^{a1}$、$^{a2}$、$^{a3}$按照高位到低位顺序...
+            快速算法，n到logn
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -417,9 +408,7 @@ Binary Exponentiation &amp; Binary Multiplication
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Binary Exponentiation">Binary Exponentiation</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Binary Multiplication">Binary Multiplication</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "位运算">位运算</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "快速幂">快速幂</a>
     
@@ -440,32 +429,10 @@ Binary Exponentiation &amp; Binary Multiplication
     <article class="index-post">
         <a class="abstract-title" href = "/2021/06/09/HashMap/" >
             
-                <span>HashMap</span>
+                <span>HashMap杂谈</span>
         </a>
         <div class="abstract-content">
-            知识点
-底层的原理
-
-put get resize factor threshold
-
-为什么使用数组+链表（树）
-
-使用的hash算法是什么？简单和hash槽长度取模？
-
-hash值高低16位异或，然后和当前长度n减1进行与运算
-
-补充说明：为什么是异或
-123456本质是信息的平衡，此处将高低异或本就是考虑到如果只是和n-1进行与运算，那么原来hash值的高位的信息很容易丢失，异或运算需要两者的信息产生差异，而与运算、或运算极大可能是其中一者的信息。
-
-
-
-
-
-hash冲突几种解决方案
-
-用LinkedList代替数组可以吗，为什么不用，ArrayList呢？
-
-jdk1.8中修改点...
+            HashMap相关的关键点以及8中的一些变化
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -497,17 +464,10 @@ jdk1.8中修改点...
     <article class="index-post">
         <a class="abstract-title" href = "/2018/05/29/fgo-1/" >
             
-                <span>Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）</span>
+                <span>Fate/Grand Order 免逆向战斗数据修改</span>
         </a>
         <div class="abstract-content">
-            
-“该方法仅作研究，造成任何后果概不负责 :)”
-
-分析&lt; 1.17.1版本fgo使用旧版的unity3D开发，并且所有的战斗都是在本地进行计算，只有战斗配置和战斗结果数据会与服务器通信，因此旧版本的游戏中如果要修改战斗数据，只需要解开APK获取managed文件夹中的U3D相关dll，然后通过reflector解开Assembly-csharp.dll就可以修改离线的战斗参数或对象属性甚至是界面资源。
-修改过UI的版本被很多黑屁眼的二道贩子在淘宝各种高调出售…..
-
-（国服某修改版）
-跳跳们成功引起官方注意后，随即在之后的高版本中加入了特定数据点检查、有条件战斗log上传机制和服...
+            2021 update：该方法已失效
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -515,6 +475,16 @@ jdk1.8中修改点...
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/29</span>
             </div>
             <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "hack">hack</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "gossip">gossip</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "interception">interception</a>
+    
+</div>
             
         </div>
     </article>
@@ -624,6 +594,10 @@ jdk1.8中修改点...
         
     
         
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
     
         
             
@@ -697,6 +671,8 @@ jdk1.8中修改点...
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 4
@@ -725,7 +701,7 @@ jdk1.8中修改点...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/09</span><a class="archive-post-title" href= "/2021/06/09/HashMap/" >HashMap</a>
+            <span class="archive-post-date">06/09</span><a class="archive-post-title" href= "/2021/06/09/HashMap/" >HashMap杂谈</a>
         </li>
     
     
@@ -739,7 +715,7 @@ jdk1.8中修改点...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2018/05/29/fgo-1/" >Fate/Grand Order 动态加密版本免逆向战斗数据修改（一）</a>
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2018/05/29/fgo-1/" >Fate/Grand Order 免逆向战斗数据修改</a>
         </li>
     
     </div>
@@ -747,9 +723,21 @@ jdk1.8中修改点...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Binary Exponentiation"><span class="iconfont-archer">&#xe606;</span>Binary Exponentiation</span>
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
-        <span class="sidebar-tag-name" data-tags="Binary Multiplication"><span class="iconfont-archer">&#xe606;</span>Binary Multiplication</span>
+        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap"><span class="iconfont-archer">&#xe606;</span>HashMap</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="hack"><span class="iconfont-archer">&#xe606;</span>hack</span>
+    
+        <span class="sidebar-tag-name" data-tags="gossip"><span class="iconfont-archer">&#xe606;</span>gossip</span>
+    
+        <span class="sidebar-tag-name" data-tags="interception"><span class="iconfont-archer">&#xe606;</span>interception</span>
+    
+        <span class="sidebar-tag-name" data-tags="位运算"><span class="iconfont-archer">&#xe606;</span>位运算</span>
     
         <span class="sidebar-tag-name" data-tags="快速幂"><span class="iconfont-archer">&#xe606;</span>快速幂</span>
     
@@ -760,16 +748,6 @@ jdk1.8中修改点...
         <span class="sidebar-tag-name" data-tags="二进制"><span class="iconfont-archer">&#xe606;</span>二进制</span>
     
         <span class="sidebar-tag-name" data-tags="leetcode"><span class="iconfont-archer">&#xe606;</span>leetcode</span>
-    
-        <span class="sidebar-tag-name" data-tags="位运算"><span class="iconfont-archer">&#xe606;</span>位运算</span>
-    
-        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
-    
-        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
-    
-        <span class="sidebar-tag-name" data-tags="HashMap"><span class="iconfont-archer">&#xe606;</span>HashMap</span>
-    
-        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -804,13 +782,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="算法"><span class="iconfont-archer">&#xe60a;</span>算法</span>
-    
         <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
     
-        <span class="sidebar-category-name" data-categories="算法/位运算"><span class="iconfont-archer">&#xe60a;</span>算法/位运算</span>
+        <span class="sidebar-category-name" data-categories="hack"><span class="iconfont-archer">&#xe60a;</span>hack</span>
+    
+        <span class="sidebar-category-name" data-categories="算法"><span class="iconfont-archer">&#xe60a;</span>算法</span>
     
         <span class="sidebar-category-name" data-categories="Java/数据结构"><span class="iconfont-archer">&#xe60a;</span>Java/数据结构</span>
+    
+        <span class="sidebar-category-name" data-categories="算法/位运算"><span class="iconfont-archer">&#xe60a;</span>算法/位运算</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
