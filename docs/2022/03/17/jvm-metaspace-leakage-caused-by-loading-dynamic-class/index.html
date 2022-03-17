@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Attt&#39;s ブログ | Papers</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Attt&#39;s ブログ</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            &lt;JVM&gt; Metaspace leakage caused by loading dynamic class
+        </div>
+        <div class="post-meta">
+            2022-03-17
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="cause"><a href="#cause" class="headerlink" title="cause"></a>cause</h2><p>Define class with <code>ClassLoader#defineClass</code>, no matter the parameter <code>name</code> is specified or not, the HotSpot JVM always throws OOM in metaspace at last.</p>
+<h2 id="behavior-of-ClassLoader-defineClass"><a href="#behavior-of-ClassLoader-defineClass" class="headerlink" title="behavior of ClassLoader#defineClass"></a>behavior of <code>ClassLoader#defineClass</code></h2><p><img src="/0.png" alt="defineClass"></p>
+<p><code>ClassLoader#defineClass</code> is JVM native method, the major steps are:</p>
+<ol>
+<li><p>parse class file and check if class file format is correct</p>
+<p><img src="/1.png" alt="vm specification"></p>
+</li>
+<li><p>check <code>systemDictionary</code> with parameter <code>name</code> to determine if Klass&#x2F;KlassHandler is already loaded</p>
+</li>
+</ol>
+<p>(pretend here some source codes XD)</p>
+<p>But if step-2 exists, why the metaspace will be full?</p>
+<h2 id="what-actually-happens-when-VM-parsing-class-file"><a href="#what-actually-happens-when-VM-parsing-class-file" class="headerlink" title="what actually happens when VM parsing class file"></a>what actually happens when VM parsing class file</h2><p>In step-1 mentioned above, HotSpot VM not only parses the class file but save the class data structure (class code, vtable, itable, etc.) to metaspace. so even if the class name is totally the same, there is duplicated class data generated in metaspace, and which is the metaspace OOM cause.</p>
+<p><img src="/2.png" alt="native define class"></p>
+<p><img src="/3.png" alt="find klass in dict"></p>
+<p><img src="/4.png" alt="check if class already defined"></p>
+<p>Why not just only parse the file without saving it to metaspace?</p>
+<p>In my gusse:</p>
+<ul>
+<li><p>In java code, most of class definition is done by <code>ClassLoader#loadClass()</code> which checks the class name before vm method invoked.</p>
+<p><img src="/5.png" alt="loadClass in java"></p>
+</li>
+<li><p>There is not so many chances that class file format is bad (ClassFormatError), so it will be a large waste that parse class file and then dellocate the memory and then parse it again if system dictionary dosn’t contain the same class handler.</p>
+</li>
+</ul>
+<h2 id="Class-data-GC-in-metaspace"><a href="#Class-data-GC-in-metaspace" class="headerlink" title="Class data GC in metaspace"></a>Class data GC in metaspace</h2><p>Actually there is no specific GC behavior in metaspace, in VM the GC always works in heap, but the pointer pointed to class data in metaspace is saved in class instance which lives in heap. So if the class instance is time to be collected, the class data in metaspace will be freed to.</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Attt&#39;s ブログ</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
