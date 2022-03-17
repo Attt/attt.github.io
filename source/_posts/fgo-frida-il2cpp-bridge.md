@@ -1,5 +1,5 @@
 ---
-title: frida-il2cpp-bridge script for fate/go
+title: <Wallhack>Frida-il2cpp-bridge script for fate/go
 date: 2022-03-17 15:10:42
 ---
 
