@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Attt&#39;s ブログ | </title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Attt&#39;s ブログ</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            frida-il2cpp-bridge script for fate/go
+        </div>
+        <div class="post-meta">
+            2022-03-17
+        </div>
+    
+
+    <div class="post-md">
+        <p>hack script for fgo based on <a target="_blank" rel="noopener" href="https://github.com/frida/frida">frida</a> and <a target="_blank" rel="noopener" href="https://github.com/vfsfitvnm/frida-il2cpp-bridge">frida-il2cpp-bridge</a> </p>
+<h3 id="Supports"><a href="#Supports" class="headerlink" title="Supports"></a>Supports</h3><ul>
+<li><p>bilibili fate go v2.36.0</p>
+</li>
+<li><p>aniplex fate go v2.49.0</p>
+<p><em>fate go in other channels&#x2F;platforms&#x2F;versions may functional but it’s not tested</em></p>
+</li>
+</ul>
+<h3 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h3><h4 id="For-Android"><a href="#For-Android" class="headerlink" title="For Android"></a>For Android</h4><p>*<em>Android 10 or 11 is recommended, among testing in android 9 sometimes game may crash</em></p>
+<ul>
+<li><p>Install nodeJs for NPM</p>
+</li>
+<li><p>Install frida and frida-tools with <code> npm install frida &amp;&amp; npm install frida-tools</code></p>
+</li>
+<li><p>Download latest frida-server from <a target="_blank" rel="noopener" href="https://github.com/frida/frida/releases">https://github.com/frida/frida/releases</a></p>
+</li>
+<li><p>Start rooted device, rettach with <code> adb root</code></p>
+</li>
+<li><p>Install game apk</p>
+</li>
+<li><p>Copy <em><strong>frida-server</strong></em> file to device directory such as <em><strong>&#x2F;data&#x2F;local&#x2F;tmp</strong></em></p>
+</li>
+<li><p>Run <code>adb shell</code> to connect to device</p>
+</li>
+<li><p>Change <em><strong>frida-server</strong></em> file permission with <code>chmod 777 &#123;directory&#125;/frida-server</code></p>
+</li>
+<li><p>Navigate to directory and run server with <code>./frida-server</code></p>
+</li>
+</ul>
+<h4 id="For-IOS"><a href="#For-IOS" class="headerlink" title="For IOS"></a>For IOS</h4><ul>
+<li>TODO</li>
+</ul>
+<h4 id="Run-script"><a href="#Run-script" class="headerlink" title="Run script"></a>Run script</h4><ul>
+<li><p>See comments in <em><strong>fgo_hack_script.ts</strong></em>, and change codes according to the <em>fgo</em> version</p>
+<ul>
+<li>there is some tiny diffrences between <em>bili fatego</em> and <em>aniplex fatego</em></li>
+</ul>
+</li>
+<li><p>Build with <code>./build_aniplex.sh</code> or <code>./build_bili.sh</code></p>
+</li>
+<li><p>Run with <code>./run.sh com.bilibili.fgo</code> or <code>./run.sh com.aniplex.fategrandorder</code></p>
+<ul>
+<li>you could now see some logs (if codes like <code>console.log(...)</code> is uncommented) when starting battle</li>
+</ul>
+</li>
+<li><p>Have fun.</p>
+</li>
+</ul>
+<h3 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h3><p><img src="/images/0.jpg" alt="in battle"></p>
+<h4 id="active"><a href="#active" class="headerlink" title="active"></a>active</h4><ol>
+<li><p>Increase player’s servant hp (by 500,000)</p>
+</li>
+<li><p>Set all skills lv to 10 (both servant’s and master’s)</p>
+</li>
+<li><p>Change all skills charge turn down (to 1)</p>
+</li>
+<li><p>Try to disable codestage anti-cheat engine (notice that there is <strong>NO WAY</strong> to cheat safely cause anyway the battle data will be sent to game server)</p>
+</li>
+</ol>
+<h4 id="inactive"><a href="#inactive" class="headerlink" title="inactive"></a>inactive</h4><ol>
+<li><p>Never die (reset hp every time servant dies)</p>
+</li>
+<li><p>Increase attack &amp; defence np rate</p>
+</li>
+<li><p>Increase attack star rate</p>
+</li>
+</ol>
+<h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h3><ul>
+<li><p>Could not ran with X64-based simulator such as MuMu (tested) at this time (<a target="_blank" rel="noopener" href="https://github.com/vfsfitvnm/frida-il2cpp-bridge">frida-il2cpp-bridge</a> version 0.7.9)</p>
+</li>
+<li><p>Features in <a href="#inactive">inactive</a> may invoked too frequently that may cause some leakage</p>
+</li>
+</ul>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Attt&#39;s ブログ</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
