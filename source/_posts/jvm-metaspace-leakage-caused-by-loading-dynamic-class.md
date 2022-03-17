@@ -6,7 +6,7 @@ tags:
 
 ## cause
 
-Define class with `ClassLoader#defineClass`, no matter the parameter `name` is specified or not, the HotSpot JVM always throws OOM in metaspace at last.
+Define several classes with certain `name` by using `ClassLoader#defineClass` , no matter the `name` is specified or not, the HotSpot JVM always throws OOM in metaspace at last.
 
 ## behavior of `ClassLoader#defineClass`
 
@@ -20,9 +20,9 @@ Define class with `ClassLoader#defineClass`, no matter the parameter `name` is s
 
 2. check `systemDictionary` with parameter `name` to determine if Klass/KlassHandler is already loaded
 
-(pretend here some source codes XD)
+(pretend here are some source codes XD)
 
-But if step-2 exists, why the metaspace will be full?
+But if step-2 exists, why the metaspace memory exhausts at last?
 
 ## what actually happens when VM parsing class file
 
