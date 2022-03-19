@@ -49,9 +49,9 @@ highlight:
   auto_detect: false
   tab_replace: ''
   wrap: true
-  hljs: false
+  hljs: true # supported languages: https://www.d.umn.edu/~gshute/jsLib/documentation/web-developer/content/hljs.xhtml
 prismjs:
-  enable: false
+  enable: true
   preprocess: true
   line_number: true
   tab_replace: ''
@@ -101,5 +101,3 @@ theme: one-paper
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: ''
