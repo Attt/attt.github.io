@@ -2,6 +2,15 @@
 
 @font-face
 {
+    font-family: "CascadiaCodePL";
+    font-style: normal;
+    font-weight: 200;
+    src: local(""),
+        url("../fonts/CascadiaCodePL.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+@font-face
+{
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 400;

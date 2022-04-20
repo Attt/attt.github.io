@@ -18,12 +18,16 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "Montserrat", "CascadiaCodePL", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
     color: var(--font-color-2);
     background: #111;
+}
+code
+{
+    font-family: 'CascadiaCodePL';
 }
 a
 {
