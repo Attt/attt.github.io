@@ -228,3 +228,239 @@ echo '==> start to backup... type device:' && \
 	/ /mnt/$mount_dir/system_backup && \
 echo '==> finished.'
 ```
+
+### 中文及字体设置
+- 语言配置
+去掉`/etc/locale.gen`中的`zh_CN.UTF-8 UTF-8`和`en_US.UTF-8 UTF-8`的注释
+
+根据需要在`~/.xinitrc`或者`~/.bashrc`配置
+
+**在`~/.xinitrc`中配置要注意在`exec xxx`之前**
+```bash
+export LANG=zh_CN.UTF-8
+export LANGUAGE=zh_CN:en_US
+```
+- 字体配置
+```bash
+sudo pacman -S wqy-microhei noto-fonts-cjk
+```
+设置`~/.config/fontconfig/fonts.conf`
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>
+
+  <!-- 显示器使用的像素排列方式 -->
+  <match target="font">
+    <edit mode="assign" name="rgba">
+      <const>rgb</const>
+    </edit>
+  </match>
+
+  <!-- 字体微调的程度, 可选 hintnone, hintslight (默认), hintmedium, hintfull. -->
+  <!-- 更高的 hinting 等级可使字体更锐利，同时也会损失更多的细节 -->
+  <!-- 如果显示器的 DPI 高得不像话 (>=300), 可关闭 hinting, 字体会自然对齐像素 -->
+  <match target="font">
+    <edit mode="assign" name="hintstyle">
+      <const>hintslight</const>
+    </edit>
+  </match>
+
+  <!-- 抗锯齿. 除非屏幕DPI奇高否则建议开启 -->
+  <match target="font">
+    <edit mode="assign" name="antialias">
+      <bool>true</bool>
+    </edit>
+  </match>
+
+
+<!-- 全局默认字体　-->
+  <match>
+    <edit mode="prepend" name="family">
+      <string>Terminus</string>
+    </edit>
+  </match>
+
+<!-- 全局默认英文字体 -->
+  <match>
+    <test compare="contains" name="lang">
+      <string>en</string>
+    </test>
+    <edit mode="prepend" name="family">
+      <string>Terminus</string>
+    </edit>
+  </match>
+
+<!-- 全局默认中文字体 -->
+  <match>
+    <test compare="contains" name="lang">
+      <string>zh</string>
+    </test>
+    <edit mode="prepend" name="family">
+      <string>WenQuanYi WenQuanYi Bitmap Song</string>
+    </edit>
+  </match>
+
+<!-- 默认无衬线字体 -->
+  <match target="pattern">
+    <test qual="any" name="family">
+      <string>sans-serif</string></test>
+    <edit name="family" mode="prepend" binding="same">
+      <string>Terminus</string>
+    </edit>
+  </match>
+
+<!-- 默认衬线字体 -->
+  <match target="pattern">
+    <test qual="any" name="family">
+      <string>serif</string>
+    </test>
+    <edit name="family" mode="prepend" binding="same">
+      <string>Terminus</string>
+    </edit>
+  </match>
+
+<!-- 默认等宽字体 -->
+  <match target="pattern">
+    <test qual="any" name="family">
+      <string>monospace</string>
+    </test>
+    <edit name="family" mode="prepend" binding="same">
+      <string>Terminus</string>
+    </edit>
+  </match>
+
+  <!-- 字体替换 -->
+  <!--SimSun, Microsoft YaHei, SimHei -> WenQuanYi Micro Hei -->
+  <match target="pattern">
+      <test name="family">
+          <string>宋体</string>
+      </test>
+      <edit name="family" mode="assign" binding="strong">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+          <!-- <string>Noto Serif CJK SC</string> -->
+      </edit>
+  </match>
+  <match target="pattern">
+      <test name="family">
+          <string>SimSun</string>
+      </test>
+      <edit name="family" mode="assign" binding="strong">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+          <!-- <string>Noto Serif CJK SC</string> -->
+      </edit>
+  </match>
+  <match target="pattern">
+      <test qual="any" name="family">
+          <string>SimSun-18030</string>
+      </test>
+      <edit name="family" mode="assign" binding="same">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+         <!-- <string>Noto Serif CJK SC</string> -->
+      </edit>
+  </match>
+
+  <match target="pattern">
+    <test qual="any" name="family">
+        <string>Microsoft YaHei</string>
+    </test>
+    <edit name="family" mode="assign" binding="same">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+      </edit>
+  </match>
+
+<match target="pattern">
+    <test qual="any" name="family">
+        <string>SimHei</string>
+    </test>
+    <edit name="family" mode="assign" binding="same">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+      </edit>
+  </match>
+
+  <match target="pattern">
+      <test name="family">
+          <string>Times New Roman</string>
+      </test>
+      <edit name="family" mode="append" binding="strong">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+      </edit>
+  </match>
+  <match target="pattern">
+      <test name="family">
+          <string>Terminus</string>
+      </test>
+      <edit name="family" mode="append" binding="strong">
+          <string>WenQuanYi WenQuanYi Bitmap Song</string>
+      </edit>
+  </match>
+
+
+
+
+<!-- 备用字体优先顺序 -->
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>WenQuanYi WenQuanYi Bitmap Song</family>
+      <family>WenQuanYi Micro Hei</family>
+      <family>DejaVu Sans</family>
+      <family>Roboto</family>
+      <family>Noto Sans</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Font Awesome 5 Free</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Terminus</family>
+      <family>WenQuanYi WenQuanYi Bitmap Song</family>
+      <family>DejaVu Serif</family>
+      <family>Noto Serif</family>
+      <family>Noto Serif CJK SC</family>
+      <family>Noto Serif CJK TC</family>
+      <family>Noto Serif CJK JP</family>
+      <family>Noto Serif CJK KR</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Font Awesome 5 Free</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Terminus</family>
+      <family>Hack</family>
+      <family>DejaVu Sans Mono</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Font Awesome 5 Free</family>
+    </prefer>
+  </alias>
+
+</fontconfig>
+```
+
+### 安装fcitx5
+```bash
+sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-mozc
+```
+
+### xfce的声音
+```bash
+ sudo pacman -S alsa-utils pulseaudio pulseaudio-alsa \
+  pavucontrol      #与xfce4 panel里面的插件配合使用,必须要有这个进程
+```
+xfce4 panel设置里面添加一个pulseaudio plugin的插件
+
+`alsamixer` F6选择声卡,然后把mm的M键去掉,上下箭头调节,auto-mute disable了以后,loopback enable. reboot重启,这时候xfce4的插件就可以调节声音了
