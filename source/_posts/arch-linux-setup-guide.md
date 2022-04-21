@@ -201,7 +201,7 @@ tags:
     - XFCE
       - 安装xfce
       ```bash
-      sudo pacman -S xfce xfce4-goodies
+      sudo pacman -S xfce4 xfce4-goodies
       ```
       - 配置xinitrc
       ```bash
@@ -228,6 +228,11 @@ tags:
   ./make...
   ./install...
   ```
+然后记得在win中用管理员设置
+```cmd
+Set-VM -VMName <your_vm_name>  -EnhancedSessionTransportType HvSocket
+```
+
   **如果无法通过增强模式连接**
 
   [arch wiki [loginctl or systemctl --user not working]](https://wiki.archlinux.org/title/Xrdp#loginctl_or_systemctl_--user_not_working)
@@ -301,7 +306,7 @@ export LANGUAGE=zh_CN:en_US
 ```
 - 字体配置
 ```bash
-sudo pacman -S wqy-microhei noto-fonts-cjk
+sudo pacman -S wqy-bitmapfont wqy-microhei noto-fonts-cjk
 ```
 设置`~/.config/fontconfig/fonts.conf`
 ```xml
@@ -523,3 +528,27 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-mozc
 xfce4 panel设置里面添加一个pulseaudio plugin的插件
 
 `alsamixer` F6选择声卡,然后把mm的M键去掉,上下箭头调节,auto-mute disable了以后,loopback enable. reboot重启,这时候xfce4的插件就可以调节声音了
+
+### 安装chrome
+```bash
+#AUR 助手
+git clone https://aur.archlinux.org/yay-git.git
+cd yay-git
+makepkg -si
+
+#yay不要用root
+yay -S google-chrome
+
+#升级
+yay -Syu
+```
+
+### 安装clash
+
+看[这](https://blog.linioi.com/posts/clash-on-arch/)
+
+
+### 支持ntfs
+```bash
+sudo pacman -S ntfs-3g
+```
