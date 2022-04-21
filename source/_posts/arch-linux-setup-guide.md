@@ -28,13 +28,21 @@ tags:
   uefi参考：
   | 挂载点 | 分区 | 分区类型 | 大小 |
   | -- | -- | -- | -- |
-  | /mnt/boot/efi| /dev/efi_system_partition | EFI系统分区 | 300M |
-  | \[swap\]| /dev/swap_partition/ |Linux swap (交换空间) | > 512M (2G if physical ram > 4G) |
+  | /mnt/boot/EFI| /dev/efi_system_partition | EFI系统分区 | 300M |
+  | \[swap\] **移动设备建议不要**| /dev/swap_partition/ |Linux swap (交换空间) | > 512M (2G if physical ram > 4G) |
   | /mnt| /dev/root_partition | Linux x86-64 根目录 (/) | 剩余空间 |
+
+  - *移动设备的情况下:*
+    | 挂载点 | 分区 | 分区类型 | 大小 |
+    | -- | -- | -- | -- |
+    | *none* | *none* | BIOS启动分区 | 1M |
+    | /mnt/boot/EFI| /dev/efi_system_partition | EFI系统分区 | 300M |
+    | /mnt| /dev/root_partition | Linux x86-64 根目录 (/) | 剩余空间 |
 
   - 格式化分区
   ```bash
    mkfs.ext4 /dev/root_partition（根分区）
+   # 移动设备关闭日志 mkfs.ext4 -O "^has_journal" /dev/root_partition（根分区）
    mkswap /dev/swap_partition（交换空间分区）
    mkfs.fat -F 32 /dev/efi_system_partition
   ```
@@ -64,7 +72,10 @@ tags:
   - 安装系统&软件包
   ```bash
   pacstrap /mnt base base-devel linux linux-firmware vim vi sudo git
+  # 移动设备 可以使用基于BFQ的io调度内核linux-zen，把linux换成linux-zen
   ```
+  *参考：[BFQ](https://www.kernel.org/doc/html/latest/block/bfq-iosched.html)*
+
 ## 系统配置
 ### 系统引导
   - 配置fstab
@@ -74,11 +85,27 @@ tags:
   - 安装grub
   ```bash
   pacman -S efibootmgr grub
+
   # uefi
-  grub-install --target=x86_64-efi --efi-directory={挂载点,如/mnt/boot/efi} --bootloader-id=GRUB
+  grub-install --target=x86_64-efi --efi-directory={挂载点,如/mnt/boot/EFI} --bootloader-id=GRUB
+
   # bios(非GPT分区无需其他空间，但GPT分区需要有一块1M的BIOS boot分区)
   grub-install --target=i386-pc /dev/sdX
   ```
+  *移动设备的情况下*
+  ```bash
+  pacman -S efibootmgr grub amd-ucode intel-ucode
+
+  # uefi + MBR(BIOS)混合启动
+  grub-install --target=x86_64-efi --efi-directory={挂载点,如/mnt/boot/EFI} --removable
+   --bootloader-id=GRUB --boot-directory={root挂载点,如/mnt}/boot
+
+  grub-install --target=i386-pc --recheck --boot-directory=/DATA_MOUNTPOINT/boot /dev/{1M的那个分区}
+
+  # 作为保险
+  grub-install --target=i386-pc --recheck --boot-directory=/DATA_MOUNTPOINT/boot /dev/{root的那个分区}
+  ```
+
   - 配置grub.cfg
   ```bash
   grub-mkconfig -o /boot/grub/grub.cfg
@@ -98,6 +125,22 @@ tags:
   ```bash
   locale-gen
   ```
+
+  -- 移动设备最小化磁盘访问,把日志放到内存
+  修改`/etc/systemd/journald.conf.d/usbstick.conf`
+  写入
+  ```bash
+  [Journal]
+  Storage=volatile
+  RuntimeMaxUse=30M
+  ```
+
+  - initramfs
+  如果是移动设备，将`/etc/mkinitcpio.conf`中`HOOKS`里面的`block`和`keyboard`放到`autodetect`前面，然后
+  ```bash
+  mkinitcpio -P
+  ```
+
   创建`/etc/locale.conf`,设置`LANG=en_US.UTF-8`
   - hostname
   创建`/etc/hostname`,写入主机名
@@ -105,6 +148,14 @@ tags:
   ```bash
   passwd
   ```
+  - hosts
+  向`/etc/hosts`写入
+  ```bash
+  127.0.0.1 localhost
+  ::1 localhost
+  127.0.0.1 {hostname}
+  ```
+
   - 安装网络工具
   
   *networkmanager已经不使用dhcpcd, 因此需要安装dhclient
@@ -122,11 +173,15 @@ tags:
 
 **到这里基本已经完成最小系统的配置和安装，在继续之前，改启动项然后reboot**
 
-## DE/WM
+## DE/WM/DM
 
   - 安装xorg
   ```bash
   sudo pacman -S xorg xorg-xinit
+  ## 移动设备要安装
+  # xf86-input-synaptics 支持触控板
+  # xf86-video-vesa, xf86-video-ati, xf86-video-intel, xf86-video-amdgpu, xf86-video-nouveau and xf86-video-fbdev. 大多数的开源显卡驱动
+  #  libeatmydata  可以禁用fsync，比如对于firefox：eatmydata firefox
   ```
   - 安装字体
   ```bash
@@ -154,7 +209,11 @@ tags:
       ```
       把最后的启动换成`exec startxfce4`
 
-  - 安装WM
+  - 仅安装WM
+    
+    *(略)*
+    
+  - 安装DM
     - lightdm
     ```bash
       sudo pacman -S lightdm-gtk-greeter
