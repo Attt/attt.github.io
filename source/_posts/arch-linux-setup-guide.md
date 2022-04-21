@@ -105,6 +105,10 @@ tags:
   # 作为保险
   grub-install --target=i386-pc --recheck --boot-directory=/DATA_MOUNTPOINT/boot /dev/{root的那个分区}
   ```
+  - 切换到已经安装的系统
+  ```bash
+  arch-chroot /mnt
+  ```
 
   - 配置grub.cfg
   ```bash
@@ -112,10 +116,6 @@ tags:
   ```
 ### 系统初始化设置
 
-  - 切换到已经安装的系统
-  ```bash
-  arch-chroot /mnt
-  ```
   - 设置时区
   ```bash
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

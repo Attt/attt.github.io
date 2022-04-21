@@ -165,11 +165,12 @@ grub-install --target<span class="token operator">=</span>i386-pc --recheck --bo
 <span class="token comment"># 作为保险</span>
 grub-install --target<span class="token operator">=</span>i386-pc --recheck --boot-directory<span class="token operator">=</span>/DATA_MOUNTPOINT/boot /dev/<span class="token punctuation">&#123;</span>root的那个分区<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <ul>
+<li><p>切换到已经安装的系统</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">arch-chroot /mnt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>配置grub.cfg</p>
   <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">grub-mkconfig</span> -o /boot/grub/grub.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="系统初始化设置"><a href="#系统初始化设置" class="headerlink" title="系统初始化设置"></a>系统初始化设置</h3></li>
-<li><p>切换到已经安装的系统</p>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">arch-chroot /mnt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>设置时区</p>
   <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
