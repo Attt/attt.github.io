@@ -25,10 +25,10 @@ body
     color: var(--font-color-2);
     background: #111;
 }
-code
+/* code
 {
     font-family: 'CascadiaCodePL';
-}
+} */
 a
 {
     text-decoration: none;

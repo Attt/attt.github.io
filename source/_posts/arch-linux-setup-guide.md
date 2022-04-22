@@ -306,7 +306,7 @@ export LANGUAGE=zh_CN:en_US
 ```
 - 字体配置
 ```bash
-sudo pacman -S wqy-bitmapfont wqy-microhei noto-fonts-cjk
+sudo pacman -S wqy-bitmapfont wqy-microhei noto-fonts noto-fonts-emoji
 ```
 设置`~/.config/fontconfig/fonts.conf`
 ```xml
@@ -460,24 +460,19 @@ sudo pacman -S wqy-bitmapfont wqy-microhei noto-fonts-cjk
   </match>
 
 
-
-
 <!-- 备用字体优先顺序 -->
   <alias>
     <family>sans-serif</family>
     <prefer>
+      <family>Terminus</family>
       <family>WenQuanYi WenQuanYi Bitmap Song</family>
-      <family>WenQuanYi Micro Hei</family>
-      <family>DejaVu Sans</family>
-      <family>Roboto</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
       <family>Noto Sans</family>
       <family>Noto Sans CJK SC</family>
       <family>Noto Sans CJK TC</family>
       <family>Noto Sans CJK JP</family>
       <family>Noto Sans CJK KR</family>
-      <family>Noto Color Emoji</family>
-      <family>Noto Emoji</family>
-      <family>Font Awesome 5 Free</family>
     </prefer>
   </alias>
   <alias>
@@ -485,34 +480,84 @@ sudo pacman -S wqy-bitmapfont wqy-microhei noto-fonts-cjk
     <prefer>
       <family>Terminus</family>
       <family>WenQuanYi WenQuanYi Bitmap Song</family>
-      <family>DejaVu Serif</family>
-      <family>Noto Serif</family>
-      <family>Noto Serif CJK SC</family>
-      <family>Noto Serif CJK TC</family>
-      <family>Noto Serif CJK JP</family>
-      <family>Noto Serif CJK KR</family>
       <family>Noto Color Emoji</family>
       <family>Noto Emoji</family>
-      <family>Font Awesome 5 Free</family>
+      <family>Noto Sans</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+      <family>Noto Emoji</family>
     </prefer>
   </alias>
   <alias>
     <family>monospace</family>
     <prefer>
       <family>Terminus</family>
-      <family>Hack</family>
-      <family>DejaVu Sans Mono</family>
+      <family>WenQuanYi WenQuanYi Bitmap Song</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Noto Sans</family>
       <family>Noto Sans CJK SC</family>
       <family>Noto Sans CJK TC</family>
       <family>Noto Sans CJK JP</family>
       <family>Noto Sans CJK KR</family>
-      <family>Noto Color Emoji</family>
-      <family>Noto Emoji</family>
-      <family>Font Awesome 5 Free</family>
     </prefer>
   </alias>
 
 </fontconfig>
+```
+设置字体偏好:`/etc/fonts/conf.d/64-language-selector-prefer.conf`
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>  
+<alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Terminus</family>
+      <family>WenQuanYi WenQuanYi Bitmap Song</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Noto Sans</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Terminus</family>
+      <family>WenQuanYi WenQuanYi Bitmap Song</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Noto Sans</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+      <family>Noto Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Terminus</family>
+      <family>WenQuanYi WenQuanYi Bitmap Song</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>Noto Sans</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+    </prefer>
+  </alias>
+</fontconfig>
+
+
 ```
 
 ### 安装fcitx5
@@ -546,6 +591,7 @@ yay -Syu
 ### 安装clash
 
 看[这](https://blog.linioi.com/posts/clash-on-arch/)
+或者[class for windows](https://github.com/Fndroid/clash_for_windows_pkg/releases)
 
 
 ### 支持ntfs
