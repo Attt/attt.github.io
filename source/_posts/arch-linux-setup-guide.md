@@ -93,6 +93,48 @@ tags:
   grub-install --target=i386-pc /dev/sdX
   ```
   *移动设备的情况下*
+
+  假设分区顺序是：
+    - BIOS
+    - EFI
+    - root
+  要先在这块设备上写入引导信息，运行`gdisk /dev/sdX`
+
+  ```bash
+  # gdisk /dev/sdX
+
+  Command (? for help): r
+  Recovery/transformation command (? for help): h
+
+  WARNING! Hybrid MBRs are flaky and dangerous! If you decide not to use one,
+  just hit the Enter key at the below prompt and your MBR partition table will
+  be untouched.
+
+  Type from one to three GPT partition numbers, separated by spaces, to be added to the hybrid MBR, in sequence: 1 2 3
+  Place EFI GPT (0xEE) partition first in MBR (good for GRUB)? (Y/N): N
+
+  Creating entry for GPT partition #1 (MBR partition #1)
+  Enter an MBR hex code (default EF): 
+  Set the bootable flag? (Y/N): N
+
+  Creating entry for GPT partition #2 (MBR partition #2)
+  Enter an MBR hex code (default EF): 
+  Set the bootable flag? (Y/N): N
+
+  Creating entry for GPT partition #3 (MBR partition #3)
+  Enter an MBR hex code (default 83): 
+  Set the bootable flag? (Y/N): Y
+
+  Recovery/transformation command (? for help): x
+  Expert command (? for help): h
+  Expert command (? for help): w
+
+  Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+  PARTITIONS!!
+
+  Do you want to proceed? (Y/N): Y
+  ```
+
   ```bash
   pacman -S efibootmgr grub amd-ucode intel-ucode
 
@@ -100,7 +142,7 @@ tags:
   grub-install --target=x86_64-efi --efi-directory={挂载点,如/mnt/boot/EFI} --removable
    --bootloader-id=GRUB --boot-directory={root挂载点,如/mnt}/boot
 
-  grub-install --target=i386-pc --recheck --boot-directory=/DATA_MOUNTPOINT/boot /dev/{1M的那个分区}
+  grub-install --target=i386-pc --recheck --boot-directory=/DATA_MOUNTPOINT/boot /dev/sdX #注意这里是整个设备
 
   # 作为保险
   grub-install --target=i386-pc --recheck --boot-directory=/DATA_MOUNTPOINT/boot /dev/{root的那个分区}
