@@ -18,17 +18,38 @@ p
 
 body
 {
-    font-family: "Montserrat", "CascadiaCodePL", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
     color: var(--font-color-2);
     background: #111;
 }
-/* code
-{
-    font-family: 'CascadiaCodePL';
-} */
+
+table:not(.hljs-ln){
+    width: 100% !important;
+    border-collapse:collapse;
+    border:none;
+    font-size:0.23rem;
+}
+
+td:not(.hljs-ln-line),th:not(.hljs-ln-line){
+    white-space:nowrap; /* 自适应宽度*/
+    word-break:keep-all; /* 避免长单词截断，保持全部 */
+    border:solid #e5dfdf 1px;
+    text-align:left;
+    white-space:pre-line;
+    word-break:break-word !important;
+    word-wrap:break-word !important;
+    display:table-cell;
+    vertical-align:middle !important;
+    white-space: normal !important;
+    height:auto;
+    vertical-align:text-top;
+    padding:2px 2px 0 2px;
+    display: table-cell;
+    font-family: monospace;
+}
 a
 {
     text-decoration: none;
