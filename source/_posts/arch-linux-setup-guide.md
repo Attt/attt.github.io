@@ -134,6 +134,13 @@ tags:
 
   Do you want to proceed? (Y/N): Y
   ```
+  
+  > **如果不需要兼容，不用做这一步，混合分区会在设备上存在两个分区表，系统识别这个设备分区的时候具体的行为完全依赖于系统的实现，非常不稳定**
+
+  > **注意：写完hybrid之后，默认的windows中就只认MBR分区，假设分区按上面的例子，且还有一个4号分区，那么由于MBR的限制**
+  > **在windows中第四个分区是无法正确识别文件系统的，如果要使用第四个分区且要通过MBR引导，那么这里就要在MBR写入134分区**
+  > **ESP分区可以不用写到MBR里**
+
 
   ```bash
   pacman -S efibootmgr grub amd-ucode intel-ucode
