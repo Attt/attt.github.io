@@ -34,8 +34,8 @@ table:not(.hljs-ln){
 }
 
 td:not(.hljs-ln-line),th:not(.hljs-ln-line){
-    white-space:nowrap; /* 自适应宽度*/
-    word-break:keep-all; /* 避免长单词截断，保持全部 */
+   /* white-space:nowrap;  自适应宽度*/
+    /*word-break:keep-all;  避免长单词截断，保持全部 */
     border:solid #e5dfdf 1px;
     text-align:left;
     white-space:pre-line;
