@@ -30,7 +30,7 @@ table:not(.hljs-ln){
     width: 100% !important;
     border-collapse:collapse;
     border:none;
-    font-size:0.23rem;
+    /* font-size:0.23rem; */
 }
 
 td:not(.hljs-ln-line),th:not(.hljs-ln-line){

@@ -56,6 +56,7 @@
 <li><p>进入分区</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">fdisk</span> /dev/the_disk_to_be_partitioned（要被分区的磁盘）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>uefi参考：</p>
+<div class="table-wrapper"/>
 <table>
 <thead>
 <tr>
@@ -84,8 +85,10 @@
 <td>剩余空间</td>
 </tr>
 </tbody></table>
+</div>
 </li>
 <li><p><em>移动设备的情况下:</em></p>
+<div class="table-wrapper"/>
 <table>
 <thead>
 <tr>
@@ -114,6 +117,7 @@
 <td>剩余空间</td>
 </tr>
 </tbody></table>
+</div>
 </li>
 <li><p>格式化分区</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mkfs.ext4 /dev/root_partition（根分区）
