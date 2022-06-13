@@ -1,0 +1,7 @@
+<div class="archive-list">
+
+        <% site.tags.sort('name').each(function(item){ %>
+			<a class="archive-title" style="font-weight: bold;color: #005237;" href="<%= url_for(item.path) %>"><%= item.name %> (<span style="color: #8a2be2;font-style: italic;"><%= item.posts.length %></span>)</a>
+            ,
+		<% }); %>
+</div>

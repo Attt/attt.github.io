@@ -17,7 +17,7 @@
     
 <link rel="stylesheet" href="/css/fonts.css">
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.1.0"></head>
     <body>
         <div class="paper">
             <div class="paper-main">
@@ -30,6 +30,10 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/categories">分类</a></li>
+        
+        <li><a href="/tags">标签</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
@@ -38,18 +42,23 @@
                 <div class="post-list">
     
     <div class="post">
-        <a class="post-title" href="/2022/06/13/memo-2022-06-13/">&lt;Memo&gt; 2022 06 13</a>
+        <a class="post-title" href="/2022/06/13/memo-2022-06-13/">2022 06 13</a>
         <div class="post-except">
-            Spring RabbitMQ bindingsexchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定&lt;rabbit:queue id="queue0.id" name="queue.0.name"/>
-  &lt;rabbit:fanout-exchange name="exchange.0.name">
-    &lt;
+            Spring RabbitMQ bindings
+
+exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定
+
+
+&lt;rabbit:queue id="queue0.id" name="queue.0.name"/>
+&lt;rabbit:fanout-exchange name="exchange.0.name">
+  &lt
             <a class="read-more" href="/2022/06/13/memo-2022-06-13/"> ... </a>
         </div>
         <div class="post-date">2022.06.13</div>
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2022/04/19/arch-linux-setup-guide/">Arch linux Setup</a>
+        <a class="post-title" href="/2022/04/19/arch-linux-setup-guide/">Arch Linux Setup</a>
         <div class="post-except">
             
 https://wiki.archlinux.org/
@@ -57,7 +66,6 @@ https://wiki.archlinux.org/
 基本系统安装前置准备
 检查网络ip link
 更新系统时间timedatectl set-ntp true
-
 准备磁盘
 分区
 查看当前磁盘信息
@@ -65,6 +73,7 @@ fdisk -l
 进入分区
 fdisk /dev/the_disk_to_be_partitioned（要被分区的磁盘）
 uefi参考：
+
 
 
 
@@ -83,7 +92,7 @@ uefi参考：
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2022/03/19/shell-some-memos-for-shell-script/">&lt;Shell&gt; Some memos for shell script</a>
+        <a class="post-title" href="/2022/03/19/shell-some-memos-for-shell-script/">Some memos for shell script</a>
         <div class="post-except">
             
 accept user input
@@ -105,7 +114,7 @@ redirect output
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/">&lt;JVM&gt; Metaspace leakage caused by loading dynamic class</a>
+        <a class="post-title" href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/">Metaspace leakage caused by loading dynamic class</a>
         <div class="post-except">
             causeDefine several classes with certain name by using ClassLoader#defineClass , no matter the name is specified or not, the HotSpot JVM always throws OOM in metaspace at last.
 behavior of ClassLoader#defineClass
@@ -116,7 +125,7 @@ ClassLoader#defineClass is
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2022/03/17/fgo-frida-il2cpp-bridge/">&lt;Wallhack&gt;Frida-il2cpp-bridge script for fate/go</a>
+        <a class="post-title" href="/2022/03/17/fgo-frida-il2cpp-bridge/">Frida-il2cpp-bridge script for fate/go</a>
         <div class="post-except">
             hack script for fgo based on frida and frida-il2cpp-bridge 
 Supports

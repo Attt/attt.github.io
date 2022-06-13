@@ -17,7 +17,7 @@
     
 <link rel="stylesheet" href="/css/fonts.css">
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.1.0"></head>
     <body>
         <div class="paper">
             <div class="paper-main">
@@ -35,7 +35,7 @@
 
     
         <div class="post-main-title">
-            &lt;Memo&gt; 2022 06 13
+            2022 06 13
         </div>
         <div class="post-meta">
             2022-06-13
@@ -43,12 +43,18 @@
     
 
     <div class="post-md">
-        <h2 id="Spring-RabbitMQ-bindings"><a href="#Spring-RabbitMQ-bindings" class="headerlink" title="Spring RabbitMQ bindings"></a>Spring RabbitMQ bindings</h2><h3 id="exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定"><a href="#exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定" class="headerlink" title="exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定"></a>exchange的<code>auto-declare</code>配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>queue</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue0.id<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue.0.name<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>fanout-exchange</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>exchange.0.name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>bindings</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>binding</span> <span class="token attr-name">queue</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue0.id<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rabbit:</span>bindings</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rabbit:</span>fanout-exchange</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <h2 id="Spring-RabbitMQ-bindings"><a href="#Spring-RabbitMQ-bindings" class="headerlink" title="Spring RabbitMQ bindings"></a>Spring RabbitMQ bindings</h2><blockquote>
+<blockquote>
+<p>exchange的<code>auto-declare</code>配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定</p>
+</blockquote>
+</blockquote>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>queue</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue0.id<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue.0.name<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>fanout-exchange</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>exchange.0.name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>bindings</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rabbit:</span>binding</span> <span class="token attr-name">queue</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>queue0.id<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rabbit:</span>bindings</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rabbit:</span>fanout-exchange</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>解析binding的入口：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">   <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doParseBindings</span><span class="token punctuation">(</span><span class="token class-name">Element</span> element<span class="token punctuation">,</span> <span class="token class-name">ParserContext</span> parserContext<span class="token punctuation">,</span>
@@ -142,7 +148,11 @@
 
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="org-springframework-web-util-UriComponentsBuilder"><a href="#org-springframework-web-util-UriComponentsBuilder" class="headerlink" title="org.springframework.web.util.UriComponentsBuilder"></a>org.springframework.web.util.UriComponentsBuilder</h2><p>用来解析uri，还可以</p>
+<h2 id="org-springframework-web-util-UriComponentsBuilder"><a href="#org-springframework-web-util-UriComponentsBuilder" class="headerlink" title="org.springframework.web.util.UriComponentsBuilder"></a>org.springframework.web.util.UriComponentsBuilder</h2><blockquote>
+<blockquote>
+<p>用来解析uri，用起来还可以</p>
+</blockquote>
+</blockquote>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> url <span class="token operator">=</span> <span class="token string">"http://domain:port/path1/subpath1?param0=0&amp;param1=1"</span><span class="token punctuation">;</span>
 
 <span class="token class-name">UriComponentsBuilder</span><span class="token punctuation">.</span><span class="token function">fromHttpUrl</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>

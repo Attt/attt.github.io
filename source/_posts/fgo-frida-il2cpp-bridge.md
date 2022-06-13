@@ -1,6 +1,13 @@
 ---
-title: <Wallhack>Frida-il2cpp-bridge script for fate/go
+title: Frida-il2cpp-bridge script for fate/go
 date: 2022-03-17 15:10:42
+categories: 
+	- hack
+tags:
+  - wallhack
+  - injection
+  - reverse engineering
+  - fgo
 ---
 
 hack script for fgo based on [frida](https://github.com/frida/frida) and [frida-il2cpp-bridge](https://github.com/vfsfitvnm/frida-il2cpp-bridge) 

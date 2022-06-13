@@ -1,7 +1,12 @@
 ---
-title: <JVM> Metaspace leakage caused by loading dynamic class
+title: Metaspace leakage caused by loading dynamic class
 date: 2022-03-17 15:59:28
+categories: 
+	- Java
 tags:
+  - JVM
+  - Java
+  - JVM Memory
 ---
 
 ## cause

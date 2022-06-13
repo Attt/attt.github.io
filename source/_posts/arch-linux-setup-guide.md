@@ -1,7 +1,12 @@
 ---
-title: Arch linux Setup
+title: Arch Linux Setup
 date: 2022-04-19 11:23:08
+categories: 
+	- Linux
 tags:
+	- setup
+	- Arch Linux
+	- Linux
 ---
 > https://wiki.archlinux.org/
 

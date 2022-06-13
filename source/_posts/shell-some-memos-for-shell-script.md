@@ -1,7 +1,13 @@
 ---
-title: <Shell> Some memos for shell script
+title: Some memos for shell script
 date: 2022-03-19 23:27:41
+categories: 
+	- Linux
 tags:
+	- memo
+	- Linux
+	- shell
+	- shell script
 ---
 
 - accept user input
