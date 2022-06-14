@@ -6,7 +6,6 @@ categories:
 tags:
 	- memo
 	- Linux
-	- shell
 	- shell script
 ---
 

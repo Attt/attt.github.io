@@ -1,0 +1,9 @@
+<!-- <div id="site_search">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control"/>
+    <div id="local-search-result"></div>
+  </div> -->
+  <form id="search-form"> <!-- 搜索框相关 -->
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off"/>
+    <i class="fa fa-times" onclick="resetSearch()"></i> <!-- 清空/重置搜索框 -->
+</form>
+<div id="local-search-result"></div> <!-- 搜索结果区 -->

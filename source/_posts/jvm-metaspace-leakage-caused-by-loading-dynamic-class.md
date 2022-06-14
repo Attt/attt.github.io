@@ -5,8 +5,8 @@ categories:
 	- Java
 tags:
   - JVM
-  - Java
   - JVM Memory
+  - Java
 ---
 
 ## cause
