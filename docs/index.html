@@ -17,7 +17,7 @@
     
 <link rel="stylesheet" href="/css/fonts.css">
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.1.0"></head>
     <body>
         <div class="paper">
             <div class="paper-main">
@@ -44,7 +44,31 @@
                 <div class="post-list">
     
     <div class="post">
-        <a class="post-title" href="/2022/06/13/memo-2022-06-13/">2022 06 13</a>
+        <a class="post-title" href="/2022/06/14/useful-utils/">Some useful tools</a>
+        <div class="post-except">
+            org.springframework.web.util.UriComponentsBuilder
+
+spring带的解析uri工具，用起来还不错
+
+
+String url = "http://domain:port/path1/subpath1?param0=0&amp;param1=1";
+
+UriComponentsBuilder.fromHttpUrl(url).build();
+UriComponentsBuilder.fromUri(URI.create(uri)
+            <a class="read-more" href="/2022/06/14/useful-utils/"> ... </a>
+        </div>
+        <div class="post-date">2022.06.14</div>
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: 
+			Spring,
+		
+			URI,
+		</span>
+        </div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2022/06/14/spring-rabbitmq-binding-trap/">Spring rabbitMQ binding config &#34;trap&#34;</a>
         <div class="post-except">
             Spring RabbitMQ bindings
 
@@ -54,15 +78,15 @@ exchange的auto-declare配置同时作用于binding，如果声明新的queue，
 &lt;rabbit:queue id="queue0.id" name="queue.0.name"/>
 &lt;rabbit:fanout-exchange name="exchange.0.name">
   &lt
-            <a class="read-more" href="/2022/06/13/memo-2022-06-13/"> ... </a>
+            <a class="read-more" href="/2022/06/14/spring-rabbitmq-binding-trap/"> ... </a>
         </div>
-        <div class="post-date">2022.06.13</div>
-        <div style="opacity: 0.5;border-style: dotted;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        
+        <div class="post-date">2022.06.14</div>
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: 
 			RabbitMQ,
 		
 			Spring,
-		
+		</span>
         </div>
     </div>
     
@@ -75,7 +99,6 @@ https://wiki.archlinux.org/
 基本系统安装前置准备
 检查网络ip link
 更新系统时间timedatectl set-ntp true
-
 准备磁盘
 分区
 查看当前磁盘信息
@@ -83,6 +106,7 @@ fdisk -l
 进入分区
 fdisk /dev/the_disk_to_be_partitioned（要被分区的磁盘）
 uefi参考：
+
 
 
 
@@ -98,14 +122,14 @@ uefi参考：
             <a class="read-more" href="/2022/04/19/arch-linux-setup-guide/"> ... </a>
         </div>
         <div class="post-date">2022.04.19</div>
-        <div style="opacity: 0.5;border-style: dotted;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: 
 			Arch Linux,
 		
 			Linux,
 		
 			setup,
-		
+		</span>
         </div>
     </div>
     
@@ -129,14 +153,12 @@ redirect output
             <a class="read-more" href="/2022/03/19/shell-some-memos-for-shell-script/"> ... </a>
         </div>
         <div class="post-date">2022.03.19</div>
-        <div style="opacity: 0.5;border-style: dotted;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: 
 			Linux,
 		
-			memo,
-		
 			shell script,
-		
+		</span>
         </div>
     </div>
     
@@ -149,14 +171,14 @@ ClassLoader#defineClass is
             <a class="read-more" href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/"> ... </a>
         </div>
         <div class="post-date">2022.03.17</div>
-        <div style="opacity: 0.5;border-style: dotted;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: 
 			JVM,
 		
 			JVM Memory,
 		
 			Java,
-		
+		</span>
         </div>
     </div>
     
@@ -175,8 +197,8 @@ StepsFor Android*Android 10 o
             <a class="read-more" href="/2022/03/17/fgo-frida-il2cpp-bridge/"> ... </a>
         </div>
         <div class="post-date">2022.03.17</div>
-        <div style="opacity: 0.5;border-style: dotted;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: 
 			fgo,
 		
 			injection,
@@ -184,7 +206,7 @@ StepsFor Android*Android 10 o
 			reverse engineering,
 		
 			wallhack,
-		
+		</span>
         </div>
     </div>
     

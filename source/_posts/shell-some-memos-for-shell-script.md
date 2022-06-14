@@ -4,7 +4,6 @@ date: 2022-03-19 23:27:41
 categories: 
 	- Linux
 tags:
-	- memo
 	- Linux
 	- shell script
 ---

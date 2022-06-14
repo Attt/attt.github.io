@@ -97,25 +97,25 @@ var getSearchFile = function(){
 inputArea.onfocus = function(){ getSearchFile() }
 
 // reset button
-var $resetButton = $("#search-form .fa-times");
-var $resultArea = $("#local-search-result");
+// var $resetButton = $("#search-form .fa-times");
+// var $resultArea = $("#local-search-result");
 
-inputArea.oninput = function(){ $resetButton.show(); }
-resetSearch = function(){
-    $resultArea.html("");
-    document.querySelector("#search-form").reset();
-    $resetButton.hide();
-    $(".no-result").hide();
-}
+// inputArea.oninput = function(){ $resetButton.show(); }
+// resetSearch = function(){
+//     $resultArea.html("");
+//     document.querySelector("#search-form").reset();
+//     $resetButton.hide();
+//     $(".no-result").hide();
+// }
 
 // shut enter key
 inputArea.onkeydown = function(){ if(event.keyCode==13) return false}
 
 // no result show?
-$resultArea.bind("DOMNodeRemoved DOMNodeInserted", function(e) {
-    if (!$(e.target).text()) {
-        $(".no-result").show(200); 
-    } else {
-      $(".no-result").hide();
-    }
-})
+// $resultArea.bind("DOMNodeRemoved DOMNodeInserted", function(e) {
+//     if (!$(e.target).text()) {
+//         $(".no-result").show(200); 
+//     } else {
+//       $(".no-result").hide();
+//     }
+// })

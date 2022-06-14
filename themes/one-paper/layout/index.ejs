@@ -7,10 +7,10 @@
             <a class="read-more" href="<%- url_for(post.path) %>"> ... </a>
         </div>
         <div class="post-date"><%- date(post.date, "YYYY.MM.DD") %></div>
-        <div style="opacity: 0.5;border-style: dotted;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <% post.tags.sort('name').each(function(item){ %>
+        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
+        <span> tags: <% post.tags.sort('name').each(function(item){ %>
 			<%= item.name %>,
-		<% }); %>
+		<% }); %></span>
         </div>
     </div>
     <% }) %>

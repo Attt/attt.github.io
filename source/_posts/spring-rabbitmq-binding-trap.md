@@ -1,6 +1,6 @@
 ---
-title: 2022 06 13
-date: 2022-06-13 15:09:40
+title: Spring rabbitMQ binding config "trap"
+date: 2022-06-14 20:31:59
 categories: 
 	- Spring
 tags:
@@ -120,24 +120,4 @@ tags:
 		this.logger.debug("Declarations finished");
 
 	}
-```
-
-## org.springframework.web.util.UriComponentsBuilder
-
->> 用来解析uri，用起来还可以
-
-```java
-    String url = "http://domain:port/path1/subpath1?param0=0&param1=1";
-
-    UriComponentsBuilder.fromHttpUrl(url).build();
-    UriComponentsBuilder.fromUri(URI.create(uri)).build();
-    UriComponentsBuilder.fromUriString(uri).build();
-    ....
-
-    uriComponents.getHost(); // e.g. domain
-    uriComponents.getPath(); // e.g. /path1/subpath1
-    uriComponents.getPathSegments(); // e.g. [path1, subpath1]
-    uriComponents.getScheme(); // e.g. http
-    uriComponents.getQueryParams(); // [param0:0, param1:1]
-
 ```
