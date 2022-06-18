@@ -8,7 +8,7 @@ subtitle: 'Papers'
 description: ''
 keywords:
 author: attt
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
@@ -97,11 +97,12 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: one-paper
+#theme: one-paper
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 
 search:
-  path: search.xml
+  path: local-search.xml
   field: post

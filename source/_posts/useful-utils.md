@@ -1,5 +1,5 @@
 ---
-title: Some useful tools
+title: 一些好用的工具
 date: 2022-06-14 20:33:35
 categories: 
 	- tools
@@ -7,9 +7,11 @@ tags:
 	- URI
 	- Spring
 ---
-## org.springframework.web.util.UriComponentsBuilder
+## UriComponentsBuilder
 
->> spring带的解析uri工具，用起来还不错
+`org.springframework.web.util.UriComponentsBuilder`
+
+> spring带的解析uri工具
 
 ```java
     String url = "http://domain:port/path1/subpath1?param0=0&param1=1";
@@ -24,5 +26,4 @@ tags:
     uriComponents.getPathSegments(); // e.g. [path1, subpath1]
     uriComponents.getScheme(); // e.g. http
     uriComponents.getQueryParams(); // [param0:0, param1:1]
-
 ```

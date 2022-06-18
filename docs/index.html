@@ -1,267 +1,796 @@
+
+
 <!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>Attt&#39;s ブログ | Papers</title>
-    
-<link rel="stylesheet" href="/css/reset.css">
+<html lang="zh-CN" data-default-color-scheme=auto>
 
-    
-<link rel="stylesheet" href="/css/style.css">
 
-    
-<link rel="stylesheet" href="/css/markdown.css">
 
-    
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/me.png">
+  <link rel="icon" href="/images/me.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="attt">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Attt&#39;s ブログ">
+<meta property="og:url" content="https://attt.github.io/index.html">
+<meta property="og:site_name" content="Attt&#39;s ブログ">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="attt">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Attt&#39;s ブログ</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
 <link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/fix-input-shadow.css">
 
-<meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div class="paper">
-            <div class="paper-main">
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"attt.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":10,"cursorChar":"▮","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 90vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Attt&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首 页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归 档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分 类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标 签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关 于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/jojo.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.7)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ほとんど、でも、違う。"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
                 
-                    <div class="header">
-    <a class="logo" href="/">Attt&#39;s ブログ</a>
-    <ul class="nav">
-        
-        <li><a href="/">首页</a></li>
-        
-        <li><a href="/archives">归档</a></li>
-        
-        <li><a href="/categories">分类</a></li>
-        
-        <li><a href="/tags">标签</a></li>
-        
-        <li><a href="/about">关于</a></li>
-        
-        <li><a href="/search">搜索</a></li>
-        
-    </ul>
-</div>
-                
-                <div class="post-list">
+
+
+  <div class="row mx-auto index-card">
     
-    <div class="post">
-        <a class="post-title" href="/2022/06/17/case-sensitive-collation-in-mysql/">Case Sensitive collation in MySQL</a>
-        <div class="post-except">
-            utf8mb4字符集排序规则在MySQL8.0.1之前，utf8mb4没有cs排序规则，大小写敏感的排序规则只能用utf8mb4_bin，然后通过类似于SELECT ... ORDER BY column COLLATE utf8_croatian_ci.的方法来得到更“human”的排序结果。（bin的排序方式按照类似ACSII顺序，比如大小写的字母不一定会在一起）
-
-SELECT * FROM mytable WHERE name COLLATE utf8_bin &#x
-            <a class="read-more" href="/2022/06/17/case-sensitive-collation-in-mysql/"> ... </a>
-        </div>
-        <div class="post-date">2022.06.17</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			MySQL,
-		
-			charset,
-		
-			collation,
-		</span>
-        </div>
-    </div>
     
-    <div class="post">
-        <a class="post-title" href="/2022/06/14/useful-utils/">Some useful tools</a>
-        <div class="post-except">
-            org.springframework.web.util.UriComponentsBuilder
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/17/case-sensitive-collation-in-mysql/" target="_self">
+          MySQL中的大小写敏感排序规则
+        </a>
+      </h1>
 
-spring带的解析uri工具，用起来还不错
-
-
-String url = "http://domain:port/path1/subpath1?param0=0&amp;param1=1";
-
-UriComponentsBuilder.fromHttpUrl(url).build();
-UriComponentsBuilder.fromUri(URI.create(uri)
-            <a class="read-more" href="/2022/06/14/useful-utils/"> ... </a>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/17/case-sensitive-collation-in-mysql/" target="_self">
+        <div>
+          utf8mb4字符集排序规则在MySQL8.0.1之前，utf8mb4没有cs排序规则，大小写敏感的排序规则只能用utf8mb4_bin，然后通过类似于SELECT ... ORDER BY column COLLATE utf8_croatian_ci.的方法来得到更“human”的排序结果。（bin的排序方式按照类似ACSII顺序，比如大小写的字母不一定会在一起）  SELECT * FROM
         </div>
-        <div class="post-date">2022.06.14</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			Spring,
-		
-			URI,
-		</span>
-        </div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2022/06/14/spring-rabbitmq-binding-trap/">Spring rabbitMQ binding config &#34;trap&#34;</a>
-        <div class="post-except">
-            Spring RabbitMQ bindings
+      </a>
 
-exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定
-
-
-&lt;rabbit:queue id="queue0.id" name="queue.0.name"/>
-&lt;rabbit:fanout-exchange name="exchange.0.name">
-  &lt
-            <a class="read-more" href="/2022/06/14/spring-rabbitmq-binding-trap/"> ... </a>
-        </div>
-        <div class="post-date">2022.06.14</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			RabbitMQ,
-		
-			Spring,
-		</span>
-        </div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2022/04/19/arch-linux-setup-guide/">Arch Linux Setup</a>
-        <div class="post-except">
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-17 15:51" pubdate>
+              2022-06-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
             
-https://wiki.archlinux.org/
 
-基本系统安装前置准备
-检查网络ip link
-更新系统时间timedatectl set-ntp true
-
-准备磁盘
-分区
-查看当前磁盘信息
-fdisk -l
-进入分区
-fdisk /dev/the_disk_to_be_partitioned（要被分区的磁盘）
-uefi参考：
-
-
-
-挂载点
-分区
-分区类型
-大小
-
-
-
-&#x2F;mnt&#x2F;boot&#x2F;EFI
-&#x2F;dev&#x2F;efi_
-            <a class="read-more" href="/2022/04/19/arch-linux-setup-guide/"> ... </a>
-        </div>
-        <div class="post-date">2022.04.19</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			Arch Linux,
-		
-			Linux,
-		
-			setup,
-		</span>
-        </div>
-    </div>
+<span class="category-chains">
+  
+  
     
-    <div class="post">
-        <a class="post-title" href="/2022/03/19/shell-some-memos-for-shell-script/">Some memos for shell script</a>
-        <div class="post-except">
+      <span class="category-chain">
+        
+  <a href="/categories/mysql/" class="category-chain-item">MySQL</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-accept user input
-read var
-echo "input value is $var"
+              <a href="/tags/mysql/">#MySQL</a>
+            
+              <a href="/tags/charset/">#charset</a>
+            
+              <a href="/tags/collation/">#collation</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
-do after pre-command succeed
-rm somefile &amp;&amp; echo "removed"
-
-do after pre-command failed
-rm filenotexists || echo "nothing removed"
-
-redirect output
-
-1 means stdout, standard ou
-            <a class="read-more" href="/2022/03/19/shell-some-memos-for-shell-script/"> ... </a>
-        </div>
-        <div class="post-date">2022.03.19</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			Linux,
-		
-			shell script,
-		</span>
-        </div>
-    </div>
+  <div class="row mx-auto index-card">
     
-    <div class="post">
-        <a class="post-title" href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/">Metaspace leakage caused by loading dynamic class</a>
-        <div class="post-except">
-            causeDefine several classes with certain name by using ClassLoader#defineClass , no matter the name is specified or not, the HotSpot JVM always throws OOM in metaspace at last.
-behavior of ClassLoader#defineClass
-ClassLoader#defineClass is 
-            <a class="read-more" href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/"> ... </a>
-        </div>
-        <div class="post-date">2022.03.17</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			JVM,
-		
-			JVM Memory,
-		
-			Java,
-		</span>
-        </div>
-    </div>
     
-    <div class="post">
-        <a class="post-title" href="/2022/03/17/fgo-frida-il2cpp-bridge/">Frida-il2cpp-bridge script for fate/go</a>
-        <div class="post-except">
-            hack script for fgo based on frida and frida-il2cpp-bridge 
-Supports
-bilibili fate go v2.36.0
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/14/useful-utils/" target="_self">
+          一些好用的工具
+        </a>
+      </h1>
 
-aniplex fate go v2.49.0
-fate go in other channels&#x2F;platforms&#x2F;versions may functional but it’s not tested
-
-
-StepsFor Android*Android 10 o
-            <a class="read-more" href="/2022/03/17/fgo-frida-il2cpp-bridge/"> ... </a>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/14/useful-utils/" target="_self">
+        <div>
+          UriComponentsBuilderorg.springframework.web.util.UriComponentsBuilder  spring带的解析uri工具  123456789101112String url &#x3D; &quot;http:&#x2F;&#x2F;domain:port&#x2F;path1&#x2F;subpath1?param0&#x3D;0&amp;param1&#x3D;1&quot;;UriComponentsBui
         </div>
-        <div class="post-date">2022.03.17</div>
-        <div style="opacity: 0.5;padding: 3px;color: #565757; font-style: italic;font-size: 0.2rem;" >
-        <span> tags: 
-			fgo,
-		
-			injection,
-		
-			reverse engineering,
-		
-			wallhack,
-		</span>
-        </div>
-    </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-14 20:33" pubdate>
+              2022-06-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
     
-</div>
+      <span class="category-chain">
+        
+  <a href="/categories/tools/" class="category-chain-item">tools</a>
+  
+  
 
-                <div class="footer">
-    <span>Copyright © 2022 Attt&#39;s ブログ</span>
-    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a>, Modified by <a target="_blank" href="https://github.com/attt">Attt</a></span>
-</div>
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/spring/">#Spring</a>
+            
+              <a href="/tags/uri/">#URI</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/14/spring-rabbitmq-binding-trap/" target="_self">
+          Spring rabbitMQ binding配置的“陷阱”
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/14/spring-rabbitmq-binding-trap/" target="_self">
+        <div>
+          Spring RabbitMQ bindings exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定  123456&lt;rabbit:queue id&#x3D;&quot;queue0.id&quot; name&#x3D;&quot;queue.0.name&amp;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-14 20:31" pubdate>
+              2022-06-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/rabbitmq/">#RabbitMQ</a>
+            
+              <a href="/tags/spring/">#Spring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/19/arch-linux-setup-guide/" target="_self">
+          Arch Linux 安装笔记
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/19/arch-linux-setup-guide/" target="_self">
+        <div>
+          https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;  基本系统安装前置准备 检查网络1ip link 更新系统时间1timedatectl set-ntp true 准备磁盘 分区 查看当前磁盘信息 1fdisk -l 进入分区 1fdisk &#x2F;dev&#x2F;the_disk_to_be_partitioned（要被分区的磁盘） uefi参考：     挂载点 分区 分区类型 大小    &amp;#x2
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-19 11:23" pubdate>
+              2022-04-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/setup/">#setup</a>
+            
+              <a href="/tags/arch-linux/">#Arch Linux</a>
+            
+              <a href="/tags/linux/">#Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/19/shell-some-memos-for-shell-script/" target="_self">
+          Shell脚本笔记
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/03/19/shell-some-memos-for-shell-script/" target="_self">
+        <div>
+          接受用户输入 12read varecho &quot;input value is $var&quot;  成功后执行 1rm somefile &amp;&amp; echo &quot;removed&quot;  失败后执行 1rm filenotexists || echo &quot;nothing removed&quot;  重定向输出  1代表stdout, 标准输出  2代表
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-19 23:27" pubdate>
+              2022-03-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/linux/">#Linux</a>
+            
+              <a href="/tags/shell-script/">#shell script</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/" target="_self">
+          错误的动态类加载方式引发的metaspace内存泄漏
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/" target="_self">
+        <div>
+          现象通过ClassLoader#defineClass方法重复定义指定name的类, HotSpot JVM最终会在metaspace中抛出OOM。 ClassLoader#defineClass的行为 ClassLoader#defineClass是JVM本地方法, 主要的执行步骤:  解析class文件并检查class文件格式是否正确。   根据name检查systemDictionary中c
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-17 15:59" pubdate>
+              2022-03-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/jvm/">#JVM</a>
+            
+              <a href="/tags/jvm-memory/">#JVM Memory</a>
+            
+              <a href="/tags/java/">#Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/17/fgo-frida-il2cpp-bridge/" target="_self">
+          Frida-il2cpp-bridge script for fate/go
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/03/17/fgo-frida-il2cpp-bridge/" target="_self">
+        <div>
+          hack script for fgo based on frida and frida-il2cpp-bridge  Supports bilibili fate go v2.36.0  aniplex fate go v2.49.0 fate go in other channels&#x2F;platforms&#x2F;versions may functional but it’s no
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-17 15:10" pubdate>
+              2022-03-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/hack/" class="category-chain-item">hack</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/wallhack/">#wallhack</a>
+            
+              <a href="/tags/injection/">#injection</a>
+            
+              <a href="/tags/reverse-engineering/">#reverse engineering</a>
+            
+              <a href="/tags/fgo/">#fgo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
 
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/search.css">
 
-
-<script src="/js/highlight.min.js"></script>
-
-
-<script src="/js/highlightjs-line-numbers.js"></script>
-
-
-<script src="/js/search.js"></script>
-
-
-<script src="/js/jquery-3.6.0.min.js"></script>
-
-
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
-
+              </div>
             </div>
+          </div>
         </div>
-    </body>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <i class="iconfont icon-copyright"></i> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: Metaspace leakage caused by loading dynamic class
+title: 错误的动态类加载方式引发的metaspace内存泄漏
 date: 2022-03-17 15:59:28
 categories: 
 	- Java
@@ -9,29 +9,26 @@ tags:
   - Java
 ---
 
-## cause
+## 现象
 
-Define several classes with certain `name` by using `ClassLoader#defineClass` , no matter the `name` is specified or not, the HotSpot JVM always throws OOM in metaspace at last.
+通过`ClassLoader#defineClass`方法重复定义指定`name`的类, HotSpot JVM最终会在metaspace中抛出OOM。
 
-## behavior of `ClassLoader#defineClass`
+## `ClassLoader#defineClass`的行为
 
 ![defineClass](jvm-metaspace-leakage-caused-by-loading-dynamic-class/0.png)
 
-`ClassLoader#defineClass` is JVM native method, the major steps are:
+`ClassLoader#defineClass`是JVM本地方法, 主要的执行步骤:
 
-1. parse class file and check if class file format is correct
+1. 解析class文件并检查class文件格式是否正确。
    
    ![vm specification](jvm-metaspace-leakage-caused-by-loading-dynamic-class/1.png)
 
-2. check `systemDictionary` with parameter `name` to determine if Klass/KlassHandler is already loaded
+2. 根据`name`检查`systemDictionary`中class对应的类数据Klass/KlassHandler是否已经加载过。
 
-(pretend here are some source codes XD)
 
-But if step-2 exists, why the metaspace memory exhausts at last?
+## HotSpot VM解析class的时候实际行为
 
-## what actually happens when VM parsing class file
-
-In step-1 mentioned above, HotSpot VM not only parses the class file but save the class data structure (class code, vtable, itable, etc.) to metaspace. so even if the class name is totally the same, there is duplicated class data generated in metaspace, and which is the metaspace OOM cause.
+在解析和检查class格式过程中, HotSpot VM同时也在metaspace中产生了对应class文件的结构数据 (class code, vtable, itable, etc.)。 所以即使传入的`name`完全一样, 也会在metaspace中不断产生“重复”的class数据。
 
 ![native define class](jvm-metaspace-leakage-caused-by-loading-dynamic-class/2.png)
 
@@ -39,16 +36,12 @@ In step-1 mentioned above, HotSpot VM not only parses the class file but save th
 
 ![check if class already defined](jvm-metaspace-leakage-caused-by-loading-dynamic-class/4.png)
 
-Why not just only parse the file without saving it to metaspace?
+选择在解析的过程中保留完整的class数据（这里“完整”指的是相对与解析一部分之后丢弃一部分的做法），除了不这么做会增加代码复杂度、增加class数据解析的次数、产生更多的内存碎片之外，另一个考虑是正确且规范的动态类加载方式应该是通过`ClassLoader#loadClass()`来进行，而不是直接调用native方法，因为直接调用native方法并不会得到不一样的结果。
 
-In my gusse:
+![loadClass in java](jvm-metaspace-leakage-caused-by-loading-dynamic-class/5.png)
 
-- In java code, most of class definition is done by `ClassLoader#loadClass()` which checks the class name before vm method invoked.
-  
-  ![loadClass in java](jvm-metaspace-leakage-caused-by-loading-dynamic-class/5.png)
+## metaspace中Class数据的GC时机
 
-- There is not so many chances that class file format is bad (ClassFormatError), so it will be a large waste that parse class file and then dellocate the memory and then parse it again if system dictionary dosn't contain the same class handler.
+实际上没有特定针对metaspace的GC行为，GC总是在堆中工作。但当堆中包含metaspace的class数据指针的class对象被执行回收时，class数据占用的空间也会被同时释放。
 
-## Class data GC in metaspace
-
-Actually there is no specific GC behavior in metaspace, in VM the GC always works in heap, but the pointer pointed to class data in metaspace is saved in class instance which lives in heap. So if the class instance is time to be collected, the class data in metaspace will be freed to.
+![metaspace 'GC'](jvm-metaspace-leakage-caused-by-loading-dynamic-class/6.png)

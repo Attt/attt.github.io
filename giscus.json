@@ -1,0 +1,10 @@
+{
+    "origins": [
+      "https://attt.github.io",
+      "https://atpexgo.netlify.app"
+    ],
+    "originsRegex": [
+      "http://localhost:[0-9]+"
+    ],
+    "defaultCommentOrder": "oldest"
+  }

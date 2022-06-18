@@ -1,5 +1,5 @@
 ---
-title: Arch Linux Setup
+title: Arch Linux 安装笔记
 date: 2022-04-19 11:23:08
 categories: 
 	- Linux

@@ -1,5 +1,5 @@
 ---
-title: Case Sensitive collation in MySQL
+title: MySQL中的大小写敏感排序规则
 date: 2022-06-17 15:51:08
 tags:
     - MySQL
@@ -16,6 +16,10 @@ categories:
 - [SELECT ... ORDER BY column COLLATE utf8_croatian_ci](https://forums.mysql.com/read.php?103,19380,200971#msg-200971)
 
 
-MySQL8.0.1之后的版本支持utf8mb4字符集的大小写敏感排序规则（utf8_*_cs）
+MySQL8.0.1之后的版本支持utf8mb4字符集的大小写敏感排序规则（utf8mb4_0900_*_as_cs）
+
+> 0900是指unicode的版本，同utf8mb4_general_520_ci的520，都应该是指排序算法版本（一种类似谁前谁后的排序规则），没有细究
+> as表示accent sensitive（竟然支持了重音排序，他真的，我哭死...）
+
 - [MySQL 8.0.1: Accent and case sensitive collations for utf8mb4](https://dev.mysql.com/blog-archive/mysql-8-0-1-accent-and-case-sensitive-collations-for-utf8mb4/)
 - [New collations in MySQL 8.0.0](https://dev.mysql.com/blog-archive/new-collations-in-mysql-8-0-0/)

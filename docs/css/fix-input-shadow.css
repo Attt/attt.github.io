@@ -1,0 +1,5 @@
+.md-form input[type]:focus:not([readonly]) {
+    border-bottom: 1px solid #4285f4;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

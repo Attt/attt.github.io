@@ -1,5 +1,5 @@
 ---
-title: Some memos for shell script
+title: Shell脚本笔记
 date: 2022-03-19 23:27:41
 categories: 
 	- Linux
@@ -8,60 +8,60 @@ tags:
 	- shell script
 ---
 
-- accept user input
+- 接受用户输入
   
   ```bash
   read var
   echo "input value is $var"
   ```
 
-- do after pre-command succeed
+- 成功后执行
   
   ```bash
   rm somefile && echo "removed"
   ```
 
-- do after pre-command failed
+- 失败后执行
   
   ```bash
   rm filenotexists || echo "nothing removed"
   ```
 
-- redirect output
+- 重定向输出
   
-  - `1` means `stdout`, standard output
+  - `1`代表`stdout`, 标准输出
   
-  - `2` means `stderr`, standard error output
+  - `2`代表`stderr`, 标准错误输出
   
-  - `&` means "as the same way"
+  - `&`代表"按照相同方式输出"
   
-  - `dev/null` is a null file like a "blak hole", anything written to it is discard
+  - `dev/null`是null文件，可以理解为一个“黑洞”设备，所有输入都会被丢弃
   
   ```bash
   echo "blabla" > dest.file
   
-  # complete
+  # 输出所有输出到文件
   echo "blabla" 1 > dest.file
   
-  # error output to dest.file
+  # 只输出错误输出到文件
   rm filenotexists 2 > err.log
   
-  # all output to dest.file
+  # 输出所有输出到文件
   rm somefile 1 > dest.file 2>&1
   
-  # only stdout
+  # 输出非错误输出到文件
   rm somefile 1 > dest.file 2 > dev/null
   
-  # create 2 pipes, overwrites each other
+  # 创建两条管道
   rm somefile 1 > log 2 > log
   
-  # 2 extends 1's pipe, works fine
+  # 2的管道继承于1
   rm somefile 1 > log 2>&1
   ```
 
-- create blank file with certain size
+- 创建固定大小的空文件
   
-  `dev/zero` as an input stream provides endless 0s (not ASCII '0')
+  当`dev/zero`作为输入流的时候，会产生无限的0 (不是ASCII的'0')
   
   ```bash
   # input file is /dev/zero
@@ -91,7 +91,7 @@ tags:
   fi
   ```
 
-- append to file
+- 追加到文件
   
   ```bash
   file1 >> file2

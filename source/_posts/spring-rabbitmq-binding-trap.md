@@ -1,5 +1,5 @@
 ---
-title: Spring rabbitMQ binding config "trap"
+title: Spring rabbitMQ binding配置的“陷阱”
 date: 2022-06-14 20:31:59
 categories: 
 	- Spring
@@ -10,7 +10,7 @@ tags:
 
 ## Spring RabbitMQ bindings
 
->> exchange的`auto-declare`配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定
+> exchange的`auto-declare`配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定
 
 ```xml
   <rabbit:queue id="queue0.id" name="queue.0.name"/>
@@ -19,7 +19,6 @@ tags:
       <rabbit:binding queue="queue0.id"/>
     </rabbit:bindings>
   </rabbit:fanout-exchange>
-
 ```
 
 解析binding的入口：
