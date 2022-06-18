@@ -1,6 +1,6 @@
 [submodule "themes/stellar"]
 	path = themes/stellar
-	url = git@github.com:Attt/hexo-theme-stellar.git
+	url = https://github.com/Attt/hexo-theme-stellar.git
 [submodule "themes/fluid"]
 	path = themes/fluid
-	url = git@github.com:Attt/hexo-theme-fluid.git
+	url = https://github.com/Attt/hexo-theme-fluid.git
