@@ -1,6 +1,3 @@
-[submodule "themes/stellar"]
-	path = themes/stellar
-	url = https://github.com/Attt/hexo-theme-stellar.git
 [submodule "themes/fluid"]
 	path = themes/fluid
 	url = https://github.com/Attt/hexo-theme-fluid.git

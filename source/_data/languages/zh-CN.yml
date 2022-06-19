@@ -1,36 +1,36 @@
 name: '简体中文'
 
 home:
-  menu: '首页'
-  title: '首页'
+  menu: '首 页'
+  title: '首 页'
 
 archive:
-  menu: '归档'
-  title: '归档'
-  subtitle: '归档'
+  menu: '归 档'
+  title: '归 档'
+  subtitle: '归 档'
   post_total: '共计 %d 篇文章'
 
 category:
-  menu: '分类'
-  title: '分类'
-  subtitle: '分类'
+  menu: '分 类'
+  title: '分 类'
+  subtitle: '分 类'
   post_total: '共计 %d 篇文章'
   more: 'More...'
 
 tag:
-  menu: '标签'
-  title: '标签'
-  subtitle: '标签'
+  menu: '标 签'
+  title: '标 签'
+  subtitle: '标 签'
   post_total: '共计 %d 篇文章'
 
 about:
-  menu: '关于'
-  title: '关于'
-  subtitle: '关于'
+  menu: '关 于'
+  title: '关 于'
+  subtitle: '关 于'
 
 links:
-  menu: '友链'
-  title: '友链'
+  menu: '友 链'
+  title: '友 链'
   subtitle: '友情链接'
 
 page404:
