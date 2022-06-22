@@ -2,7 +2,7 @@
 title: Frida-il2cpp-bridge script for fate/go
 date: 2022-03-17 15:10:42
 categories: 
-	- hack
+	- Amateur Exp.
 tags:
   - wallhack
   - injection
@@ -18,7 +18,7 @@ hack script for fgo based on [frida](https://github.com/frida/frida) and [frida-
 
 - aniplex fate go v2.49.0
   
-  *fate go in other channels/platforms/versions may functional but it's not tested*
+  *fate go in other channels/platforms/versions may be functional but it's not tested*
 
 ### Steps
 
