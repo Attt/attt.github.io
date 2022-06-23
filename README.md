@@ -1,6 +1,12 @@
 # attt.github.io
 blog
- 
+
+- theme
+```bash
+git submodule init
+git submodule update
+```
+
 - new
 ```bash
 hexo new post 'new post name'
