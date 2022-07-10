@@ -16,27 +16,26 @@
   <meta name="author" content="attt">
   <meta name="keywords" content="">
   
-    <meta name="description" content="例句 今日はずっと家にいます。 明日はずっと家でゲームをします。 あそこに山が見えます。（あそこから山が見えます。） 友達の家に携帯を忘れました。 友達の家で携帯を無くしました。 ここに車を停めてください。・ここで車を停めでください。  区别に作为场所&#x2F;地点助词的时候，表达的是一种静态的结果或者一种状态，で则表达一个动作或者一个行为。  今日はずっと家にいます。  表达“存在”是一种状态">
+    <meta name="description" content="Future基本的异步模型，主要方法有get()、get(time,timeUnit)、isDone()等。 CompletableFuture支持回调，更好的支持多个异步任务的流程控制，比如先后顺序，成功或失败之后的流转。 假如有A、B两个任务，B需要在A之后执行：1234567891011121314151617181920CompletableFuture&lt;String&gt; aQu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「に」と「で」作为场所助词时的区别">
-<meta property="og:url" content="https://attt.github.io/2022/06/29/jp-ni-de-basyou/index.html">
+<meta property="og:title" content="异步&#x2F;并发">
+<meta property="og:url" content="https://attt.github.io/2022/07/10/asynchronization/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
-<meta property="og:description" content="例句 今日はずっと家にいます。 明日はずっと家でゲームをします。 あそこに山が見えます。（あそこから山が見えます。） 友達の家に携帯を忘れました。 友達の家で携帯を無くしました。 ここに車を停めてください。・ここで車を停めでください。  区别に作为场所&#x2F;地点助词的时候，表达的是一种静态的结果或者一种状态，で则表达一个动作或者一个行为。  今日はずっと家にいます。  表达“存在”是一种状态">
+<meta property="og:description" content="Future基本的异步模型，主要方法有get()、get(time,timeUnit)、isDone()等。 CompletableFuture支持回调，更好的支持多个异步任务的流程控制，比如先后顺序，成功或失败之后的流转。 假如有A、B两个任务，B需要在A之后执行：1234567891011121314151617181920CompletableFuture&lt;String&gt; aQu">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-28T16:05:42.000Z">
-<meta property="article:modified_time" content="2022-07-10T13:05:05.929Z">
+<meta property="article:published_time" content="2022-07-10T13:06:58.000Z">
+<meta property="article:modified_time" content="2022-07-10T14:25:01.586Z">
 <meta property="article:author" content="attt">
-<meta property="article:tag" content="language">
-<meta property="article:tag" content="japanese">
-<meta property="article:tag" content="文法">
-<meta property="article:tag" content="grammar">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="asynchronization">
+<meta property="article:tag" content="concurrency">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>「に」と「で」作为场所助词时的区别 - Attt&#39;s ブログ</title>
+  <title>异步/并发 - Attt&#39;s ブログ</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="「に」と「で」作为场所助词时的区别"></span>
+            <span id="subtitle" data-typed-text="异步/并发"></span>
           
         </div>
 
@@ -222,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-29 00:05" pubdate>
-          2022年6月29日 星期三 凌晨
+        <time datetime="2022-07-10 21:06" pubdate>
+          2022年7月10日 星期日 晚上
         </time>
       </span>
     
@@ -234,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          619 字
+          2.8k 字
         
       </span>
     
@@ -245,7 +244,7 @@
         
         
         
-          8 分钟
+          36 分钟
         
       </span>
     
@@ -301,50 +300,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">「に」と「で」作为场所助词时的区别</h1>
+            <h1 style="display: none">异步/并发</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="例句"><a href="#例句" class="headerlink" title="例句"></a>例句</h1><ol>
-<li>今日はずっと家<code>に</code>います。</li>
-<li>明日はずっと家<code>で</code>ゲームをします。</li>
-<li>あそこ<code>に</code>山が見えます。（あそこ<code>から</code>山が見えます。）</li>
-<li>友達の家<code>に</code>携帯を忘れました。</li>
-<li>友達の家<code>で</code>携帯を無くしました。</li>
-<li>ここ<code>に</code>車を停めてください。・ここ<code>で</code>車を停めでください。</li>
+                <h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>基本的异步模型，主要方法有<code>get()</code>、<code>get(time,timeUnit)</code>、<code>isDone()</code>等。</p>
+<h2 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h2><p>支持回调，更好的支持多个异步任务的流程控制，比如先后顺序，成功或失败之后的流转。</p>
+<h3 id="假如有A、B两个任务，B需要在A之后执行："><a href="#假如有A、B两个任务，B需要在A之后执行：" class="headerlink" title="假如有A、B两个任务，B需要在A之后执行："></a>假如有A、B两个任务，B需要在A之后执行：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java">CompletableFuture&lt;String&gt; aQuery = CompletableFuture.supplyAsync(() -&gt; &#123;<br>    <span class="hljs-keyword">return</span> queryA();<br>&#125;).exceptionally(e -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;failed to execute aQuery&quot;</span>);<br>    e.printStackTrace();<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;);<br><span class="hljs-comment">//aQuery成功后继续执行bQuery</span><br>CompletableFuture&lt;Double&gt; bQuery = cfQuery.thenApplyAsync(aResult -&gt; &#123;<br>    <span class="hljs-keyword">if</span>(aResult == <span class="hljs-literal">null</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> queryB(aResult);<br>&#125;).exceptionally(e -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;failed to execute bQuery&quot;</span>);<br>    e.printStackTrace();<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;);<br><span class="hljs-comment">// bQuery成功后打印结果</span><br>bQuery.thenAccept(System.out::println);<br></code></pre></td></tr></table></figure>
+
+<p>如果不依赖CompletableFuture的话：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java">Future&lt;String&gt; aFuture = asyncQueryA();<br><span class="hljs-type">String</span> <span class="hljs-variable">aResult</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">try</span>&#123;<br>    aResult = aFuture.get();<br>&#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>    System.out.println(<span class="hljs-string">&quot;failed to execute asyncQueryA&quot;</span>);<br>    e.printStackTrace();<br>&#125;<br><br><span class="hljs-type">String</span> <span class="hljs-variable">bResult</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">if</span>(aResult != <span class="hljs-literal">null</span>)&#123;<br>    Future&lt;String&gt; bFuture = asyncQueryB(aResult);<br>    <span class="hljs-keyword">try</span>&#123;<br>        bResult = bFuture.get();<br>    &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>        System.out.println(<span class="hljs-string">&quot;failed to execute asyncQueryB&quot;</span>);<br>        e.printStackTrace();<br>    &#125;<br>&#125;<br>System.out.println(bResult);<br></code></pre></td></tr></table></figure>
+
+<h3 id="假如有A、B两个任务，A或B任意一个任务执行完成就结束："><a href="#假如有A、B两个任务，A或B任意一个任务执行完成就结束：" class="headerlink" title="假如有A、B两个任务，A或B任意一个任务执行完成就结束："></a>假如有A、B两个任务，A或B任意一个任务执行完成就结束：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//aQuery</span><br>CompletableFuture&lt;String&gt; aQuery = CompletableFuture.supplyAsync(() -&gt; &#123;<br>    <span class="hljs-keyword">return</span> queryA();<br>&#125;).exceptionally(e -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;failed to execute aQuery&quot;</span>);<br>    e.printStackTrace();<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;);<br><span class="hljs-comment">//bQuery</span><br>CompletableFuture&lt;Double&gt; bQuery = cfQuery.thenApplyAsync(() -&gt; &#123;<br>    <span class="hljs-keyword">return</span> queryB();<br>&#125;).exceptionally(e -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;failed to execute bQuery&quot;</span>);<br>    e.printStackTrace();<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;);<br><br>CompletableFuture&lt;Object&gt; aOrBQuery = CompletableFuture.anyOf(aQuery, bQuery);<br><br><span class="hljs-comment">// 任意一个任务成功后打印结果</span><br>aOrBQuery.thenAccept(System.out::println);<br></code></pre></td></tr></table></figure>
+
+<p>这种情况如果不依赖CompletableFuture的话……：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java">Future&lt;String&gt; aFuture = asyncQueryA();<br>Future&lt;String&gt; bFuture = asyncQueryB();<br><span class="hljs-type">int</span> <span class="hljs-variable">failedTask</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>    <span class="hljs-keyword">if</span>(aFuture.isDone())&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            result = aFuture.get();<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;failed to execute asyncQueryA&quot;</span>);<br>            e.printStackTrace();<br>            failedTask++;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(bFuture.isDone())&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            result = bFuture.get();<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;failed to execute asyncQueryB&quot;</span>);<br>            e.printStackTrace();<br>            failedTask++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// 不写==2, 防止以后加任务cdef等等时忘记修改这个判断值引起死循环</span><br>    <span class="hljs-keyword">if</span>(failedTask &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现细节和注意点"><a href="#实现细节和注意点" class="headerlink" title="实现细节和注意点"></a>实现细节和注意点</h3><ol>
+<li><code>thenAccept</code>或者<code>exceptionally</code>这种方法是在调用线程中执行的，会阻塞调用线程，<code>supplyAsync</code>或者<code>thenApplyAsync</code>这种名字里带Async的会被提交到线程池执行。</li>
+<li>如果不指定线程池的话，默认使用的是<code>ForkJoinPool</code>的<code>CommonPool</code>线程池（默认的coreSize和poolSize是8还是几来着，反正很少），可能会和其他的任务共享线程池，也许会互相抢占线程资源。</li>
+<li>（待续）</li>
 </ol>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p><code>に</code>作为场所&#x2F;地点助词的时候，表达的是一种静态的结果或者一种状态，<code>で</code>则表达一个动作或者一个行为。</p>
-<blockquote>
-<p>今日はずっと家<code>に</code>います。</p>
-</blockquote>
-<p>表达“存在”是一种状态。</p>
-<blockquote>
-<p>明日はずっと家<code>で</code>ゲームをします。</p>
-</blockquote>
-<p>表达“打游戏”是一个动作。</p>
-<blockquote>
-<p>あそこ<code>に</code>山が見えます。</p>
-</blockquote>
-<p>表达的“能被看见”是一个状态。</p>
-<blockquote>
-<p>友達の家<code>に</code>携帯を忘れました。</p>
-</blockquote>
-<p>表达“落在某处”是一个事实&#x2F;状态。</p>
-<blockquote>
-<p>友達の家<code>で</code>携帯を無くしました。</p>
-</blockquote>
-<p>表达“弄丢”是一个动作。</p>
-<p><code>从“弄丢了”这个动作发生开始，就一直处于”忘了“的状态。</code></p>
-<blockquote>
-<p>ここ<code>に</code>車を停めてください。</p>
-</blockquote>
-<p>把车停在这里，表达的是在这里保持一种停着的状态。</p>
-<blockquote>
-<p>ここ<code>で</code>車を停めでください。</p>
-</blockquote>
-<p>在这里停车，表达的是“停”这个动作，至于“停”完了是保持“停”的状态还是继续发生“动”的后续动作并不是重点。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">再比如说：寝る，有两个意思，一个是“睡觉　眠る”，一个是“躺着 横たわる・横になる”<br><br>「ここで寝る」表示的是在这里睡觉，因为睡觉是个动作，至于你这个动作做了会怎么样那不重要，就在这里睡就完事了。<br><br>「ここに寝る」表示在这里躺着，怎么躺着的不重要，倒下去还是慢慢躺下去或者后空翻接转体三周半摔在上面都不重要，最终变成躺着就可以，只要最后是在ここ躺着的状态都OK。<br></code></pre></td></tr></table></figure>
+<h2 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h2><p>（待续）</p>
+<h2 id="Viber-x2F-Coroutines"><a href="#Viber-x2F-Coroutines" class="headerlink" title="Viber&#x2F;Coroutines"></a>Viber&#x2F;Coroutines</h2><p>（待续）</p>
 
                 
               </div>
@@ -363,7 +341,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/lanaguage/" class="category-chain-item">Lanaguage</a>
+  <a href="/categories/java/" class="category-chain-item">Java</a>
   
   
 
@@ -378,13 +356,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/language/">#language</a>
+        <a href="/tags/java/">#Java</a>
       
-        <a href="/tags/japanese/">#japanese</a>
+        <a href="/tags/asynchronization/">#asynchronization</a>
       
-        <a href="/tags/%E6%96%87%E6%B3%95/">#文法</a>
-      
-        <a href="/tags/grammar/">#grammar</a>
+        <a href="/tags/concurrency/">#concurrency</a>
       
     </div>
   
@@ -396,8 +372,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>「に」と「で」作为场所助词时的区别</div>
-      <div>https://attt.github.io/2022/06/29/jp-ni-de-basyou/</div>
+      <div>异步/并发</div>
+      <div>https://attt.github.io/2022/07/10/asynchronization/</div>
     </div>
     <div class="license-meta">
       
@@ -409,7 +385,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年6月29日</div>
+          <div>2022年7月10日</div>
         </div>
       
       
@@ -439,18 +415,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/10/asynchronization/" title="异步/并发">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">异步/并发</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/23/jp-tokoro/" title="文法「ところ」">
-                        <span class="hidden-mobile">文法「ところ」</span>
+                      <a href="/2022/06/29/jp-ni-de-basyou/" title="「に」と「で」作为场所助词时的区别">
+                        <span class="hidden-mobile">「に」と「で」作为场所助词时的区别</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
