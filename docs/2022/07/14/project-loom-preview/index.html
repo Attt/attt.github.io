@@ -16,21 +16,22 @@
   <meta name="author" content="attt">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Home page、Proposal">
+    <meta name="description" content="相关资源 主页：https:&#x2F;&#x2F;openjdk.org&#x2F;projects&#x2F;loom&#x2F; 提案：http:&#x2F;&#x2F;cr.openjdk.java.net&#x2F;~rpressler&#x2F;loom&#x2F;Loom-Proposal.html 预览：https:&#x2F;&#x2F;jdk.java.net&#x2F;loom&#x2F;  EA in JDK19123456789Thread.ofVirtual()            .">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Loom 预览">
 <meta property="og:url" content="https://attt.github.io/2022/07/14/project-loom-preview/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
-<meta property="og:description" content="Home page、Proposal">
+<meta property="og:description" content="相关资源 主页：https:&#x2F;&#x2F;openjdk.org&#x2F;projects&#x2F;loom&#x2F; 提案：http:&#x2F;&#x2F;cr.openjdk.java.net&#x2F;~rpressler&#x2F;loom&#x2F;Loom-Proposal.html 预览：https:&#x2F;&#x2F;jdk.java.net&#x2F;loom&#x2F;  EA in JDK19123456789Thread.ofVirtual()            .">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-14T09:02:15.000Z">
-<meta property="article:modified_time" content="2022-07-14T12:09:41.619Z">
+<meta property="article:modified_time" content="2022-07-14T13:47:37.293Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="asynchronization">
 <meta property="article:tag" content="concurrency">
 <meta property="article:tag" content="virtual threads">
 <meta property="article:tag" content="fiber">
+<meta property="article:tag" content="continuations">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -235,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          17 字
+          1k 字
         
       </span>
     
@@ -246,7 +247,7 @@
         
         
         
-          1 分钟
+          13 分钟
         
       </span>
     
@@ -307,9 +308,24 @@
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p><a target="_blank" rel="noopener" href="https://openjdk.org/projects/loom/">Home page</a>、<a target="_blank" rel="noopener" href="http://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html">Proposal</a></p>
+                <h2 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h2><blockquote>
+<p>主页：<a target="_blank" rel="noopener" href="https://openjdk.org/projects/loom/">https://openjdk.org/projects/loom/</a></p>
+<p>提案：<a target="_blank" rel="noopener" href="http://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html">http://cr.openjdk.java.net/~rpressler&#x2F;loom&#x2F;Loom-Proposal.html</a></p>
+<p>预览：<a target="_blank" rel="noopener" href="https://jdk.java.net/loom/">https://jdk.java.net/loom/</a></p>
 </blockquote>
+<h2 id="EA-in-JDK19"><a href="#EA-in-JDK19" class="headerlink" title="EA in JDK19"></a>EA in JDK19</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread.ofVirtual()<br>            .name(<span class="hljs-string">&quot;fiber-1&quot;</span>)<br>            .allowSetThreadLocals(<span class="hljs-literal">false</span>)<br>            .inheritInheritableThreadLocals(<span class="hljs-literal">false</span>)<br>            .unstarted(() -&gt; &#123;<br>                <span class="hljs-type">Thread</span> <span class="hljs-variable">fiber</span> <span class="hljs-operator">=</span> Thread.currentThread();<br>                System.out.printf(<span class="hljs-string">&quot;[%s,daemon:%s,virtual:%s] - Hello World\n&quot;</span>, fiber.getName(),<br>                        fiber.isDaemon(), fiber.isVirtual());<br>            &#125;).start();<br></code></pre></td></tr></table></figure>
+
+<h2 id="函数颜色问题"><a href="#函数颜色问题" class="headerlink" title="函数颜色问题"></a>函数颜色问题</h2><p><a target="_blank" rel="noopener" href="http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">what-color-is-your-function</a>，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：</p>
+<p>那么这种语言实际存在两种<code>function</code>关键字：<code>blue_func</code>和<code>red_func</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">blue_func <span class="hljs-title function_">sync</span>(<span class="hljs-params"></span>)&#123;...&#125;<br><br>red_func <span class="hljs-title function_">async</span>(<span class="hljs-params">callback</span>)&#123;...&#125;<br></code></pre></td></tr></table></figure>
+<p>其中，<font color='red'>红色</font>函数的结果不通过方法返回，而是传递给参数中的函数，那么就会有这样的问题：</p>
+<ul>
+<li>在<font color='red'>红色</font>函数中可以调用<font color='#0099ff'>蓝色</font>函数，因为<font color='#0099ff'>蓝色</font>函数的返回值通过方法返回能够拿到。</li>
+<li>而在<font color='#0099ff'>蓝色</font>函数中是不能轻易调用<font color='red'>红色</font>函数的，因为结果已经传递到<font color='red'>红色</font>函数的参数函数里了，在<font color='#0099ff'>蓝色</font>函数线性执行过程中不能保证能够从<font color='red'>红色</font>函数的参数函数里获取结果。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">red_func <span class="hljs-title function_">async</span>(<span class="hljs-params">callback</span>)&#123;<br>    <span class="hljs-title function_">sync</span>() <span class="hljs-comment">// 可以调用</span><br>&#125;<br><br>blue_func <span class="hljs-title function_">sync</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">async</span>(callback) <span class="hljs-comment">// 不能调用</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>所谓的<font color='red'>红色</font>函数就是异步函数，上面的这个“颜色问题”就是“回调地狱”(“callback hell”)的另一种感受方法😅。</p>
+<p>在函数式编程中，异步存在两个比较炸裂的问题：1. 回调地狱😅；2. 一个被广泛使用的同步函数的异步化所需要的大量的修改和重写量可以让任何一个开发直接爆炸。</p>
 
                 
               </div>
@@ -352,6 +368,8 @@
         <a href="/tags/virtual-threads/">#virtual threads</a>
       
         <a href="/tags/fiber/">#fiber</a>
+      
+        <a href="/tags/continuations/">#continuations</a>
       
     </div>
   
