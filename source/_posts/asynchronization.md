@@ -120,11 +120,10 @@ while(true){
 ### 实现细节和注意点
 1. `thenAccept`或者`exceptionally`这种方法是在调用线程中执行的，会阻塞调用线程，`supplyAsync`或者`thenApplyAsync`这种名字里带Async的会被提交到线程池执行。
 2. 如果不指定线程池的话，默认使用的是`ForkJoinPool`的`CommonPool`线程池（默认的coreSize和poolSize是8还是几来着，反正很少），可能会和其他的任务共享线程池，也许会互相抢占线程资源。
-3. 
-（待续）
+3. `CompletionStage`定义流程控制的能力，各种流程组合的实际动作都基于`CompletableFuture.Completion`实现的类
 
 ## RxJava
 （待续）
 
 ## Fiber/Coroutines
-（待续）
+[Project Loom Preview](/2022/07/14/project-loom-preview/index.html)
