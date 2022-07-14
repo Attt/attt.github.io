@@ -10,3 +10,5 @@ tags:
 categories:
     - Java
 ---
+> [Home page](https://openjdk.org/projects/loom/)、[Proposal](http://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html)
+
