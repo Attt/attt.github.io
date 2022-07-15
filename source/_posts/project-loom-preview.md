@@ -20,19 +20,66 @@ categories:
 
 
 ## EA in JDK19
+> [https://github.com/Attt/Loom-Preview](https://github.com/Attt/Loom-Preview)
+
 ```java
-Thread.ofVirtual()
-            .name("fiber-1")
-            .allowSetThreadLocals(false)
-            .inheritInheritableThreadLocals(false)
-            .unstarted(() -> {
-                Thread fiber = Thread.currentThread();
-                System.out.printf("[%s,daemon:%s,virtual:%s] - Hello World\n", fiber.getName(),
-                        fiber.isDaemon(), fiber.isVirtual());
-            }).start();
+// 创建builder
+Thread.Builder.OfVirtual ofVirtual = Thread.ofVirtual()
+        // 名称，start表示种子1步进递增
+        .name("virtual-thread-", 0)
+        // 是否允许set threadLocal
+        .allowSetThreadLocals(true)
+        // 是否允许使用可继承的threadLocal
+        .inheritInheritableThreadLocals(true)
+        // 未捕获异常处理器
+        .uncaughtExceptionHandler((t, e) -> {
+            System.out.println(t);
+            e.printStackTrace();
+        });
+
+// 执行
+ofVirtual.start(() -> {
+    // do something
+    System.out.println(Thread.currentThread().getName());
+    System.out.println(Thread.currentThread().isDaemon());
+    System.out.println(Thread.currentThread().isVirtual());
+}).join();
+
+// 预设任务，返回Thread实例
+Thread unstarted = ofVirtual
+        .unstarted(() -> {
+            System.out.println(Thread.currentThread().getName());
+            System.out.println("Wooooow!");
+        });
+// 开启任务
+unstarted.start();
+
+// 基于Executors#newThreadPerTaskExecutor，使用VirtualThreadFactory作为线程工厂
+// 为每个提交的任务开启一个thread，无界
+ExecutorService virtualThreadPerTaskExecutor = Executors.newVirtualThreadPerTaskExecutor();
+virtualThreadPerTaskExecutor.submit(() -> {
+    System.out.printf("%s-newVirtualThreadPerTaskExecutor %n", Thread.currentThread().getName());
+});
+
+// 使用builder的设置值创建的perTaskExecutor
+ExecutorService perTaskExecutor = Executors.newThreadPerTaskExecutor(ofVirtual.factory());
+perTaskExecutor.submit(() -> {
+    System.out.printf("%s-newThreadPerTaskExecutor %n", Thread.currentThread().getName());
+});
 ```
 
-## 函数颜色问题
+## Benchmark
+```java
+Benchmark                                  Mode  Cnt     Score     Error   Units
+ThreadThroughputBenchmark.platformThread  thrpt    5    10.788 ±   0.677  ops/ms
+ThreadThroughputBenchmark.virtualThread   thrpt    5  4201.740 ± 475.806  ops/ms
+```
+
+## Q&A
+
+
+
+## *函数颜色问题
 [what-color-is-your-function](http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：
 
 那么这种语言实际存在两种`function`关键字：`blue_func`和`red_func`
