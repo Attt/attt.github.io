@@ -24,7 +24,7 @@ categories:
 > 如果使用octane渲染器，就要用universal material着色器，但基本的着色原理大差不差
 
 ### 输入
-![principled BSDF](blender-learning-memo0/render_shader-nodes_shader_principled_node.png)
+![principled BSDF](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/render_shader-nodes_shader_principled_node.png)
 
 #### 基础色`Base Color`
 漫射或金属表面颜色。
@@ -89,8 +89,8 @@ categories:
 ```text
 与 各向异性 BSDF 着色器节点不同，该节点的高光延伸方向会旋转90°。可通过增加0.25的旋转值进行更正。
 ```
-![Anisotropic & Roughness 1](blender-learning-memo0/render_shader-nodes_shader_principled_example-2a.jpg)
-![Anisotropic & Roughness 2](blender-learning-memo0/render_shader-nodes_shader_principled_example-2b.jpg)
+![Anisotropic & Roughness 1](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/render_shader-nodes_shader_principled_example-2a.jpg)
+![Anisotropic & Roughness 2](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/render_shader-nodes_shader_principled_example-2b.jpg)
 
 #### 光泽`Sheen`
 边缘附近类似天鹅绒材质的反射数量，用于模拟布料等材质。
@@ -165,4 +165,4 @@ categories:
 
 
 ### 样例
-![principled example 1](blender-learning-memo0/render_shader-nodes_shader_principled_example-1a.jpg)
+![principled example 1](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/render_shader-nodes_shader_principled_example-1a.jpg)

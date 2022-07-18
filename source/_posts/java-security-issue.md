@@ -30,7 +30,7 @@ Caused by: java.lang.SecurityException: class "javax.annotation.ManagedBean"'s s
 ```
 ## 解决
 原因如错误信息所说，同package下有不同签名信息，属于依赖冲突。`javax.annotation.ManagedBean`的package是`javax.annotation`，找一下还有哪个jar里面有这个package：
-![搜索图](java-security-issue/scrshot0.png)
+![搜索图](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/scrshot0.png)
 
 然后找一下这两个包是什么依赖引入的（有一个肯定是zk😊):
 ```bash

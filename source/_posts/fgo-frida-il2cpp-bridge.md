@@ -64,7 +64,7 @@ hack script for fgo based on [frida](https://github.com/frida/frida) and [frida-
 
 ### Features
 
-![in battle](/images/0.jpg)
+![in battle](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/0.jpg)
 
 #### active
 

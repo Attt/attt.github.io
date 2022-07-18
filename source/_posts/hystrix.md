@@ -85,4 +85,4 @@ public CommandHelloWorld(String name) {
 ### 监控
 （hystrix-metrics-event-stream、略）
 
-![hystrix](hystrix/hystrix.webp)
+![hystrix](https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/hystrix.webp)

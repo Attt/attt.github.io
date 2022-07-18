@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/images/me.png">
-  <link rel="icon" href="/images/me.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/me.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/me.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,25 +19,25 @@
     <meta name="description" content="现象通过ClassLoader#defineClass方法重复定义指定name的类, HotSpot JVM最终会在metaspace中抛出OOM。 ClassLoader#defineClass的行为 ClassLoader#defineClass是JVM本地方法, 主要的执行步骤:  解析class文件并检查class文件格式是否正确。   根据name检查systemDictionary中c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="错误的动态类加载方式引发的metaspace内存泄漏">
-<meta property="og:url" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/index.html">
+<meta property="og:url" content="https://at3.live/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
 <meta property="og:description" content="现象通过ClassLoader#defineClass方法重复定义指定name的类, HotSpot JVM最终会在metaspace中抛出OOM。 ClassLoader#defineClass的行为 ClassLoader#defineClass是JVM本地方法, 主要的执行步骤:  解析class文件并检查class文件格式是否正确。   根据name检查systemDictionary中c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/0.png">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/1.png">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/2.png">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/3.png">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/4.png">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/5.png">
-<meta property="og:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/6.png">
 <meta property="article:published_time" content="2022-03-17T07:59:28.000Z">
-<meta property="article:modified_time" content="2022-06-18T13:18:00.176Z">
+<meta property="article:modified_time" content="2022-07-18T16:19:17.875Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="JVM Memory">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://attt.github.io/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/0.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/0.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -86,7 +86,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"attt.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":10,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"at3.live","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":10,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -207,7 +207,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/images/eye1.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/eye1.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
       <div class="banner-text text-center fade-in-up">
@@ -314,23 +314,23 @@
               <div class="markdown-body">
                 
                 <h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>通过<code>ClassLoader#defineClass</code>方法重复定义指定<code>name</code>的类, HotSpot JVM最终会在metaspace中抛出OOM。</p>
-<h2 id="ClassLoader-defineClass的行为"><a href="#ClassLoader-defineClass的行为" class="headerlink" title="ClassLoader#defineClass的行为"></a><code>ClassLoader#defineClass</code>的行为</h2><p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/0.png" srcset="/img/loading.gif" lazyload alt="defineClass"></p>
+<h2 id="ClassLoader-defineClass的行为"><a href="#ClassLoader-defineClass的行为" class="headerlink" title="ClassLoader#defineClass的行为"></a><code>ClassLoader#defineClass</code>的行为</h2><p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/0.png" srcset="/img/loading.gif" lazyload alt="defineClass"></p>
 <p><code>ClassLoader#defineClass</code>是JVM本地方法, 主要的执行步骤:</p>
 <ol>
 <li><p>解析class文件并检查class文件格式是否正确。</p>
-<p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/1.png" srcset="/img/loading.gif" lazyload alt="vm specification"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/1.png" srcset="/img/loading.gif" lazyload alt="vm specification"></p>
 </li>
 <li><p>根据<code>name</code>检查<code>systemDictionary</code>中class对应的类数据Klass&#x2F;KlassHandler是否已经加载过。</p>
 </li>
 </ol>
 <h2 id="HotSpot-VM解析class的时候实际行为"><a href="#HotSpot-VM解析class的时候实际行为" class="headerlink" title="HotSpot VM解析class的时候实际行为"></a>HotSpot VM解析class的时候实际行为</h2><p>在解析和检查class格式过程中, HotSpot VM同时也在metaspace中产生了对应class文件的结构数据 (class code, vtable, itable, etc.)。 所以即使传入的<code>name</code>完全一样, 也会在metaspace中不断产生“重复”的class数据。</p>
-<p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/2.png" srcset="/img/loading.gif" lazyload alt="native define class"></p>
-<p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/3.png" srcset="/img/loading.gif" lazyload alt="find klass in dict"></p>
-<p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/4.png" srcset="/img/loading.gif" lazyload alt="check if class already defined"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/2.png" srcset="/img/loading.gif" lazyload alt="native define class"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/3.png" srcset="/img/loading.gif" lazyload alt="find klass in dict"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/4.png" srcset="/img/loading.gif" lazyload alt="check if class already defined"></p>
 <p>选择在解析的过程中保留完整的class数据（这里“完整”指的是相对与解析一部分之后丢弃一部分的做法），除了不这么做会增加代码复杂度、增加class数据解析的次数、产生更多的内存碎片之外，另一个考虑是正确且规范的动态类加载方式应该是通过<code>ClassLoader#loadClass()</code>来进行，而不是直接调用native方法，因为直接调用native方法并不会得到不一样的结果。</p>
-<p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/5.png" srcset="/img/loading.gif" lazyload alt="loadClass in java"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/5.png" srcset="/img/loading.gif" lazyload alt="loadClass in java"></p>
 <h2 id="metaspace中Class数据的GC时机"><a href="#metaspace中Class数据的GC时机" class="headerlink" title="metaspace中Class数据的GC时机"></a>metaspace中Class数据的GC时机</h2><p>实际上没有特定针对metaspace的GC行为，GC总是在堆中工作。但当堆中包含metaspace的class数据指针的class对象被执行回收时，class数据占用的空间也会被同时释放。</p>
-<p><img src="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/6.png" srcset="/img/loading.gif" lazyload alt="metaspace &#39;GC&#39;"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/attt/attt.github.io.pics@master/static/img/6.png" srcset="/img/loading.gif" lazyload alt="metaspace &#39;GC&#39;"></p>
 
                 
               </div>
