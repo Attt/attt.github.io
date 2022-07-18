@@ -1,7 +1,10 @@
 {
     "origins": [
       "https://attt.github.io",
-      "https://atpexgo.netlify.app"
+      "https://atpexgo.netlify.app",
+      "https://attt-github-io.vercel.app",
+      "https://at3.live",
+      "https://www.at3.live"
     ],
     "originsRegex": [
       "http://localhost:[0-9]+"
