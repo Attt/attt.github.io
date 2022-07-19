@@ -65,7 +65,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"attt.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":10,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"attt.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":10,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -577,7 +577,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/06/22/hystrix/" target="_self">
         <div>
-          官方文档  Hystrix的主要功能 线程拆分、隔离 降级、熔断 超时 缓存 监控  线程拆分、隔离任务线程和请求线程隔离，每种任务（command）使用不同的线程池，相互间隔离。 降级超时、异常、线程池饱和都会执行降级 12345678910111213141516171819202122232425public class CommandHelloWorld extends HystrixC
+          官方文档  Hystrix的主要功能 线程拆分、隔离 降级、熔断 超时 缓存 监控  增加服务调用方的对外吞吐，对被调用方提供保护 线程拆分、隔离任务线程和请求线程隔离，不同种类任务间也可以使用不同的线程池，相互间隔离。 降级超时、异常、线程池饱和（请求拒绝，不一定是线程池的maximumPoolSize或者blockingQueue的size限制，因为会优先检查queueSizeReject
         </div>
       </a>
 
