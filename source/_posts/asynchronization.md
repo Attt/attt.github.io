@@ -1,12 +1,12 @@
 ---
-title: 异步/并发
+title: 【KNOW-HOW】异步/并发
 date: 2022-07-10 21:06:58
+categories:
+    - Know-how
 tags:
     - Java
     - asynchronization
     - concurrency
-categories:
-    - Java
 ---
 ## Future
 基本的异步模型，主要方法有`get()`、`get(time,timeUnit)`、`isDone()`等。

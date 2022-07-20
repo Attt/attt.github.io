@@ -1,15 +1,15 @@
 ---
-title: 一些好用的工具
+title: 【STUFF】一些好用的工具
 date: 2022-06-14 20:33:35
 categories: 
-	- Tools
+	- Stuff
 tags:
 	- URI
 	- Spring
 ---
-## UriComponentsBuilder
+## UriComponents
 
-`org.springframework.web.util.UriComponentsBuilder`
+`org.springframework.web.util.UriComponents`
 
 > spring带的解析uri工具
 

@@ -1,8 +1,8 @@
 ---
-title: Frida-il2cpp-bridge script for fate/go
+title: 【TRIAL】Frida-il2cpp-bridge script for fate/go
 date: 2022-03-17 15:10:42
 categories: 
-	- Amateur Exp.
+	- Trial
 tags:
   - wallhack
   - injection

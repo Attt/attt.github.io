@@ -1,8 +1,8 @@
 ---
-title: Spring rabbitMQ binding配置的“陷阱”
+title: 【KNOW-HOW】Spring rabbitMQ binding配置的“陷阱”
 date: 2022-06-14 20:31:59
 categories: 
-	- Spring
+	- Know-how
 tags:
 	- RabbitMQ
 	- Spring

@@ -1,14 +1,14 @@
 ---
-title: Hystrix
+title: 【KNOW-HOW】Hystrix
 date: 2022-06-22 22:41:52
+categories:
+    - Know-how
 tags:
     - Netflix Hystrix
     - Spring Cloud
     - Java
     - microservice
     - distributed services
-categories:
-    - Distributed services
 ---
 ![hystrix](hystrix/hystrix.webp)
 

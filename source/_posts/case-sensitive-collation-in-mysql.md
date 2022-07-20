@@ -1,12 +1,12 @@
 ---
-title: MySQL中的大小写敏感排序规则
+title: 【Feature】MySQL中的大小写敏感排序规则
 date: 2022-06-17 15:51:08
+categories:
+    - Feature
 tags:
     - MySQL
     - charset
     - collation
-categories:
-    - MySQL
 ---
 
 ## utf8mb4字符集排序规则

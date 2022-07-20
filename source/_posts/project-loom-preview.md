@@ -1,6 +1,8 @@
 ---
-title: Project Loom 预览
+title: 【Feature】Project Loom 预览
 date: 2022-07-14 17:02:15
+categories:
+    - Feature
 tags:
     - Java
     - virtual threads
@@ -8,8 +10,6 @@ tags:
     - asynchronization
     - concurrency
     - continuations
-categories:
-    - Java
 ---
 ## 相关资源
 > 主页：[https://openjdk.org/projects/loom/](https://openjdk.org/projects/loom/)

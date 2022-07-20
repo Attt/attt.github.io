@@ -1,6 +1,8 @@
 ---
-title: Blender学习笔记0
+title: 【KNOW-HOW】Blender学习笔记0
 date: 2022-06-18 23:59:44
+categories:
+    - Know-how
 tags:
     - blender
     - shading
@@ -8,8 +10,6 @@ tags:
     - cycles
     - eevee
     - BSDF
-categories:
-    - Blender
 ---
 
 > 参照[官方文档](https://docs.blender.org/manual/zh-hans/3.1/render/shader_nodes/shader/principled.html)学习🙂

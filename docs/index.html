@@ -78,7 +78,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.1.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -230,8 +230,73 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/07/20/url-parsing-issue/" target="_self">
+          【ISSUE】用Spring工具解析带fragment的Url时异常
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/07/20/url-parsing-issue/" target="_self">
+        <div>
+          现象用UriComponents解析url的时候报IllegalArgumentException。 传入解析的url：www.xxxx.com&#x2F;p#&#x2F;f，特点是带上了fragment#&#x2F;f  RFC3986   原因fromHttpUrl(String)的匹配规则是：  PATH部分不允许’?’或’#’出现 ‘?’后作为一个整体  也就是www.xxxx.com&#x2F;p#&#x2F;f里&#x2F;p被解析为了path
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-20 13:39" pubdate>
+              2022-07-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/issue/" class="category-chain-item">Issue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/spring/">#Spring</a>
+            
+              <a href="/tags/uri/">#URI</a>
+            
+              <a href="/tags/issue/">#issue</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/07/14/project-loom-preview/" target="_self">
-          Project Loom 预览
+          【Feature】Project Loom 预览
         </a>
       </h1>
 
@@ -262,7 +327,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java/" class="category-chain-item">Java</a>
+  <a href="/categories/feature/" class="category-chain-item">Feature</a>
   
   
 
@@ -302,7 +367,7 @@
       <h1 class="index-header">
         
         <a href="/2022/07/14/java-security-issue/" target="_self">
-          Class签名信息不匹配引起的依赖冲突
+          【BUG】Class签名信息不匹配引起的依赖冲突
         </a>
       </h1>
 
@@ -333,7 +398,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java/" class="category-chain-item">Java</a>
+  <a href="/categories/bug/" class="category-chain-item">Bug</a>
   
   
 
@@ -358,6 +423,8 @@
             
               <a href="/tags/class-security-check/">#class security check</a>
             
+              <a href="/tags/bug/">#bug</a>
+            
           </div>
         
       </div>
@@ -371,7 +438,7 @@
       <h1 class="index-header">
         
         <a href="/2022/07/10/asynchronization/" target="_self">
-          异步/并发
+          【KNOW-HOW】异步/并发
         </a>
       </h1>
 
@@ -402,7 +469,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java/" class="category-chain-item">Java</a>
+  <a href="/categories/know-how/" class="category-chain-item">Know-how</a>
   
   
 
@@ -436,7 +503,7 @@
       <h1 class="index-header">
         
         <a href="/2022/06/29/jp-ni-de-basyou/" target="_self">
-          「に」と「で」作为场所助词时的区别
+          【KNOW-HOW】「に」と「で」作为场所助词时的区别
         </a>
       </h1>
 
@@ -467,7 +534,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/lanaguage/" class="category-chain-item">Lanaguage</a>
+  <a href="/categories/know-how/" class="category-chain-item">Know-how</a>
   
   
 
@@ -503,7 +570,7 @@
       <h1 class="index-header">
         
         <a href="/2022/06/23/jp-tokoro/" target="_self">
-          文法「ところ」
+          【KNOW-HOW】文法「ところ」
         </a>
       </h1>
 
@@ -534,7 +601,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/lanaguage/" class="category-chain-item">Lanaguage</a>
+  <a href="/categories/know-how/" class="category-chain-item">Know-how</a>
   
   
 
@@ -570,7 +637,7 @@
       <h1 class="index-header">
         
         <a href="/2022/06/22/hystrix/" target="_self">
-          Hystrix
+          【KNOW-HOW】Hystrix
         </a>
       </h1>
 
@@ -601,7 +668,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/distributed-services/" class="category-chain-item">Distributed services</a>
+  <a href="/categories/know-how/" class="category-chain-item">Know-how</a>
   
   
 
@@ -639,7 +706,7 @@
       <h1 class="index-header">
         
         <a href="/2022/06/18/blender-learning-memo0/" target="_self">
-          Blender学习笔记0
+          【KNOW-HOW】Blender学习笔记0
         </a>
       </h1>
 
@@ -670,7 +737,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/blender/" class="category-chain-item">Blender</a>
+  <a href="/categories/know-how/" class="category-chain-item">Know-how</a>
   
   
 
@@ -710,7 +777,7 @@
       <h1 class="index-header">
         
         <a href="/2022/06/17/case-sensitive-collation-in-mysql/" target="_self">
-          MySQL中的大小写敏感排序规则
+          【Feature】MySQL中的大小写敏感排序规则
         </a>
       </h1>
 
@@ -741,7 +808,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/mysql/" class="category-chain-item">MySQL</a>
+  <a href="/categories/feature/" class="category-chain-item">Feature</a>
   
   
 
@@ -775,14 +842,14 @@
       <h1 class="index-header">
         
         <a href="/2022/06/14/useful-utils/" target="_self">
-          一些好用的工具
+          【STUFF】一些好用的工具
         </a>
       </h1>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/06/14/useful-utils/" target="_self">
         <div>
-          UriComponentsBuilderorg.springframework.web.util.UriComponentsBuilder  spring带的解析uri工具  123456789101112String url &#x3D; &quot;http:&#x2F;&#x2F;domain:port&#x2F;path1&#x2F;subpath1?param0&#x3D;0&amp;param1&#x3D;1&quot;;UriComponentsBui
+          UriComponentsorg.springframework.web.util.UriComponents  spring带的解析uri工具  123456789101112String url &#x3D; &quot;http:&#x2F;&#x2F;domain:port&#x2F;path1&#x2F;subpath1?param0&#x3D;0&amp;param1&#x3D;1&quot;;UriComponentsBuilder.fromHttpU
         </div>
       </a>
 
@@ -806,7 +873,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/tools/" class="category-chain-item">Tools</a>
+  <a href="/categories/stuff/" class="category-chain-item">Stuff</a>
   
   
 
@@ -824,69 +891,6 @@
               <a href="/tags/spring/">#Spring</a>
             
               <a href="/tags/uri/">#URI</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/14/spring-rabbitmq-binding-trap/" target="_self">
-          Spring rabbitMQ binding配置的“陷阱”
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/14/spring-rabbitmq-binding-trap/" target="_self">
-        <div>
-          Spring RabbitMQ bindings exchange的auto-declare配置同时作用于binding，如果声明新的queue，但是绑定的exchange的auto-declare为false，则不会在既有的exchange上进行绑定  123456&lt;rabbit:queue id&#x3D;&quot;queue0.id&quot; name&#x3D;&quot;queue.0.name&amp;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-14 20:31" pubdate>
-              2022-06-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/spring/" class="category-chain-item">Spring</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/rabbitmq/">#RabbitMQ</a>
-            
-              <a href="/tags/spring/">#Spring</a>
             
           </div>
         

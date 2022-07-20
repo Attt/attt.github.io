@@ -1,9 +1,10 @@
 ---
-title: Arch Linux 安装笔记
+title: 【GUIDE】Arch Linux 安装笔记
 date: 2022-04-19 11:23:08
 categories: 
-	- Linux
+	- Guide
 tags:
+  - guide
 	- setup
 	- Arch Linux
 	- Linux

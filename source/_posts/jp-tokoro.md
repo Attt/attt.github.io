@@ -1,13 +1,13 @@
 ---
-title: 文法「ところ」
+title: 【KNOW-HOW】文法「ところ」
 date: 2022-06-23 08:08:45
+categories:
+    - Know-how
 tags:
     - language
     - japanese
     - 文法
     - grammar
-categories:
-    - Lanaguage
 ---
 # N4
 ## 原型或は意志型・ている・た　＋　ところだ

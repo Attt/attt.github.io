@@ -1,8 +1,8 @@
 ---
-title: 错误的动态类加载方式引发的metaspace内存泄漏
+title: 【BUG】错误的动态类加载方式引发的metaspace内存泄漏
 date: 2022-03-17 15:59:28
 categories: 
-	- Java
+	- Bug
 tags:
   - JVM
   - JVM Memory
