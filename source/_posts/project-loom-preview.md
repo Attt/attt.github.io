@@ -66,6 +66,27 @@ ExecutorService perTaskExecutor = Executors.newThreadPerTaskExecutor(ofVirtual.f
 perTaskExecutor.submit(() -> {
     System.out.printf("%s-newThreadPerTaskExecutor %n", Thread.currentThread().getName());
 });
+
+// 结构化并发
+StructuredTaskScope.ShutdownOnFailure shutdownOnFailure = new StructuredTaskScope.ShutdownOnFailure();
+shutdownOnFailure.fork(() -> {
+    System.out.println("taskA");
+    TimeUnit.SECONDS.sleep(1);
+    throw new RuntimeException("error occurred in taskA");
+});
+
+shutdownOnFailure.fork(() -> {
+    System.out.println("taskB...");
+    TimeUnit.SECONDS.sleep(5);
+    System.out.println("taskB is finished.");
+    return null;
+});
+
+try {
+    shutdownOnFailure.joinUntil(LocalDateTime.now().plusSeconds(10).toInstant(ZoneOffset.UTC));
+} catch (TimeoutException e) {
+    e.printStackTrace();
+}
 ```
 
 ## Benchmark
@@ -76,10 +97,16 @@ ThreadThroughputBenchmark.virtualThread   thrpt    5  4201.740 ± 475.806  ops/m
 ```
 
 ## Q&A
+1. 命名
+- [Virtual Threads: A Short Note about Naming](https://mail.openjdk.org/pipermail/loom-dev/2019-November/000864.html)
+
+2. 为什么不用类似于await/async提供的协作调度？协作调度能够明确调度点在哪里，也能简化并发编程？
+- Java已经有基于抢占式调度的线程，增加协作调度只会增加兼容问题
+- 协作调度是一种较差的调度方案，协作调度意味着每个操作都是在临界区发生的不能互相交错，明确定义了交错的点，抢占式调度正相反，明确了不能交错的地方，使得交错能够发生在其他的任何地方，对于服务端来说大多数操作对调度点并不敏感不明确的交错可以更高效，而且每一次添加调度点也需要考虑更多的事情
 
 
 
-## *函数颜色问题
+## *函数颜色问题（协作式调度）
 [what-color-is-your-function](http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：
 
 那么这种语言实际存在两种`function`关键字：`blue_func`和`red_func`
