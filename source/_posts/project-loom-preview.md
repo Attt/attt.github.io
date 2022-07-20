@@ -18,7 +18,6 @@ tags:
 >
 > 预览：[https://jdk.java.net/loom/](https://jdk.java.net/loom/)
 
-
 ## EA in JDK19
 > [https://github.com/Attt/Loom-Preview](https://github.com/Attt/Loom-Preview)
 
@@ -105,8 +104,7 @@ ThreadThroughputBenchmark.virtualThread   thrpt    5  4201.740 ± 475.806  ops/m
 - 协作调度是一种较差的调度方案，协作调度意味着每个操作都是在临界区发生的不能互相交错，明确定义了交错的点，抢占式调度正相反，明确了不能交错的地方，使得交错能够发生在其他的任何地方，对于服务端来说大多数操作对调度点并不敏感不明确的交错可以更高效，而且每一次添加调度点也需要考虑更多的事情
 
 
-
-## *函数颜色问题（协作式调度）
+## 关于并发编程的吐槽：函数颜色问题
 [what-color-is-your-function](http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：
 
 那么这种语言实际存在两种`function`关键字：`blue_func`和`red_func`
@@ -130,4 +128,55 @@ blue_func sync(){
 ```
 所谓的<font color='red'>红色</font>函数就是异步函数，上面的这个“颜色问题”就是“回调地狱”("callback hell")的另一种感受方法😅。
 
-在函数式编程中，异步存在两个比较炸裂的问题：1. 回调地狱😅；2. 一个被广泛使用的同步函数的异步化所需要的大量的修改和重写量可以让任何一个开发直接爆炸。
+在函数式编程中，异步存在两个比较炸裂的问题：1. 回调地狱😅；2. 一个被广泛使用的同步函数的异步化所需要的大量的修改和重写量可以让任何一个开发直接爆炸：
+
+```javascript
+func syncC(shit){
+    printf "shit is %s", shit
+}
+
+func asyncB(callbackB){
+    var b
+    // do something
+    callbackB(b)
+}
+
+func syncB(fart){
+    printf "fart is %s", fart
+    asyncB(syncC)
+}
+
+func asyncA(callbackA){
+    var a
+    // do something
+    callbackA(a)
+}
+
+func syncA(){
+    asyncA(syncB)
+}
+```
+看到这段代码已经开始焦虑了，如果简化一下：
+```javascript
+func asyncB(callbackB){
+    var b
+    // do something
+    callbackB(b)
+}
+
+func asyncA(callbackA){
+    var a
+    // do something
+    callbackA(a)
+}
+
+func syncA(){
+    asyncA(fart -> {
+        printf "fart is %s", fart
+        asyncB(shit -> {
+            printf "shit is %s", shit
+        })
+    })
+}
+```
+有人可以看出是现有fart还是现有shit吗...

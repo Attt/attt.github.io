@@ -24,7 +24,7 @@
 <meta property="og:description" content="相关资源 主页：https:&#x2F;&#x2F;openjdk.org&#x2F;projects&#x2F;loom&#x2F; 提案：http:&#x2F;&#x2F;cr.openjdk.java.net&#x2F;~rpressler&#x2F;loom&#x2F;Loom-Proposal.html 预览：https:&#x2F;&#x2F;jdk.java.net&#x2F;loom&#x2F;  EA in JDK19 https:&#x2F;&#x2F;github.com&#x2F;Attt&#x2F;Loom-Preview  1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-14T09:02:15.000Z">
-<meta property="article:modified_time" content="2022-07-20T12:42:55.690Z">
+<meta property="article:modified_time" content="2022-07-20T13:07:34.785Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="asynchronization">
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          3.9k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          41 分钟
+          50 分钟
         
       </span>
     
@@ -333,7 +333,7 @@
 <li>Java已经有基于抢占式调度的线程，增加协作调度只会增加兼容问题</li>
 <li>协作调度是一种较差的调度方案，协作调度意味着每个操作都是在临界区发生的不能互相交错，明确定义了交错的点，抢占式调度正相反，明确了不能交错的地方，使得交错能够发生在其他的任何地方，对于服务端来说大多数操作对调度点并不敏感不明确的交错可以更高效，而且每一次添加调度点也需要考虑更多的事情</li>
 </ul>
-<h2 id="函数颜色问题（协作式调度）"><a href="#函数颜色问题（协作式调度）" class="headerlink" title="*函数颜色问题（协作式调度）"></a>*函数颜色问题（协作式调度）</h2><p><a target="_blank" rel="noopener" href="http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">what-color-is-your-function</a>，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：</p>
+<h2 id="关于并发编程的吐槽：函数颜色问题"><a href="#关于并发编程的吐槽：函数颜色问题" class="headerlink" title="关于并发编程的吐槽：函数颜色问题"></a>关于并发编程的吐槽：函数颜色问题</h2><p><a target="_blank" rel="noopener" href="http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">what-color-is-your-function</a>，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：</p>
 <p>那么这种语言实际存在两种<code>function</code>关键字：<code>blue_func</code>和<code>red_func</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">blue_func <span class="hljs-title function_">sync</span>(<span class="hljs-params"></span>)&#123;...&#125;<br><br>red_func <span class="hljs-title function_">async</span>(<span class="hljs-params">callback</span>)&#123;...&#125;<br></code></pre></td></tr></table></figure>
 <p>其中，<font color='red'>红色</font>函数的结果不通过方法返回，而是传递给参数中的函数，那么就会有这样的问题：</p>
@@ -343,7 +343,11 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">red_func <span class="hljs-title function_">async</span>(<span class="hljs-params">callback</span>)&#123;<br>    <span class="hljs-title function_">sync</span>() <span class="hljs-comment">// 可以调用</span><br>&#125;<br><br>blue_func <span class="hljs-title function_">sync</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">async</span>(callback) <span class="hljs-comment">// 不能调用</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>所谓的<font color='red'>红色</font>函数就是异步函数，上面的这个“颜色问题”就是“回调地狱”(“callback hell”)的另一种感受方法😅。</p>
-<p>在函数式编程中，异步存在两个比较炸裂的问题：1. 回调地狱😅；2. 一个被广泛使用的同步函数的异步化所需要的大量的修改和重写量可以让任何一个开发直接爆炸。</p>
+<p>在函数式编程中，异步存在两个比较炸裂的问题：1. 回调地狱😅；2. 一个被广泛使用的同步函数的异步化所需要的大量的修改和重写量可以让任何一个开发直接爆炸：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript">func <span class="hljs-title function_">syncC</span>(<span class="hljs-params">shit</span>)&#123;<br>    printf <span class="hljs-string">&quot;shit is %s&quot;</span>, shit<br>&#125;<br><br>func <span class="hljs-title function_">asyncB</span>(<span class="hljs-params">callbackB</span>)&#123;<br>    <span class="hljs-keyword">var</span> b<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackB</span>(b)<br>&#125;<br><br>func <span class="hljs-title function_">syncB</span>(<span class="hljs-params">fart</span>)&#123;<br>    printf <span class="hljs-string">&quot;fart is %s&quot;</span>, fart<br>    <span class="hljs-title function_">asyncB</span>(syncC)<br>&#125;<br><br>func <span class="hljs-title function_">asyncA</span>(<span class="hljs-params">callbackA</span>)&#123;<br>    <span class="hljs-keyword">var</span> a<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackA</span>(a)<br>&#125;<br><br>func <span class="hljs-title function_">syncA</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">asyncA</span>(syncB)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>看到这段代码已经开始焦虑了，如果简化一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript">func <span class="hljs-title function_">asyncB</span>(<span class="hljs-params">callbackB</span>)&#123;<br>    <span class="hljs-keyword">var</span> b<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackB</span>(b)<br>&#125;<br><br>func <span class="hljs-title function_">asyncA</span>(<span class="hljs-params">callbackA</span>)&#123;<br>    <span class="hljs-keyword">var</span> a<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackA</span>(a)<br>&#125;<br><br>func <span class="hljs-title function_">syncA</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">asyncA</span>(fart -&gt; &#123;<br>        printf <span class="hljs-string">&quot;fart is %s&quot;</span>, fart<br>        <span class="hljs-title function_">asyncB</span>(shit -&gt; &#123;<br>            printf <span class="hljs-string">&quot;shit is %s&quot;</span>, shit<br>        &#125;)<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>有人可以看出是现有fart还是现有shit吗…</p>
 
                 
               </div>

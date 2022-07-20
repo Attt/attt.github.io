@@ -27,3 +27,4 @@ tags:
     uriComponents.getScheme(); // e.g. http
     uriComponents.getQueryParams(); // [param0:0, param1:1]
 ```
+2022/07/20记：也并不是那么好用🙃[【ISSUE】用Spring工具解析带fragment的Url时异常](/2022/07/20/url-parsing-issue/index.html)
