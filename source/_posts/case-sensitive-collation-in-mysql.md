@@ -1,5 +1,5 @@
 ---
-title: 【Feature】MySQL中的大小写敏感排序规则
+title: 【FEATURE】MySQL中的大小写敏感排序规则
 date: 2022-06-17 15:51:08
 categories:
     - Feature

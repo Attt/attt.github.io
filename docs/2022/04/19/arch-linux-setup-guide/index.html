@@ -16,20 +16,20 @@
   <meta name="author" content="attt">
   <meta name="keywords" content="">
   
-    <meta name="description" content="https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;  基本系统安装前置准备 检查网络1ip link 更新系统时间1timedatectl set-ntp true  准备磁盘 分区 查看当前磁盘信息 1fdisk -l 进入分区 1fdisk &#x2F;dev&#x2F;the_disk_to_be_partitioned（要被分区的磁盘） uefi参考：    挂载点 分区 分区类型 大小    &amp;#x2">
+    <meta name="description" content="https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;  基本系统安装前置准备 检查网络1ip link 更新系统时间1timedatectl set-ntp true 准备磁盘 分区 查看当前磁盘信息 1fdisk -l 进入分区 1fdisk &#x2F;dev&#x2F;the_disk_to_be_partitioned（要被分区的磁盘） uefi参考：     挂载点 分区 分区类型 大小    &amp;#x2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【GUIDE】Arch Linux 安装笔记">
 <meta property="og:url" content="https://attt.github.io/2022/04/19/arch-linux-setup-guide/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
-<meta property="og:description" content="https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;  基本系统安装前置准备 检查网络1ip link 更新系统时间1timedatectl set-ntp true  准备磁盘 分区 查看当前磁盘信息 1fdisk -l 进入分区 1fdisk &#x2F;dev&#x2F;the_disk_to_be_partitioned（要被分区的磁盘） uefi参考：    挂载点 分区 分区类型 大小    &amp;#x2">
+<meta property="og:description" content="https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;  基本系统安装前置准备 检查网络1ip link 更新系统时间1timedatectl set-ntp true 准备磁盘 分区 查看当前磁盘信息 1fdisk -l 进入分区 1fdisk &#x2F;dev&#x2F;the_disk_to_be_partitioned（要被分区的磁盘） uefi参考：     挂载点 分区 分区类型 大小    &amp;#x2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-19T03:23:08.000Z">
-<meta property="article:modified_time" content="2022-07-20T07:46:27.720Z">
+<meta property="article:modified_time" content="2022-07-20T11:53:42.982Z">
 <meta property="article:author" content="attt">
-<meta property="article:tag" content="Linux">
 <meta property="article:tag" content="guide">
 <meta property="article:tag" content="setup">
 <meta property="article:tag" content="Arch Linux">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -92,7 +92,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.1.0"></head>
 
 
 <body>
@@ -200,7 +200,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/images/eye1.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/images/eye.webp') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
       <div class="banner-text text-center fade-in-up">
@@ -311,15 +311,15 @@
 </blockquote>
 <h2 id="基本系统安装"><a href="#基本系统安装" class="headerlink" title="基本系统安装"></a>基本系统安装</h2><h3 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h3><ul>
 <li>检查网络<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ip <span class="hljs-built_in">link</span><br></code></pre></td></tr></table></figure></li>
-<li>更新系统时间<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">timedatectl set-ntp <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="准备磁盘"><a href="#准备磁盘" class="headerlink" title="准备磁盘"></a>准备磁盘</h3><ul>
+<li>更新系统时间<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">timedatectl set-ntp <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<h3 id="准备磁盘"><a href="#准备磁盘" class="headerlink" title="准备磁盘"></a>准备磁盘</h3></li>
 <li>分区<ul>
 <li><p>查看当前磁盘信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk -l<br></code></pre></td></tr></table></figure></li>
 <li><p>进入分区</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk /dev/the_disk_to_be_partitioned（要被分区的磁盘）<br></code></pre></td></tr></table></figure>
 <p>uefi参考：</p>
+<div class="table-wrapper"/>
 <table>
 <thead>
 <tr>
@@ -348,8 +348,10 @@
 <td>剩余空间</td>
 </tr>
 </tbody></table>
+</div>
 </li>
 <li><p><em>移动设备的情况下:</em></p>
+<div class="table-wrapper"/>
 <table>
 <thead>
 <tr>
@@ -378,6 +380,7 @@
 <td>剩余空间</td>
 </tr>
 </tbody></table>
+</div>
 </li>
 <li><p>格式化分区</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkfs.ext4 /dev/root_partition（根分区）<br><span class="hljs-comment"># 移动设备关闭日志 mkfs.ext4 -O &quot;^has_journal&quot; /dev/root_partition（根分区）</span><br>mkswap /dev/swap_partition（交换空间分区）<br>mkfs.fat -F 32 /dev/efi_system_partition<br></code></pre></td></tr></table></figure></li>
@@ -395,15 +398,14 @@
 <p>在<code>/etc/pacman.d/mirrorlist</code>中搜索CN，放到最前面，推荐aliyun的源</p>
 </li>
 <li><p>安装系统&amp;软件包</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacstrap /mnt base base-devel linux linux-firmware vim vi sudo git<br><span class="hljs-comment"># 移动设备 可以使用基于BFQ的io调度内核linux-zen，把linux换成linux-zen</span><br></code></pre></td></tr></table></figure>
-<p>  <em>参考：<a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/block/bfq-iosched.html">BFQ</a></em></p>
-</li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacstrap /mnt base base-devel linux linux-firmware vim vi sudo git<br><span class="hljs-comment"># 移动设备 可以使用基于BFQ的io调度内核linux-zen，把linux换成linux-zen</span><br></code></pre></td></tr></table></figure></li>
 </ul>
+<p>  <em>参考：<a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/block/bfq-iosched.html">BFQ</a></em></p>
 <h2 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h2><h3 id="系统引导"><a href="#系统引导" class="headerlink" title="系统引导"></a>系统引导</h3><ul>
 <li>配置fstab  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab<br></code></pre></td></tr></table></figure></li>
-<li>安装grub  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S efibootmgr grub<br><br><span class="hljs-comment"># uefi</span><br>grub-install --target=x86_64-efi --efi-directory=&#123;挂载点,如/mnt/boot/EFI&#125; --bootloader-id=GRUB<br><br><span class="hljs-comment"># bios(非GPT分区无需其他空间，但GPT分区需要有一块1M的BIOS boot分区)</span><br>grub-install --target=i386-pc /dev/sdX<br></code></pre></td></tr></table></figure>
-  <em>移动设备的情况下</em></li>
+<li>安装grub  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -S efibootmgr grub<br><br><span class="hljs-comment"># uefi</span><br>grub-install --target=x86_64-efi --efi-directory=&#123;挂载点,如/mnt/boot/EFI&#125; --bootloader-id=GRUB<br><br><span class="hljs-comment"># bios(非GPT分区无需其他空间，但GPT分区需要有一块1M的BIOS boot分区)</span><br>grub-install --target=i386-pc /dev/sdX<br></code></pre></td></tr></table></figure></li>
 </ul>
+<p>  <em>移动设备的情况下</em></p>
 <p>  假设分区顺序是：<br>    - BIOS<br>    - EFI<br>    - root<br>  要先在这块设备上写入引导信息，运行<code>gdisk /dev/sdX</code></p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># gdisk /dev/sdX</span><br><br>Command (? <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): r<br>Recovery/transformation <span class="hljs-built_in">command</span> (? <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): h<br><br>WARNING! Hybrid MBRs are flaky and dangerous! If you decide not to use one,<br>just hit the Enter key at the below prompt and your MBR partition table will<br>be untouched.<br><br>Type from one to three GPT partition numbers, separated by spaces, to be added to the hybrid MBR, <span class="hljs-keyword">in</span> sequence: 1 2 3<br>Place EFI GPT (0xEE) partition first <span class="hljs-keyword">in</span> MBR (good <span class="hljs-keyword">for</span> GRUB)? (Y/N): N<br><br>Creating entry <span class="hljs-keyword">for</span> GPT partition <span class="hljs-comment">#1 (MBR partition #1)</span><br>Enter an MBR hex code (default EF): <br>Set the bootable flag? (Y/N): N<br><br>Creating entry <span class="hljs-keyword">for</span> GPT partition <span class="hljs-comment">#2 (MBR partition #2)</span><br>Enter an MBR hex code (default EF): <br>Set the bootable flag? (Y/N): N<br><br>Creating entry <span class="hljs-keyword">for</span> GPT partition <span class="hljs-comment">#3 (MBR partition #3)</span><br>Enter an MBR hex code (default 83): <br>Set the bootable flag? (Y/N): Y<br><br>Recovery/transformation <span class="hljs-built_in">command</span> (? <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): x<br>Expert <span class="hljs-built_in">command</span> (? <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): h<br>Expert <span class="hljs-built_in">command</span> (? <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): w<br><br>Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING<br>PARTITIONS!!<br><br>Do you want to proceed? (Y/N): Y<br></code></pre></td></tr></table></figure>
 <blockquote>
@@ -418,11 +420,12 @@
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">arch-chroot /mnt<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>配置grub.cfg</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grub-mkconfig -o /boot/grub/grub.cfg<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="系统初始化设置"><a href="#系统初始化设置" class="headerlink" title="系统初始化设置"></a>系统初始化设置</h3><ul>
-<li>设置时区  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>hwclock --systohc<br></code></pre></td></tr></table></figure></li>
-<li>本地化  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">locale-gen<br></code></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grub-mkconfig -o /boot/grub/grub.cfg<br></code></pre></td></tr></table></figure>
+<h3 id="系统初始化设置"><a href="#系统初始化设置" class="headerlink" title="系统初始化设置"></a>系统初始化设置</h3></li>
+<li><p>设置时区</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>hwclock --systohc<br></code></pre></td></tr></table></figure></li>
+<li><p>本地化</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">locale-gen<br></code></pre></td></tr></table></figure></li>
 </ul>
 <p>  – 移动设备最小化磁盘访问,把日志放到内存<br>  修改<code>/etc/systemd/journald.conf.d/usbstick.conf</code><br>  写入<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[Journal]<br>Storage=volatile<br>RuntimeMaxUse=30M<br></code></pre></td></tr></table></figure></p>
 <ul>
@@ -540,13 +543,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/linux/">#Linux</a>
-      
         <a href="/tags/guide/">#guide</a>
       
         <a href="/tags/setup/">#setup</a>
       
         <a href="/tags/arch-linux/">#Arch Linux</a>
+      
+        <a href="/tags/linux/">#Linux</a>
       
     </div>
   
@@ -702,7 +705,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <i class="iconfont icon-copyright"></i> <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <i class="iconfont icon-copyright"></i>2022  <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   

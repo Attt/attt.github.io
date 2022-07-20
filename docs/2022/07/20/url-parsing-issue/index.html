@@ -16,18 +16,18 @@
   <meta name="author" content="attt">
   <meta name="keywords" content="">
   
-    <meta name="description" content="现象用UriComponents解析url的时候报IllegalArgumentException。 传入解析的url：www.xxxx.com&#x2F;p#&#x2F;f，特点是带上了fragment#&#x2F;f  RFC3986   原因fromHttpUrl(String)的匹配规则是：  PATH部分不允许’?’或’#’出现 ‘?’后作为一个整体  也就是www.xxxx.com&#x2F;p#&#x2F;f里&#x2F;p被解析为了path">
+    <meta name="description" content="现象用UriComponents解析url的时候报IllegalArgumentException。 传入解析的url：www.xxxx.com&#x2F;p#&#x2F;f，特点是带上了fragment#&#x2F;f  RFC3986   原因fromHttpUrl(String)的匹配规则是：  PATH部分不允许?或#出现 ?后作为一个整体  也就是www.xxxx.com&#x2F;p#&#x2F;f里&#x2F;p被解析为了path部分，#&#x2F;f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【ISSUE】用Spring工具解析带fragment的Url时异常">
 <meta property="og:url" content="https://attt.github.io/2022/07/20/url-parsing-issue/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
-<meta property="og:description" content="现象用UriComponents解析url的时候报IllegalArgumentException。 传入解析的url：www.xxxx.com&#x2F;p#&#x2F;f，特点是带上了fragment#&#x2F;f  RFC3986   原因fromHttpUrl(String)的匹配规则是：  PATH部分不允许’?’或’#’出现 ‘?’后作为一个整体  也就是www.xxxx.com&#x2F;p#&#x2F;f里&#x2F;p被解析为了path">
+<meta property="og:description" content="现象用UriComponents解析url的时候报IllegalArgumentException。 传入解析的url：www.xxxx.com&#x2F;p#&#x2F;f，特点是带上了fragment#&#x2F;f  RFC3986   原因fromHttpUrl(String)的匹配规则是：  PATH部分不允许?或#出现 ?后作为一个整体  也就是www.xxxx.com&#x2F;p#&#x2F;f里&#x2F;p被解析为了path部分，#&#x2F;f">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://attt.github.io/2022/07/20/url-parsing-issue/rfc3986_url_segments.png">
 <meta property="og:image" content="https://attt.github.io/2022/07/20/url-parsing-issue/uriComponents_parsing_regex.png">
 <meta property="og:image" content="https://attt.github.io/2022/07/20/url-parsing-issue/spring-issue-commit.png">
 <meta property="article:published_time" content="2022-07-20T05:39:02.000Z">
-<meta property="article:modified_time" content="2022-07-20T07:46:27.745Z">
+<meta property="article:modified_time" content="2022-07-20T12:21:05.900Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="Spring">
 <meta property="article:tag" content="URI">
@@ -95,7 +95,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.1.0"></head>
 
 
 <body>
@@ -203,7 +203,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/images/eye1.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/images/eye.webp') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
       <div class="banner-text text-center fade-in-up">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          427 字
+          421 字
         
       </span>
     
@@ -317,8 +317,8 @@
 <p><img src="/2022/07/20/url-parsing-issue/rfc3986_url_segments.png" srcset="/img/loading.gif" lazyload alt="RFC3986"></p>
 <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p><code>fromHttpUrl(String)</code>的匹配规则是：</p>
 <ul>
-<li>PATH部分不允许’?’或’#’出现</li>
-<li>‘?’后作为一个整体</li>
+<li>PATH部分不允许<code>?</code>或<code>#</code>出现</li>
+<li><code>?</code>后作为一个整体</li>
 </ul>
 <p>也就是<code>www.xxxx.com/p#/f</code>里<code>/p</code>被解析为了path部分，<code>#/f</code>是不合法的部分。而<code>www.xxxx.com/p?#/f</code>这种是可以的，其中<code>?#/f</code>被解析为一个整体。</p>
 <p><img src="/2022/07/20/url-parsing-issue/uriComponents_parsing_regex.png" srcset="/img/loading.gif" lazyload alt="5.2.8之前的spring解析url的匹配规则"></p>
@@ -515,7 +515,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <i class="iconfont icon-copyright"></i> <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <i class="iconfont icon-copyright"></i>2022  <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
   

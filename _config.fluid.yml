@@ -224,10 +224,10 @@ color:
 # 主题字体配置
 # Font
 font:
-  font_size: 16px
-  font_family: "LXGWWenKaiMono"
+  font_size: 15px
+  font_family: "\"PingFang SC\", \"Microsoft YaHei\", \"Hiragino Sans GB\", \"WenQuanYi Micro Hei\", \"Noto Sans CJK\", Roboto, Helvetica, Tahoma, Arial, sans-serif"
   letter_spacing: 0.02em
-  code_font_size: 85%
+  code_font_size: 75%
 
 # 指定自定义 .js 文件路径，支持列表；路径是相对 source 目录，如 /js/custom.js 对应存放目录 source/js/custom.js
 # Specify the path of your custom js file, support list. The path is relative to the source directory, such as `/js/custom.js` corresponding to the directory `source/js/custom.js`
@@ -426,7 +426,7 @@ footer:
   # 页脚第一行文字的 HTML，建议保留 Fluid 的链接，用于向更多人推广本主题
   # HTML of the first line of the footer, it is recommended to keep the Fluid link to promote this theme to more people
   content: '
-    <i class="iconfont icon-copyright"></i>
+    <i class="iconfont icon-copyright"></i>2022 
     <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a>
     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
     <i class="iconfont icon-love"></i>
@@ -464,7 +464,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /images/jojo.jpg
+  banner_img: /images/jojo.webp
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -536,7 +536,7 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 40
   banner_mask_alpha: 0.5
 
@@ -890,7 +890,7 @@ giscus:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 40
   banner_mask_alpha: 0.5
 
@@ -901,7 +901,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 40
   banner_mask_alpha: 0.5
 
@@ -930,7 +930,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 40
   banner_mask_alpha: 0.5
   tagcloud:
@@ -947,7 +947,7 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 40
   banner_mask_alpha: 0.5
   avatar: /images/me.png
@@ -969,7 +969,7 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 40
   banner_mask_alpha: 0.5
 
@@ -980,7 +980,7 @@ page:
 #---------------------------
 page404:
   enable: true
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 85
   banner_mask_alpha: 0.5
   # 重定向到首页的延迟(毫秒)
@@ -994,7 +994,7 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: /images/eye1.jpg
+  banner_img: /images/eye.webp
   banner_img_height: 60
   banner_mask_alpha: 0.5
   # 友链的成员项
