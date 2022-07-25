@@ -1,8 +1,9 @@
 ---
-title: 【KNOW-HOW】「に」と「で」作为场所助词时的区别
+title: 「に」と「で」作为场所助词时的区别
 date: 2022-06-29 00:05:42
 categories:
-    - Know-how
+    - 基础姿势
+    - 日语
 tags:
     - language
     - japanese

@@ -1,8 +1,9 @@
 ---
-title: 【ISSUE】用Spring工具解析带fragment的Url时异常
+title: 用Spring工具解析带fragment的Url时异常
 date: 2022-07-20 13:39:02
 categories:
-    - Issue
+    - 群英荟萃
+    - BUG草集
 tags:
     - Spring
     - URI

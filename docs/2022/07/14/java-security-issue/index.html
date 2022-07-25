@@ -18,14 +18,14 @@
   
     <meta name="description" content="现象线上某个服务升级zk到3.4.14, 引入依赖后无法启动。 报错信息： 1234567891011Caused by: java.lang.SecurityException: class &quot;javax.annotation.ManagedBean&quot;&amp;#x27;s signer information does not match signer information of">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【BUG】Class签名信息不匹配引起的依赖冲突">
+<meta property="og:title" content="Class签名信息不匹配引起的依赖冲突">
 <meta property="og:url" content="https://attt.github.io/2022/07/14/java-security-issue/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
 <meta property="og:description" content="现象线上某个服务升级zk到3.4.14, 引入依赖后无法启动。 报错信息： 1234567891011Caused by: java.lang.SecurityException: class &quot;javax.annotation.ManagedBean&quot;&amp;#x27;s signer information does not match signer information of">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://attt.github.io/2022/07/14/java-security-issue/scrshot0.png">
 <meta property="article:published_time" content="2022-07-14T05:45:15.000Z">
-<meta property="article:modified_time" content="2022-07-20T11:53:42.987Z">
+<meta property="article:modified_time" content="2022-07-25T15:25:10.672Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="maven">
@@ -40,7 +40,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>【BUG】Class签名信息不匹配引起的依赖冲突 - Attt&#39;s ブログ</title>
+  <title>Class签名信息不匹配引起的依赖冲突 - Attt&#39;s ブログ</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【BUG】Class签名信息不匹配引起的依赖冲突"></span>
+            <span id="subtitle" data-typed-text="Class签名信息不匹配引起的依赖冲突"></span>
           
         </div>
 
@@ -305,7 +305,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【BUG】Class签名信息不匹配引起的依赖冲突</h1>
+            <h1 style="display: none">Class签名信息不匹配引起的依赖冲突</h1>
             
             
               <div class="markdown-body">
@@ -343,8 +343,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/bug/" class="category-chain-item">Bug</a>
+  <a href="/categories/%E7%BE%A4%E8%8B%B1%E8%8D%9F%E8%90%83/" class="category-chain-item">群英荟萃</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BE%A4%E8%8B%B1%E8%8D%9F%E8%90%83/bug%E8%8D%89%E9%9B%86/" class="category-chain-item">BUG草集</a>
+  
+  
+
   
 
       </span>
@@ -382,9 +389,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/14/project-loom-preview/" title="【FEATURE】Project Loom 预览">
+                      <a href="/2022/07/14/project-loom-preview/" title="Project Loom 预览">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【FEATURE】Project Loom 预览</span>
+                        <span class="hidden-mobile">Project Loom 预览</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -392,8 +399,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/10/asynchronization/" title="【KNOW-HOW】Java中的异步和并发手段">
-                        <span class="hidden-mobile">【KNOW-HOW】Java中的异步和并发手段</span>
+                      <a href="/2022/07/10/asynchronization/" title="Java中的异步和并发手段">
+                        <span class="hidden-mobile">Java中的异步和并发手段</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -404,47 +411,6 @@
             </div>
 
             
-  <article id="comments" lazyload>
-    
-    <div id="giscus" class="giscus"></div>
-    <script type="text/javascript">
-      Fluid.utils.loadComments('#giscus', function() {
-        var options = {"repo":"Attt/attt.github.io","repo-id":"MDEwOlJlcG9zaXRvcnkxMjQ4OTkyODU=","category":"Announcements","category-id":"DIC_kwDOB3HP1c4CPvi3","theme-light":"light","theme-dark":"dark_dimmed","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
-        var attributes = {};
-        for (let option in options) {
-          if (!option.startsWith('theme-')) {
-            var key = option.startsWith('data-') ? option : 'data-' + option;
-            attributes[key] = options[option];
-          }
-        }
-        var light = 'light';
-        var dark = 'dark_dimmed';
-        window.GiscusThemeLight = light;
-        window.GiscusThemeDark = dark;
-        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
-        for (let attribute in attributes) {
-          var value = attributes[attribute];
-          if (value === undefined || value === null || value === '') {
-            delete attributes[attribute];
-          }
-        }
-        var s = document.createElement('script');
-        s.setAttribute('src', 'https://giscus.app/client.js');
-        s.setAttribute('crossorigin', 'anonymous');
-        for (let attribute in attributes) {
-          s.setAttribute(attribute, attributes[attribute]);
-        }
-        var ss = document.getElementsByTagName('script');
-        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
-        e.parentNode.insertBefore(s, e.nextSibling);
-      });
-    </script>
-    <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-  </article>
-
-
           </article>
         </div>
       </div>

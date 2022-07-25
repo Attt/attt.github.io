@@ -106,3 +106,10 @@ theme: fluid
 search:
   path: local-search.xml
   field: post
+
+encrypt:
+  enable: true
+  abstract: これは暗号化されている内容です。
+  message: これは暗号化されている内容です。
+  wrong_pass_message: パスワードが不一致。
+  wrong_hash_message: 不具合のため、一時的に復号化されます。

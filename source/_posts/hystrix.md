@@ -1,8 +1,9 @@
 ---
-title: 【KNOW-HOW】Hystrix
+title: Hystrix
 date: 2022-06-22 22:41:52
 categories:
-    - Know-how
+    - 基础姿势
+    - 微服务
 tags:
     - Netflix Hystrix
     - Spring Cloud

@@ -1,8 +1,9 @@
 ---
-title: 【KNOW-HOW】Shell脚本笔记
+title: Shell脚本笔记
 date: 2022-03-19 23:27:41
 categories: 
-	- Know-how
+	- 伸展运动
+  - Linux
 tags:
 	- Linux
 	- shell script

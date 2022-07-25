@@ -1,8 +1,9 @@
 ---
-title: 【KNOW-HOW】Blender学习笔记0
+title: Blender (cycles/eevee) 着色器：原理化BSDF
 date: 2022-06-18 23:59:44
 categories:
-    - Know-how
+    - 伸展运动
+    - 3D渲染
 tags:
     - blender
     - shading

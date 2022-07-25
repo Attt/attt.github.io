@@ -1,8 +1,9 @@
 ---
-title: 【KNOW-HOW】文法「ところ」
+title: 文法「ところ」
 date: 2022-06-23 08:08:45
 categories:
-    - Know-how
+    - 基础姿势
+    - 日语
 tags:
     - language
     - japanese

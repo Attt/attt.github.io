@@ -1,8 +1,9 @@
 ---
-title: 【FEATURE】MySQL中的大小写敏感排序规则
+title: MySQL中的大小写敏感排序规则
 date: 2022-06-17 15:51:08
 categories:
-    - Feature
+    - 基础姿势
+    - 中间件
 tags:
     - MySQL
     - charset

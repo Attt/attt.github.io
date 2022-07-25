@@ -1,8 +1,9 @@
 ---
-title: 【KNOW-HOW】Java中的异步和并发手段
+title: Java中的异步和并发手段
 date: 2022-07-10 21:06:58
 categories:
-    - Know-how
+    - 基础姿势
+    - 并发编程
 tags:
     - Java
     - asynchronization

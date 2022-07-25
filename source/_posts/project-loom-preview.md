@@ -1,8 +1,9 @@
 ---
-title: 【FEATURE】Project Loom 预览
+title: Project Loom 预览
 date: 2022-07-14 17:02:15
 categories:
-    - Feature
+    - 基础姿势
+    - 并发编程
 tags:
     - Java
     - virtual threads

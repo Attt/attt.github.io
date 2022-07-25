@@ -1,8 +1,9 @@
 ---
-title: 【BUG】Class签名信息不匹配引起的依赖冲突
+title: Class签名信息不匹配引起的依赖冲突
 date: 2022-07-14 13:45:15
 categories:
-    - Bug
+    - 群英荟萃
+    - BUG草集
 tags:
     - Java
     - maven
