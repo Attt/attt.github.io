@@ -493,7 +493,7 @@ index:
       # 请求地址
       # Request url
       # url: "https://v2.jinrishici.com/one.json"
-      url: "http://quotes.stormconsultancy.co.uk/random.json"
+      url: "https://quotes.stormconsultancy.co.uk/random.json"
 
       # 请求方法
       # Request method
