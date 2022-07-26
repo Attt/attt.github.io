@@ -1079,23 +1079,28 @@
       
         jQuery.ajax({
           type: 'GET',
-          url: 'https://quotes.stormconsultancy.co.uk/random.json',
+          url: 'https://api.github.com/zen',
           headers: {},
-          dataType: 'json',
+          dataType: 'text',
           success: function(result) {
             var apiText;
             if (result) {
-              var keys = 'quote'.split(',');
-              if (result instanceof Array) {
-                result = result[0];
-              }
-              for (const k of keys) {
-                var value = result[k];
-                if (typeof value === 'string') {
-                  apiText = value;
-                  break;
-                } else if (value instanceof Object) {
-                  result = value;
+              var keys = ''.split(',');
+              // support text/plain api such as https://api.github.com/zen
+              if (typeof result === 'string') {
+                apiText = result
+              }else{
+                if (result instanceof Array) {
+                  result = result[0];
+                }
+                for (const k of keys) {
+                  var value = result[k];
+                  if (typeof value === 'string') {
+                    apiText = value;
+                    break;
+                  } else if (value instanceof Object) {
+                    result = value;
+                  }
                 }
               }
             }
@@ -1103,7 +1108,7 @@
           },
           error: function(xhr, status, error) {
             if (error) {
-              console.error('Failed to request https://quotes.stormconsultancy.co.uk/random.json:', error);
+              console.error('Failed to request https://api.github.com/zen:', error);
             }
             typing(text);
           }
