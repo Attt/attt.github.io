@@ -230,6 +230,78 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/06/17/case-sensitive-collation-in-mysql/" target="_self">
+          MySQL中的大小写敏感排序规则
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/17/case-sensitive-collation-in-mysql/" target="_self">
+        <div>
+          utf8mb4字符集排序规则在MySQL8.0.1之前，utf8mb4没有cs排序规则，大小写敏感的排序规则只能用utf8mb4_bin，然后通过类似于SELECT ... ORDER BY column COLLATE utf8_croatian_ci.的方法来得到更“human”的排序结果。（bin的排序方式按照类似ACSII顺序，比如大小写的字母不一定会在一起）  SELECT * FROM
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-17 15:51" pubdate>
+              2022-06-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E5%A7%BF%E5%8A%BF/" class="category-chain-item">基础姿势</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E5%A7%BF%E5%8A%BF/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">中间件</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/mysql/">#MySQL</a>
+            
+              <a href="/tags/charset/">#charset</a>
+            
+              <a href="/tags/collation/">#collation</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/06/14/useful-utils/" target="_self">
           一些好用的工具
         </a>
@@ -354,9 +426,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/spring/">#Spring</a>
-            
               <a href="/tags/rabbitmq/">#RabbitMQ</a>
+            
+              <a href="/tags/spring/">#Spring</a>
             
           </div>
         
