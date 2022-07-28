@@ -1,0 +1,18 @@
+---
+title: LMAX Disruptor
+date: 2022-07-29 00:41:53
+tags:
+    - disruptor
+    - asynchronization
+    - multi-threads
+    - concurrency
+categories:
+    - 基础姿势
+    - 框架和组件
+---
+> High Performance Inter-Thread Messaging Library
+
+[官网](https://lmax-exchange.github.io/disruptor/)
+
+[Paper](https://lmax-exchange.github.io/disruptor/disruptor.html)
+## Ring Buffer

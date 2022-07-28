@@ -3,7 +3,7 @@ title: Spring rabbitMQ binding配置的“陷阱”
 date: 2022-06-14 20:31:59
 categories: 
     - 基础姿势
-    - 框架
+    - 框架和组件
 tags:
 	- RabbitMQ
 	- Spring
