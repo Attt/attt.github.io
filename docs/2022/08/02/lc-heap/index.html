@@ -16,26 +16,38 @@
   <meta name="author" content="attt">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hash TableHash函数直接定址 hash(k) &#x3D; k，用key hash(k) &#x3D; ak + b，key相关的线性函数  适用key集中的情况，如果key分散的话空间浪费会比较严重。 数字分析找出key的规律，利用规律降低冲突（和直接定址的线性函数有一点重叠，但是数字分析重点是规律，也就不局限于‘线性’），比如用身份证的月日加上后四位。 平方取中平方取中是一种‘伪随">
+    <meta name="description" content="Heap完全二叉树，且任意一个点的父节点都大于（小于）子节点。 Max Heap &amp; Min Heap最大&#x2F;最小堆指的是堆顶（根节点）是最大还是最小。 实现数据结构堆也是完全二叉树，所以除了可以用节点&#x2F;指针的方式来实现： 123456789class Heap&amp;#123;    Node root;&amp;#125;class Node&amp;#123;    int val;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hash Table 散列表">
-<meta property="og:url" content="https://attt.github.io/2022/08/01/lc-hash-table/index.html">
+<meta property="og:title" content="Heap 堆">
+<meta property="og:url" content="https://attt.github.io/2022/08/02/lc-heap/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
-<meta property="og:description" content="Hash TableHash函数直接定址 hash(k) &#x3D; k，用key hash(k) &#x3D; ak + b，key相关的线性函数  适用key集中的情况，如果key分散的话空间浪费会比较严重。 数字分析找出key的规律，利用规律降低冲突（和直接定址的线性函数有一点重叠，但是数字分析重点是规律，也就不局限于‘线性’），比如用身份证的月日加上后四位。 平方取中平方取中是一种‘伪随">
+<meta property="og:description" content="Heap完全二叉树，且任意一个点的父节点都大于（小于）子节点。 Max Heap &amp; Min Heap最大&#x2F;最小堆指的是堆顶（根节点）是最大还是最小。 实现数据结构堆也是完全二叉树，所以除了可以用节点&#x2F;指针的方式来实现： 123456789class Heap&amp;#123;    Node root;&amp;#125;class Node&amp;#123;    int val;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-01T12:20:14.000Z">
-<meta property="article:modified_time" content="2022-08-01T14:17:40.598Z">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/max-heap-example.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-insertion.0.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-insertion.1.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-insertion.2.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-insertion.3.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-deletion.0.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-deletion.1.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-deletion-opt.0.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-deletion-opt.1.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-deletion-opt.2.drawio.png">
+<meta property="og:image" content="https://attt.github.io/2022/08/02/lc-heap/min-heap-deletion-opt.3.drawio.png">
+<meta property="article:published_time" content="2022-08-02T11:55:49.000Z">
+<meta property="article:modified_time" content="2022-08-02T14:18:27.018Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="data structures">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://attt.github.io/2022/08/02/lc-heap/max-heap-example.drawio.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Hash Table 散列表 - Attt&#39;s ブログ</title>
+  <title>Heap 堆 - Attt&#39;s ブログ</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +217,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hash Table 散列表"></span>
+            <span id="subtitle" data-typed-text="Heap 堆"></span>
           
         </div>
 
@@ -221,8 +233,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-01 20:20" pubdate>
-          2022年8月1日 星期一 晚上
+        <time datetime="2022-08-02 19:55" pubdate>
+          2022年8月2日 星期二 晚上
         </time>
       </span>
     
@@ -233,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2k 字
         
       </span>
     
@@ -244,7 +256,7 @@
         
         
         
-          19 分钟
+          25 分钟
         
       </span>
     
@@ -300,51 +312,43 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hash Table 散列表</h1>
+            <h1 style="display: none">Heap 堆</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8">Hash Table</a></h2><h3 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h3><h4 id="直接定址"><a href="#直接定址" class="headerlink" title="直接定址"></a>直接定址</h4><ul>
-<li>hash(k) &#x3D; k，用key</li>
-<li>hash(k) &#x3D; ak + b，key相关的<code>线性函数</code></li>
-</ul>
-<p>适用key集中的情况，如果key分散的话空间浪费会比较严重。</p>
-<h4 id="数字分析"><a href="#数字分析" class="headerlink" title="数字分析"></a>数字分析</h4><p>找出key的规律，利用规律降低冲突（和直接定址的线性函数有一点重叠，但是数字分析重点是规律，也就不局限于‘线性’），比如用身份证的月日加上后四位。</p>
-<h4 id="平方取中"><a href="#平方取中" class="headerlink" title="平方取中"></a>平方取中</h4><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B9%B3%E6%96%B9%E5%8F%96%E4%B8%AD%E6%B3%95">平方取中</a>是一种‘伪随机数算法’，可以得到特定长度内的伪随机数。</p>
-<h4 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h4><p>按位数分割，然后各部分叠加，舍去进位。</p>
-<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h4><p><a href="#%E5%B9%B3%E6%96%B9%E5%8F%96%E4%B8%AD">平方取中</a>算是其中一种。</p>
-<h4 id="取余"><a href="#取余" class="headerlink" title="取余"></a>取余</h4><p>最大长度m，选取一个数p不大于m，</p>
-<p>hash(k) &#x3D; k mod p, p &lt; m</p>
-<h3 id="冲突解决方案"><a href="#冲突解决方案" class="headerlink" title="冲突解决方案"></a>冲突解决方案</h3><h4 id="开放定址"><a href="#开放定址" class="headerlink" title="开放定址"></a>开放定址</h4><p>hash_i &#x3D; (hash(k) + d_i) mod m, 其中m是最大长度，i是定址次数，d_i是第i次的序列：</p>
-<ul>
-<li>线性探测，d&#x3D;1,2,3…</li>
-<li>平方探测，d&#x3D;1^2,2^2,3^2…</li>
-<li>伪随机探测，d&#x3D;ran(k)</li>
-</ul>
-<p>开放定址的hash函数要求比较高，需要非常均匀，否则一旦出现聚集插入数据时就会增加定址次数</p>
-<h4 id="单独链表"><a href="#单独链表" class="headerlink" title="单独链表"></a>单独链表</h4><p>在冲突的位置放置链表</p>
-<h4 id="双散列"><a href="#双散列" class="headerlink" title="双散列"></a>双散列</h4><p>hash两次</p>
-<h4 id="再散列"><a href="#再散列" class="headerlink" title="再散列"></a>再散列</h4><p>准备一堆hash函数，然后冲突了就套娃：</p>
-<p>k_i &#x3D; hash_i-1(….(k))</p>
-<h4 id="公共溢出区"><a href="#公共溢出区" class="headerlink" title="公共溢出区"></a>公共溢出区</h4><p>比如准备一个链表，和单独链表有点像，只不过这里的链表是放在“公共”区的，冲突的元素都放在一个链表里，当然用别的数据结构也可以。</p>
-<h3 id="Load-factor"><a href="#Load-factor" class="headerlink" title="Load factor"></a>Load factor</h3><p>元素个数&#x2F;表长度，由于即使hash足够均匀，最终的元素必须放置在小于表长度的位置中，留给余下的元素的位置越少，产生冲突的概率越大。</p>
-<p>证明：</p>
-<p>假设有一个长度为m、load factor为a的表，且hash函数h(k)十分均匀，</p>
-<p>那么可以得出，在写入第n个元素时冲突的概率p为<code>1/(m-(n-1))，n &lt;= a*m</code>,</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text">当a = 0.8<br>    n=1，m=10时，p=1/10<br>    n=2，m=10时，p=1/9<br>    ...<br>    n=8，m=10时，p=1/3<br>    n=9，因为此时9 &gt; 0.8 * 10，不满足n &lt;= a*m，需要对表扩容或者不再写入，因此a=0.8时最大的冲突概率为1/3<br>再<br>当a = 0.6<br>    n=1，m=10时，p=1/10<br>    ...<br>    n=6，m=10时，p=1/5<br>    n=7，此时原因同上，a=0.6时最大的冲突概率为1/5<br></code></pre></td></tr></table></figure>
-<p>因此，在相同的hash函数下，load factor理论上越小，冲突的概率越小，但是load factor过于小会造成空间的浪费。</p>
-<h3 id="性能因素"><a href="#性能因素" class="headerlink" title="性能因素"></a>性能因素</h3><ol>
-<li>hash的均匀程度（冲突概率，冲突必然增加开销）</li>
-<li>冲突解决方案<ol>
-<li>比如单链增加空间开销和时间开销、开放定址增加时间开销、再散列增加时间开销等</li>
-<li>各种冲突方案的开销并不是定量的，比如单链增加的时间开销和开放定址增加的时间开销并不相当，需要考虑开放定址的hash函数算法的时间复杂度与链表查询的时间复杂度，且即使开放定址的hash函数时间复杂度为O(n)，其n的常数系数也大概率与链表的不同</li>
-</ol>
-</li>
-<li>load factor（冲突概率）</li>
-</ol>
-<h3 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h3><p>数据结构部分：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 散列表</span><br><span class="hljs-comment"> * 冲突策略：单链</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">HashTable</span>&#123;<br>    Node[] hashSlots;<br>    <span class="hljs-comment">// 散列槽数量</span><br>    <span class="hljs-type">int</span> slotsSize;<br>    <span class="hljs-comment">// 当前元素数量</span><br>    <span class="hljs-type">int</span> elementCount;<br>    <span class="hljs-comment">// load factor</span><br>    <span class="hljs-type">float</span> <span class="hljs-variable">loadFactor</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.6f</span>;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 节点</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&#123;<br>    Object key;<br>    Object object;<br>    <span class="hljs-comment">// 下一个节点</span><br>    Node next;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A0%86%E7%A9%8D">Heap</a></h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91">完全二叉树</a>，且任意一个点的父节点都大于（小于）子节点。</p>
+<h2 id="Max-Heap-amp-Min-Heap"><a href="#Max-Heap-amp-Min-Heap" class="headerlink" title="Max Heap &amp; Min Heap"></a>Max Heap &amp; Min Heap</h2><p>最大&#x2F;最小堆指的是堆顶（根节点）是最大还是最小。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>堆也是完全二叉树，所以除了可以用节点&#x2F;指针的方式来实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Heap</span>&#123;<br>    Node root;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&#123;<br>    <span class="hljs-type">int</span> val;<br>    Node left;<br>    Node right;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>也可以用数组来实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Heap</span>&#123;<br>    <span class="hljs-type">int</span>[] values;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>用数组实现时：</p>
+<p><img src="/2022/08/02/lc-heap/max-heap-example.drawio.png" srcset="/img/loading.gif" lazyload alt="max heap example"></p>
+<p>父子节点的位置关系：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-title function_">parentOffset</span><span class="hljs-params">(<span class="hljs-type">int</span> childOffset)</span>&#123;<br>    <span class="hljs-keyword">return</span> childOffset / <span class="hljs-number">2</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">leftChildOffset</span><span class="hljs-params">(<span class="hljs-type">int</span> parentOffset)</span>&#123;<br>    <span class="hljs-keyword">return</span> parentOffset * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">rightChildOffset</span><span class="hljs-params">(<span class="hljs-type">int</span> parentOffset)</span>&#123;<br>    <span class="hljs-keyword">return</span> parentOffset * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>从尾部插入，然后跟父节点比较，不满足最大（最小）二叉堆性质则交换位置直到满足性质或者达到最顶部：</p>
+<p><img src="/2022/08/02/lc-heap/min-heap-insertion.0.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap insertion, 19 is smaller than 29"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-insertion.1.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap insertion, 19 is smaller than 22"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-insertion.2.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap insertion, compare 19 with 18"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-insertion.3.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap insertion, 19 is bigger than 18"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// min heap</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span>&#123;<br>    <span class="hljs-keyword">if</span>(isFull()) resize();<br>    <span class="hljs-type">int</span> <span class="hljs-variable">offset</span> <span class="hljs-operator">=</span> size, parentOffset = parentOffset(offset);<br>    <span class="hljs-comment">// 先插入到尾部</span><br>    values[offset] = val;<br>    <span class="hljs-comment">// 与父节点对比交换</span><br>    <span class="hljs-keyword">while</span>(values[parentOffset] &gt; value[offset])&#123;<br>        <span class="hljs-comment">// sift(int, int)</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> values[parentOffset];<br>        values[offset] = tmp;<br>        values[parentOffset] = val;<br>    &#125;<br>    size++;<br>&#125;<br><br><span class="hljs-comment">// 扩容</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">resize</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>插入的元素从底部向上的这个过程可以称作：percolate up（上滤）</p>
+<h3 id="删除顶部"><a href="#删除顶部" class="headerlink" title="删除顶部"></a>删除顶部</h3><p>删除顶部节点后需要重新调整原来的子树，比如：</p>
+<p><img src="/2022/08/02/lc-heap/min-heap-deletion.0.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap deletion"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-deletion.1.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap deletion"></p>
+<p>每次移动节点的时候会出现空缺，原来的子节点都需要比较然后向前移动，比较麻烦，那么可以换种策略，在删除顶部节点后将最后一个节点移动到顶部，然后从上向下比较交换节点直到恢复堆性质：</p>
+<p><img src="/2022/08/02/lc-heap/min-heap-deletion-opt.0.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap deletion optimization"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-deletion-opt.1.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap deletion optimization"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-deletion-opt.2.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap deletion optimization"></p>
+<p><img src="/2022/08/02/lc-heap/min-heap-deletion-opt.3.drawio.png" srcset="/img/loading.gif" lazyload alt="min heap deletion optimization"></p>
+<p>从上向下比较交换的时候需要同时比较左右两个字节点，要与两个字节点中最小（最大）的交换来恢复堆性质。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// min heap</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">deleteMin</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">if</span>(isEmpty()) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    <span class="hljs-comment">// 将尾部插入到顶部</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">offset</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, leftChildOffset = -<span class="hljs-number">1</span>, rightChildOffset = -<span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> values[offset];<br>    values[offset] = values[size - <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">// 和左右子节点对比交换</span><br>    <span class="hljs-comment">// *note: 这里要校验是否存在左右节点</span><br>    <span class="hljs-keyword">while</span>(values[offset] &gt; values[(leftChildOffset = leftChildOffset(offset))] ||<br>        values[offset] &gt; values[(rightChildOffset = rightChildeOffset(offset))])&#123;<br>            <span class="hljs-keyword">if</span>(values[leftChildOffset] &gt; values[rightChildOffset])&#123;<br>                <span class="hljs-comment">// 左&lt;右</span><br>                <span class="hljs-keyword">if</span>(values[leftChildOffset] &gt; values[offset])&#123;<br>                    <span class="hljs-comment">// 左&lt;顶</span><br>                    sift(offset, leftChildOffset);<br>                    offset = leftChildOffset;<br>                &#125;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-comment">// 右&lt;左</span><br>                <span class="hljs-keyword">if</span>(values[rightChildOffset] &gt; values[offset])&#123;<br>                    <span class="hljs-comment">// 右&lt;顶</span><br>                    sift(offset, rightChildOffset);<br>                    offset = rightChildOffset;<br>                &#125;<br>            &#125;<br>    &#125;<br>    size--;<br>    <span class="hljs-keyword">return</span> min;<br>&#125;<br><br><span class="hljs-comment">// 交换元素</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">sift</span><span class="hljs-params">(<span class="hljs-type">int</span> offset, <span class="hljs-type">int</span> otherOffset)</span>&#123;<br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>删除顶部元素的这个从顶部向下交换的过程称作：percolate down（下滤）</p>
+
                 
               </div>
             
@@ -402,18 +406,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/02/lc-heap/" title="Heap 堆">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Heap 堆</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/27/lc-skip-list/" title="Skip List 跳跃表">
-                        <span class="hidden-mobile">Skip List 跳跃表</span>
+                      <a href="/2022/08/01/lc-hash-table/" title="Hash Table 散列表">
+                        <span class="hidden-mobile">Hash Table 散列表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
