@@ -24,7 +24,7 @@
 <meta property="og:description" content="Hash TableHash函数直接定址 hash(k) &#x3D; k，用key hash(k) &#x3D; ak + b，key相关的线性函数  适用key集中的情况，如果key分散的话空间浪费会比较严重。 数字分析找出key的规律，利用规律降低冲突（和直接定址的线性函数有一点重叠，但是数字分析重点是规律，也就不局限于‘线性’），比如用身份证的月日加上后四位。 平方取中平方取中是一种‘伪随">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-01T12:20:14.000Z">
-<meta property="article:modified_time" content="2022-08-01T14:17:40.598Z">
+<meta property="article:modified_time" content="2022-08-02T16:30:54.451Z">
 <meta property="article:author" content="attt">
 <meta property="article:tag" content="data structures">
 <meta property="article:tag" content="leetcode">
@@ -244,7 +244,7 @@
         
         
         
-          19 分钟
+          20 分钟
         
       </span>
     
@@ -328,12 +328,13 @@
 <h4 id="再散列"><a href="#再散列" class="headerlink" title="再散列"></a>再散列</h4><p>准备一堆hash函数，然后冲突了就套娃：</p>
 <p>k_i &#x3D; hash_i-1(….(k))</p>
 <h4 id="公共溢出区"><a href="#公共溢出区" class="headerlink" title="公共溢出区"></a>公共溢出区</h4><p>比如准备一个链表，和单独链表有点像，只不过这里的链表是放在“公共”区的，冲突的元素都放在一个链表里，当然用别的数据结构也可以。</p>
-<h3 id="Load-factor"><a href="#Load-factor" class="headerlink" title="Load factor"></a>Load factor</h3><p>元素个数&#x2F;表长度，由于即使hash足够均匀，最终的元素必须放置在小于表长度的位置中，留给余下的元素的位置越少，产生冲突的概率越大。</p>
-<p>证明：</p>
-<p>假设有一个长度为m、load factor为a的表，且hash函数h(k)十分均匀，</p>
-<p>那么可以得出，在写入第n个元素时冲突的概率p为<code>1/(m-(n-1))，n &lt;= a*m</code>,</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text">当a = 0.8<br>    n=1，m=10时，p=1/10<br>    n=2，m=10时，p=1/9<br>    ...<br>    n=8，m=10时，p=1/3<br>    n=9，因为此时9 &gt; 0.8 * 10，不满足n &lt;= a*m，需要对表扩容或者不再写入，因此a=0.8时最大的冲突概率为1/3<br>再<br>当a = 0.6<br>    n=1，m=10时，p=1/10<br>    ...<br>    n=6，m=10时，p=1/5<br>    n=7，此时原因同上，a=0.6时最大的冲突概率为1/5<br></code></pre></td></tr></table></figure>
-<p>因此，在相同的hash函数下，load factor理论上越小，冲突的概率越小，但是load factor过于小会造成空间的浪费。</p>
+<h3 id="Load-factor-载荷因子"><a href="#Load-factor-载荷因子" class="headerlink" title="Load factor 载荷因子"></a>Load factor 载荷因子</h3><p>元素个数&#x2F;表长度，由于即使hash足够均匀，最终的元素必须放置在小于表长度的位置中，留给余下的元素的位置越少，产生冲突的概率越大：</p>
+<p>假设有一个长度为m、载荷因子为a的表，且hash函数相对均匀，</p>
+<p>那么不难得出，在写入第n个元素时冲突的概率p为<code>n-1/m，n &lt;= a*m</code>,</p>
+<p>若取a的极限值0，也就是不会有元素写入，可以看作冲突概率p恒为0。</p>
+<p>换成朴素的证明：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs text">当a = 0.8<br>    n=1，m=10时，p=0/10<br>    n=2，m=10时，p=1/10<br>    ...<br>    n=8，m=10时，p=7/10<br>    n=9，因为此时9 &gt; 0.8 * 10，不满足n &lt;= a*m，需要对表扩容或者不再写入，因此a=0.8时最大的冲突概率为7/10<br>再<br>当a = 0.6<br>    n=1，m=10时，p=0/10<br>    ...<br>    n=6，m=10时，p=1/2<br>    n=7，此时原因同上，a=0.6时最大的冲突概率为1/2<br>当a = 0.5，最大p=2/5<br>...<br></code></pre></td></tr></table></figure>
+<p>因此，在相同的hash函数下，理论上载荷因子越小，冲突的概率越小，但是载荷因子过于小会造成空间的浪费。</p>
 <h3 id="性能因素"><a href="#性能因素" class="headerlink" title="性能因素"></a>性能因素</h3><ol>
 <li>hash的均匀程度（冲突概率，冲突必然增加开销）</li>
 <li>冲突解决方案<ol>
@@ -341,7 +342,7 @@
 <li>各种冲突方案的开销并不是定量的，比如单链增加的时间开销和开放定址增加的时间开销并不相当，需要考虑开放定址的hash函数算法的时间复杂度与链表查询的时间复杂度，且即使开放定址的hash函数时间复杂度为O(n)，其n的常数系数也大概率与链表的不同</li>
 </ol>
 </li>
-<li>load factor（冲突概率）</li>
+<li>载荷因子（冲突概率）</li>
 </ol>
 <h3 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h3><p>数据结构部分：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 散列表</span><br><span class="hljs-comment"> * 冲突策略：单链</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">HashTable</span>&#123;<br>    Node[] hashSlots;<br>    <span class="hljs-comment">// 散列槽数量</span><br>    <span class="hljs-type">int</span> slotsSize;<br>    <span class="hljs-comment">// 当前元素数量</span><br>    <span class="hljs-type">int</span> elementCount;<br>    <span class="hljs-comment">// load factor</span><br>    <span class="hljs-type">float</span> <span class="hljs-variable">loadFactor</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.6f</span>;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 节点</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&#123;<br>    Object key;<br>    Object object;<br>    <span class="hljs-comment">// 下一个节点</span><br>    Node next;<br>&#125;<br></code></pre></td></tr></table></figure>
