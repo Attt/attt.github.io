@@ -206,19 +206,121 @@ RFC:
 
 ### Web Caching
 
+![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2020.37.43.png)
 
+![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2020.38.01.png)
 
-#### The Conditional GET
+总的来说就是本地机构的网络或者ISP的网络中设立缓存可以充分利用本地网络的低成本带宽减少真正走Internet router出口到公共线路的请求数据量，这也是CDN（Content Distribution Networks）的作用依据。
+
+**The Conditional GET**
+
+引入缓存后如何保持一致性？
+
+1. cache向server请求时server在响应中会带上`Last-Modified`头信息，表示资源的修改时间，这个时间也会被缓存下来。
+2. 如果再次请求这个资源时，cache会发起conditional GET，头信息包含`If-Modified-Since`，这个时间就是cache中的资源时间，此时
+   1. 如果server的资源修改过，会返回新的资源响应，带上最新的Last-Modified，然后cache更新。
+   2. 如果server的资源在Last-Modified之后没有修改过，则向cache返回只包含status line和header line的响应（304 Not Modified）。 
+
+会增加一点响应时间和带宽消耗。
+
 ### HTTP/2
-#### HTTP/2 Framing
-#### Response Message Prioritization and Server Pushing
-#### HTTP/3
+
+>The primary goals for HTTP/2 are to reduce perceived latency by enabling request and response multiplexing over a single TCP connection, provide request prioritization and server push, and provide efficient compression of HTTP header fields. HTTP/2 does not change HTTP methods, status codes, URLs, or header fields. Instead, HTTP/2 changes how the data is formatted and transported between the client and server.
+
+1. 通过在单个TCP连接上实现请求和响应的multiplexing来减少perceived latency（感知延迟）
+2. 优先级请求
+3. 服务端推送
+4. HTTP头的高效压缩
+
+Head of Line (HOL) blocking，头阻塞问题：如果多个不同的请求都经过一个TCP连接发送，但不幸的是发送队列的头部有个大对象（耗时）的请求，那么在队列后面的即使是小对象的请求也不得不等待。
+
+*这个看似总等待时间没有变化，但是会严重影响用户的感知延迟，假如一个页面上有多个请求，除了一个超级大的视频之外全部都是文字和小图片，假如发生了HOL，那么在视频请求完成之前页面就是一片白*
+
+HTTP/1.1的浏览器通过多个TCP连接来解决这个问题（和1.1版复用TCP连接没有冲突，因为可以用比请求数少的TCP连接完成任务也算是改进），由于TCP的公平带宽是基于连接的，多个TCP连接理论上可以获得更多带宽，从整个网络设计层面来看，通过多个TCP来骗取更多的带宽也不太健康。
+
+*减少TCP连接其实是想节省资源(socket、内存）的占用*
+
+**HTTP/2 Framing**
+
+解决HOL问题，将响应数据拆分成frame，头部数据拆成一个frame，剩下的数据拆成一个或多个frames，对这些frame进行二进制编码，这样就可以交错的在一个TCP连接上传输响应。（可能带来的问题就是需要更大的buffer开销，毕竟需要等到某一个响应的所有frames都到达后才能对进行后续处理）
+
+**Response Message Prioritization and Server Pushing**
+
+优先级基本靠浏览器实现，不同的浏览器有不同的优先级策略。
+
+比如：
+![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2021.37.10.png)
+
+server push需要配置实现，主要是减少请求量，比如server除了响应本身的网页内容还可以push网页上依赖的资源
+
+举个例子，nginx配置
+```lua
+server {
+    listen 443 ssl http2;
+    server_name  localhost;
+
+    ssl                      on;
+    ssl_certificate          /etc/nginx/certs/example.crt;
+    ssl_certificate_key      /etc/nginx/certs/example.key;
+
+    ssl_session_timeout  5m;
+
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers   on;
+
+    location / {
+      root   /usr/share/nginx/html;
+      index  index.html index.htm;
+      http2_push /style.css; -- 推送style.css
+      http2_push /example.png; -- 推送example.png
+    }
+}
+```
+请求根目录/时，server会push配置的两个资源。
+
+**HTTP/3**
+
+QUIC，基于UDP的HTTP协议，可靠性公平性都是由application-layer来实现。
+
 ## Electronic Mail in the Internet
+
+![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2021.40.53.png)
+
 ### SMTP
+
+Simple Mail Transfer Protocol (SMTP)，基于TCP，基本是ASCII传输。
+
 ### Mail Message Formats
+
+```
+From: alice@crepes.fr
+To: bob@hamburger.edu
+Subject: Searching for the meaning of life.
+```
+
 ### Mail Access Protocols
+
+Internet Mail Access Protocol (IMAP)，用于访问邮件服务器的协议，当然用HTTP也能做到。
+
 ## DNS—The Internet’s Directory Service
+
+hostname 和 IP Address映射，将hostname转换为IP Address
+
 ### Services Provided by DNS
+
+组成部分：
+- 分布式数据库
+- 可供host查询该数据库的application-layer protocol
+
+举例，访问一个域名的步骤：
+1. 本地运行DNS的client
+2. 浏览器访问www.xxx.com下的资源时，将www.xxx.com传递给DNS的client
+3. DNS的client向DNS的server请求www.xxx.com的IP address
+4. 浏览器收到DNS client返回的IP address，通过这个IP建立TCP连接然后发送HTTP请求
+
+
+
 ### Overview of How DNS Works
 #### A Distributed, Hierarchical Database
 #### DNS Caching
