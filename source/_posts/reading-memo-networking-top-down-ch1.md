@@ -36,19 +36,21 @@ P2P架构中，几乎不依赖data center中的server，不同的hosts间相互�
 如何定义client process和server process：
 > In the context of a communication session between a pair of processes, the pro- cess that initiates the communication (that is, initially contacts the other process at the beginning of the session) is labeled as the client. The process that waits to be contacted to begin the session is the server.
 
-为了简化模型client和server的分别只是看哪一方先发起communication session，因此在P2P架构中也有client和server，只不过peer可以扮演两种角色。（这里要区别“full-duplex”和“half-duplex”，这个概念指的是能否同时进行，而client process和server process讨论的是角色）
+为了简化模型client和server的分别只是看哪一方先发起communication session，因此在P2P架构中也有client和server，只不过peer可以扮演两种角色。（要区别“full-duplex”和“half-duplex”，全双工/半双工的概念指的是能否同时进行上下行通信，而client process和server process讨论的是角色）
 
 **The Interface Between the Process and the Computer Network**
 
-process通过叫做“socket”的software interface发出消息到网络（对于process来说消息给到socket之后确实就属于“网络”了，因为process并不用关心细节），也通过socket来接受消息。
+process通过叫做“socket”的software interface发出消息到网络（对于process来说消息给到socket之后确实就属于“网络”了，因为process并不用关心细节），也通过socket来接受消息。（这东西翻译成“套接字”是真的...)
 
-socket是software层面的定义，本质上是将消息转移到下一层（通常是transport-layer），一般来说下一层的实现都由OS来负责，因此也可以理解socket是OS获取打包好的application-layer消息并且进一步打包成transport-layer消息（传出）、拆解transport-layer消息取出并送达application-layer消息（传入）的API。（通常对于transport-layer，应用程序只能选择使用何种协议）
+socket是software层面的定义，实际作用是给了个入口和出口，将消息转移到下一层（通常是transport-layer）。通常transport-layer的细节实现都由OS来负责。
+
+可以这么理解：socket是OS获取打包好的application-layer消息并且进一步打包成transport-layer消息（传出）、拆解transport-layer消息取出并送达application-layer消息（传入）的API。（在transport-layer这方面，应用程序顶多只能做选择。选择比努力更...）
 
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-14%2021.51.57.png)
 
 **Addressing Processes**
 
-通过IP address来确定目标host，通过port number来确定目标host上的目标process。
+IP address确定目标host，port number确定目标host上的目标process。
 
 ### Transport Services Available to Applications
 
@@ -58,6 +60,8 @@ transport-layer提供的服务分为四个方面：可靠数据传输、吞吐�
 
 具体问题具体分析，比如音视频流可能不太需要过于可靠（有点数据丢失或者错误问题不大），文件传输或者邮件之类的可能就必须保证可靠性。
 
+押镖就不能把货弄丢喽，传情书就无所谓了，反正是缘分。
+
 **Throughput**
 
 对速率bitrate有保障，比如指定码率的直播推流，就需要有一定的速率保障。
@@ -66,13 +70,17 @@ transport-layer提供的服务分为四个方面：可靠数据传输、吞吐�
 
 即时性，即时通讯、在线游戏之类的都需要保障一定的即时性，但邮件这种肯定不需要。
 
+其实邮件也可以要，但 没必要。
+
 **Security**
 
 不只是加密，还包括了完整性验证和身份验证。
 
+总之突出一个安全放心。
+
 ### Transport Services Provided by the Internet
 
-互联网提供了TCP和UDP两种协议（不是只有这两种！是互联网the Internet提供了这两种）。
+互联网提供了TCP和UDP两种协议（TM不是只有这两种！是互联网the Internet提供了这两种）。
 
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-14%2022.06.50.png)
 
@@ -82,9 +90,15 @@ TCP协议提供的服务：
 - Connection-oriented service
 - Reliable data transfer service
 
-面向connection有个好处就是可以保存会话状态，通过这个connection的概念来认定分别在两个host上的两个process间的消息和这些消息的状态buffer。也是在transport-layer保证可靠性的基础，同时可靠性就是保证数据的有序有效正确。
+connection这个概念其实是个抽象的东西，不是说建立了connection就是千里姻缘一线牵了，不是真的有个什么东西连上了。
 
-congestion-control mechanism，拥堵控制是用来保证整个网络的可用性和公平性。（TCP协议的研究基本就是在这个上面做文章）
+那为啥要这个抽象的概念呢，就是为了搞事情，搞拆分、搞flow control、搞congestion control、再搞搞retransmission什么的。要让分别在两个host上的两个process之间完成基本交流通过四元组（src IP + src port + dest IP + dest port）就够了，但是如果要搞事情，就还需要记一些东西，比如接收方记录一下现在哪些segment已经送到了，发送方当然也要记录，就要有buffer来放这些记录，来记状态。
+
+所以总有个时机来创建这些个buffer，所以约定一个牵手流程（建立connection)，手一牵上那大家就准备准备要开始做笔记了。
+
+分手这笔记就可以撕了。
+
+congestion-control mechanism，拥堵控制是用来保证整个网络的可用性和公平性。（TCP协议的研究大部分是在这个上面做文章）
 
 安全性方面TLS
 
@@ -102,17 +116,17 @@ congestion-control mechanism，拥堵控制是用来保证整个网络的可用�
 
 一个application-layer protocol定义了：
 
-- 消息类型，比如说请求和响应
+- 消息类型，请求和响应
 - 如何区分消息类型
 - 消息中各个部分的含义
 - process如何处理（接收、发送、解释）消息
 
-举个例子，HTTP是RFC(Request for Comments)定义的公开协议，当然也可以定义私有协议。
+HTTP是RFC(Request for Comments)定义的公开协议。（当然也可以定义私有协议）
 
 ## The Web and HTTP
 ### Overview of HTTP
 
-基于**TCP**协议的**无状态**的*HyperText Transfer Protocol*，可靠完整由TCP来保证。（HTTP/3虽然基于UDP，因此一些TCP的保证特性需要在上一层也就是application-layer的HTTP/3中实现）
+基于**TCP**协议的**无状态**的*HyperText Transfer Protocol*，可靠完整由TCP来保证。（HTTP/3基于UDP，因此一些TCP保证的特性需要在上一层也就是application-layer的HTTP/3中实现）
 
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2010.57.16.png)
 
@@ -120,11 +134,11 @@ congestion-control mechanism，拥堵控制是用来保证整个网络的可用�
 
 **HTTP with Non-Persistent Connections**
 
-初代HTTP，每个请求都发起一次新的TCP连接
+初代HTTP，每个请求都发起一次新的TCP连接，简约而不简单。
 
 **HTTP with Persistent Connections**
 
-HTTP/1.1开始，多个请求复用TCP连接
+HTTP/1.1开始，多个请求复用TCP连接，也给大家伙儿带来了HOL问题。
 
 ### HTTP Message Format
 
@@ -138,7 +152,7 @@ RFC：
 
 **HTTP Request Message**
 
-```lua
+```
 GET /somedir/page.html HTTP/1.1 
 Host: www.someschool.edu 
 Connection: close
@@ -147,9 +161,10 @@ Accept-language: fr
 ```
 1. HTTP消息是由ASCII文字编写
 2. 第一行是request line(请求行)：格式是 [method] [url] [protocol/version], 接下来的都是header line(头行?)
-3. Host指明了目标host的位置（用于web代理缓存，都是application-layer的事情。这里看似已经通过TCP和目标host建立连接，实际上由于HTTP是无状态的不同的TCP连接可能处理完全相同的HTTP请求）
+3. Host指明了目标host的位置（这是application-layer的事情，TCP虽然已经连上了，但是由于HTTP是无状态的，不同的TCP连接可能处理完全相同的HTTP请求，那如果要做web缓存，肯定是基于这个host比较好。而且web缓存也是application-layer）
 4. Connection，close表示请求完成之后关闭连接，具体定义参照RFC：
->  o  If the "close" connection option is present, the connection will
+
+>   o  If the "close" connection option is present, the connection will
 >      not persist after the current response; else,
 >
 >   o  If the received protocol is HTTP/1.1 (or later), the connection
@@ -161,13 +176,14 @@ Accept-language: fr
 >      connection will persist after the current response; otherwise,
 > 
 >   o  The connection will close after the current response.
+
 1. User-agent用户代理，提供当前client的信息
 2. Accept-language表示client能够接受的内容语言
 
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2014.01.32.png)
 
 7. entity body是POST用的，GET方法参数是通过URL携带
-8. 最开始的RFC里URL没有规定长度，但是不同的浏览器最低限制在2000chars，且CDN也会限制URL的长度
+8. 最开始的RFC里URL没有规定长度，但是某些浏览器限制2000chars，且CDN也会限制URL的长度，最好短点，有话放在body说。
 
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2014.22.39.png)
 
@@ -186,11 +202,11 @@ Content-Type: text/html
 (data data data data data ...)
 ```
 
-1. 第一行是status line(状态行)，格式[protocol/version] [status code] + [status]，接下来是header line，最后是entity body
+1. 第一行是status line(状态行)，格式[protocol/version] [status code] + [phrase]，接下来是header line，最后是entity body
 2. Connection和request时意义一样，这里是server告诉client接下来会关闭连接
 3. Date是server发送响应的时间
 4. Server提供server的信息
-5. Last-Modified是资源最后被修改的时间（包括创建），这个对缓存至关重要
+5. Last-Modified是资源最后被修改的时间（包括创建），这个对web缓存很重要
 6. Content-Length内容的长度
 7. Content-Type返回响应的资源类型
 
@@ -206,15 +222,17 @@ RFC:
 
 ### Web Caching
 
+看图说话
+
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2020.37.43.png)
 
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2020.38.01.png)
 
-总的来说就是本地机构的网络或者ISP的网络中设立缓存可以充分利用本地网络的低成本带宽减少真正走Internet router出口到公共线路的请求数据量，这也是CDN（Content Distribution Networks）的作用依据。
+还是缓存的基本作用，CDN（Content Distribution Networks）也没差。
 
 **The Conditional GET**
 
-引入缓存后如何保持一致性？
+引入缓存后第一个要考虑一致性问题：
 
 1. cache向server请求时server在响应中会带上`Last-Modified`头信息，表示资源的修改时间，这个时间也会被缓存下来。
 2. 如果再次请求这个资源时，cache会发起conditional GET，头信息包含`If-Modified-Since`，这个时间就是cache中的资源时间，此时
@@ -227,34 +245,33 @@ RFC:
 
 >The primary goals for HTTP/2 are to reduce perceived latency by enabling request and response multiplexing over a single TCP connection, provide request prioritization and server push, and provide efficient compression of HTTP header fields. HTTP/2 does not change HTTP methods, status codes, URLs, or header fields. Instead, HTTP/2 changes how the data is formatted and transported between the client and server.
 
-1. 通过在单个TCP连接上实现请求和响应的multiplexing来减少perceived latency（感知延迟）
+1. 在单个TCP连接上实现请求和响应的multiplexing来减少perceived latency（感知延迟）
 2. 优先级请求
 3. 服务端推送
 4. HTTP头的高效压缩
 
 Head of Line (HOL) blocking，头阻塞问题：如果多个不同的请求都经过一个TCP连接发送，但不幸的是发送队列的头部有个大对象（耗时）的请求，那么在队列后面的即使是小对象的请求也不得不等待。
 
-*这个看似总等待时间没有变化，但是会严重影响用户的感知延迟，假如一个页面上有多个请求，除了一个超级大的视频之外全部都是文字和小图片，假如发生了HOL，那么在视频请求完成之前页面就是一片白*
+*这个看似总等待时间没有变化，但是会严重影响用户的感知延迟，假如一个页面上有多个请求，除了一个超级大的视频之外全部都是文字和小图片，这时候哦豁视频的响应先来了，那么在视频请求完成之前页面就是一片白*
 
-HTTP/1.1的浏览器通过多个TCP连接来解决这个问题（和1.1版复用TCP连接没有冲突，因为可以用比请求数少的TCP连接完成任务也算是改进），由于TCP的公平带宽是基于连接的，多个TCP连接理论上可以获得更多带宽，从整个网络设计层面来看，通过多个TCP来骗取更多的带宽也不太健康。
+HTTP/1.1的浏览器通过多个TCP连接来缓解这个问题（说好的复用TCP呢。），而且由此方案带来另一个问题：由于TCP的公平性是基于连接的，多个TCP连接理论上可以获得更多带宽，从整个网络设计层面来看，来骗来偷袭更多的带宽这好吗这不好。
 
-*减少TCP连接其实是想节省资源(socket、内存）的占用*
+*减少TCP连接其实是想节省资源(socket、内存,etc.）的占用*
 
 **HTTP/2 Framing**
 
-解决HOL问题，将响应数据拆分成frame，头部数据拆成一个frame，剩下的数据拆成一个或多个frames，对这些frame进行二进制编码，这样就可以交错的在一个TCP连接上传输响应。（可能带来的问题就是需要更大的buffer开销，毕竟需要等到某一个响应的所有frames都到达后才能对进行后续处理）
+目标是彻底解决HOL问题，将响应数据拆分成frame，头部数据拆成一个frame，剩下的数据拆成一个或多个frames，对这些frame进行二进制编码，这样就可以交错的在一个TCP连接上传输响应。（可能带来的问题就是需要更大的buffer开销，毕竟需要等到某一个响应的所有frames都到达后才能对进行后续处理）
 
 **Response Message Prioritization and Server Pushing**
 
-优先级基本靠浏览器实现，不同的浏览器有不同的优先级策略。
+优先级基本靠浏览器实现，不同的浏览器有不同的优先级策略。（体验下用chromium内核之前的edge和用了之后的edge是两个东西，edge真好用！所以我用chrome）
 
-比如：
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-15%2021.37.10.png)
 
-server push需要配置实现，主要是减少请求量，比如server除了响应本身的网页内容还可以push网页上依赖的资源
+server push需要配置实现，目的减少请求量，比如server除了响应本身请求的网页内容还可以push网页上依赖的资源
 
 举个例子，nginx配置
-```lua
+```
 server {
     listen 443 ssl http2;
     server_name  localhost;
@@ -289,7 +306,7 @@ QUIC，基于UDP的HTTP协议，可靠性公平性都是由application-layer来�
 
 ### SMTP
 
-Simple Mail Transfer Protocol (SMTP)，基于TCP，基本是ASCII传输。
+Simple Mail Transfer Protocol (SMTP)，基于TCP，远古协议，比HTTP早得多，ASCII编码。
 
 ### Mail Message Formats
 
@@ -301,7 +318,7 @@ Subject: Searching for the meaning of life.
 
 ### Mail Access Protocols
 
-Internet Mail Access Protocol (IMAP)，用于访问邮件服务器的协议，当然用HTTP也能做到。
+Internet Mail Access Protocol (IMAP)，用于访问邮件服务器的协议，客户端接入用这个（省啊，HTTP有点肥大），网页上用HTTP。
 
 ## DNS—The Internet’s Directory Service
 
@@ -311,14 +328,13 @@ hostname 和 IP Address映射，将hostname转换为IP Address
 
 组成部分：
 - 分布式数据库
-- 可供host查询该数据库的application-layer protocol
+- 可供host查询该数据库的application-layer protocol，DNS协议
 
 举例，访问一个域名的步骤：
-1. 本地运行DNS的client
+1. 本地运行DNS的client（这东西OS的）
 2. 浏览器访问www.xxx.com下的资源时，将www.xxx.com传递给DNS的client
 3. DNS的client向DNS的server请求www.xxx.com的IP address
 4. 浏览器收到DNS client返回的IP address，通过这个IP建立TCP连接然后发送HTTP请求
-
 
 
 ### Overview of How DNS Works
