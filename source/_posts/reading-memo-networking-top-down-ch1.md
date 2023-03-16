@@ -336,11 +336,104 @@ hostname 和 IP Address映射，将hostname转换为IP Address
 3. DNS的client向DNS的server请求www.xxx.com的IP address
 4. 浏览器收到DNS client返回的IP address，通过这个IP建立TCP连接然后发送HTTP请求
 
+比用IP直接访问肯定会增加延迟，为了减小延迟DNS服务器实际上不止一台，并且会尽量让所请求的DNS服务器更靠近client。
+
+DNS提供的服务：
+- host别名
+- 邮件服务器别名
+- 负载分布
+
+多对多的映射能力，前两个是域名-IP多对一，后面是一对多。
 
 ### Overview of How DNS Works
-#### A Distributed, Hierarchical Database
-#### DNS Caching
+
+基于UDP，默认53端口。
+
+**A Distributed, Hierarchical Database**
+
+DNS是分布式服务（Distributed），同时是分层服务（Hierarchical）
+
+看图说话
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2014.23.27.png)
+
+DNS分三类：
+- root DNS servers，根DNS服务器
+- top-level domain (TLD) DNS servers，顶级域DNS服务器
+- authoritative DNS servers，授权DNS服务器
+
+***root DNS server***
+
+全世界1000+的DNS服务器（2020），提供下一层TLD DNS server的IP地址。
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2014.27.20.png)
+
+***TLD DNS server***
+
+顶级域DNS服务器。国家fr、jp这种级别
+
+***local DNS server***
+
+每个ISP（机构/住宅）都会有自己的local DNS。
+
+local DNS不在DNS分层结构中，发起DNS请求时先到local DNS：
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2015.00.39.png)
+
+1. 本地host发起DNS查询请求到local DNS
+2. local DNS查询root DNS
+3. root DNS返回负责的TLD DNS的IP
+4. local DNS查询TLD DNS
+5. TLD DNS返回负责的authoritative DNS的IP
+6. local DNS查询authoritative DNS
+7. authoritative DNS返回请求的host的IP
+8. local DNS将IP地址返回给本地host
+
+八次请求！八次！
+
+TLD DNS不是总是有authoritative DNS的地址，还会有中间DNS。
+
+DNS查询的递归+迭代：查询local DNS是递归，因为local DNS还要查别的DNS；local DNS查别的DNS是迭代，平级的。
+
+当然理论上也可以都是递归的，实际一般不这么实现：
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2015.16.17.png)
+
+*这种实现有个问题：图中local DNS到root DNS的请求也就是2那个请求，需要等到3456请求都完成了才能返回，root DNS在这种实现模型下负载会更高*
+
+冷知识：
+[域名服务器缓存污染](https://zh.wikipedia.org/zh-hans/%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%93%E5%AD%98%E6%B1%A1%E6%9F%93)
+
+[2014年中国大陆网络异常事件](https://zh.wikipedia.org/zh-hans/2014%E5%B9%B4%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E7%BD%91%E7%BB%9C%E5%BC%82%E5%B8%B8%E4%BA%8B%E4%BB%B6)
+
+所以说年轻人还是要学习一个
+
+**DNS Caching**
+
+顾名思义。
+
 ### DNS Records and Messages
+
+```
+(Name, Value, Type, TTL)
+```
+
+name和value要看type是什么：
+- Type=A
+  - name是hostname
+  - value是IPv4
+  - 比如(relay1.bar.foo.com, 145.37.93.126, A)
+- Type=NS
+  - name是域名
+  - value是dns的hostname
+  - 比如(foo.com, dns.foo.com, NS)
+- Type=CNAME
+  - name是aliased别名
+  - value是hostname
+  - 比如(foo.com, relay1.bar.foo.com, CNAME)
+- Type=MX（看起来和CNAME一样，但是单独有这个类型的的话，邮件服务器的别名就可以跟CNAME的别名重复了）
+  - name是aliased别名
+  - value是邮件的hostname
+  - 比如(foo.com, mail.bar.foo.com, MX)
+
+A记录是存在于权威DNS上的，比如aaa.always.fuxk.com，如果dns.fuxk.com不是这个domain的权威DNS，那么他会有一条NS记录指向比如说dns.always.fuxk.com，而在dns.always.fuxk.com上面应该就是aaa.always.fuxk.com对应于某个IP的A记录了。（如果是IPv6，那就是AAAA记录，都差不多。）
+
 #### DNS Messages
 #### Inserting Records into the DNS Database
 ## Peer-to-Peer File Distribution
