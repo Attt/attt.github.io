@@ -1,0 +1,933 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/me.png">
+  <link rel="icon" href="/images/me.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154de">
+  <meta name="author" content="attt">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="官方文档  Hystrix的主要功能 线程拆分、隔离 降级、熔断 超时 缓存 监控  增加服务调用方的对外吞吐，对被调用方提供保护 线程拆分、隔离任务线程和请求线程隔离，不同种类任务间也可以使用不同的线程池，相互间隔离。 降级超时、异常、线程池饱和（请求拒绝，不一定是线程池的maximumPoolSize或者blockingQueue的size限制，因为会优先检查queueSizeReject">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hystrix">
+<meta property="og:url" content="https://attt.github.io/2022/06/22/hystrix/index.html">
+<meta property="og:site_name" content="Attt&#39;s ブログ">
+<meta property="og:description" content="官方文档  Hystrix的主要功能 线程拆分、隔离 降级、熔断 超时 缓存 监控  增加服务调用方的对外吞吐，对被调用方提供保护 线程拆分、隔离任务线程和请求线程隔离，不同种类任务间也可以使用不同的线程池，相互间隔离。 降级超时、异常、线程池饱和（请求拒绝，不一定是线程池的maximumPoolSize或者blockingQueue的size限制，因为会优先检查queueSizeReject">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://attt.github.io/2022/06/22/hystrix/hystrix.webp">
+<meta property="article:published_time" content="2022-06-22T14:41:52.000Z">
+<meta property="article:modified_time" content="2022-07-26T14:46:26.243Z">
+<meta property="article:author" content="attt">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Netflix Hystrix">
+<meta property="article:tag" content="Spring Cloud">
+<meta property="article:tag" content="microservice">
+<meta property="article:tag" content="distributed services">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://attt.github.io/2022/06/22/hystrix/hystrix.webp">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hystrix - Attt&#39;s ブログ</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/fix-input-shadow.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"attt.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":10,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Attt&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首 页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归 档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分 类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标 签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关 于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/eye.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hystrix"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        attt
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-22 22:41" pubdate>
+          2022年6月22日 星期三 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          115 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hystrix</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="/2022/06/22/hystrix/hystrix.webp" srcset="/img/loading.gif" lazyload alt="hystrix"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Netflix/Hystrix/wiki">官方文档</a></p>
+</blockquote>
+<h2 id="Hystrix的主要功能"><a href="#Hystrix的主要功能" class="headerlink" title="Hystrix的主要功能"></a>Hystrix的主要功能</h2><ol>
+<li>线程拆分、隔离</li>
+<li>降级、熔断</li>
+<li>超时</li>
+<li>缓存</li>
+<li>监控</li>
+</ol>
+<p>增加服务调用方的对外吞吐，对被调用方提供保护</p>
+<h2 id="线程拆分、隔离"><a href="#线程拆分、隔离" class="headerlink" title="线程拆分、隔离"></a>线程拆分、隔离</h2><p>任务线程和请求线程隔离，不同种类任务间也可以使用不同的线程池，相互间隔离。</p>
+<h2 id="降级"><a href="#降级" class="headerlink" title="降级"></a>降级</h2><p>超时、异常、线程池饱和（请求拒绝，不一定是线程池的maximumPoolSize或者blockingQueue的size限制，因为会优先检查<code>queueSizeRejectionThreshold</code>，这玩意儿的默认值是5）都会执行降级</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CommandHelloWorld</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HystrixCommand</span>&lt;String&gt; &#123;<br><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name;<br><br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">CommandHelloWorld</span><span class="hljs-params">(String name)</span> &#123;<br>    <span class="hljs-built_in">super</span>(HystrixCommandGroupKey.Factory.asKey(<span class="hljs-string">&quot;ExampleGroup&quot;</span>));<br>    <span class="hljs-built_in">this</span>.name = name;<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">protected</span> String <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>      <span class="hljs-comment">// 这里是正常业务</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>();<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">protected</span> String <span class="hljs-title function_">getFallback</span><span class="hljs-params">()</span> &#123;<br>      <span class="hljs-comment">// 降级后的内容</span><br>      <span class="hljs-comment">// 1. 如果这里不是固定的内容还有“降级业务”，</span><br>      <span class="hljs-comment">// 需要在这里创建新的command，相当于再加一级。</span><br>      <span class="hljs-comment">// 2. 如果这里“降级业务”是查询缓存一类的低I/O行为</span><br>      <span class="hljs-comment">// 可以考虑使用“信号量”</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;dummy message&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="熔断和恢复逻辑（断路器开闭切换）"><a href="#熔断和恢复逻辑（断路器开闭切换）" class="headerlink" title="熔断和恢复逻辑（断路器开闭切换）"></a>熔断和恢复逻辑（断路器开闭切换）</h2><p><code>关闭</code>状态，如果一段时间总的请求数达到<code>circuitBreaker.requestVolumeThreshold</code>且失败的请求数大于<code>circuitBreaker.errorThresholdPercentage</code>这个百分比，断路器就会进入<code>打开</code>状态，打开状态下所有的请求都会直接执行降级逻辑，然后在<code>circuitBreaker.sleepWindowInMilliseconds</code>这个时间后会进入<code>半开</code>状态，半开状态下会尝试放一个请求，如果：</p>
+<ol>
+<li>该请求成功，则会进入<code>关闭</code>状态</li>
+<li>该请求失败，保持<code>打开</code>状态（将当前时间设置为打开时间，再次等待<code>circuitBreaker.sleepWindowInMilliseconds</code>进入<code>半开</code>）</li>
+</ol>
+<h2 id="Pool配置"><a href="#Pool配置" class="headerlink" title="Pool配置"></a>Pool配置</h2><h3 id="corePoolSize"><a href="#corePoolSize" class="headerlink" title="corePoolSize"></a>corePoolSize</h3><ul>
+<li><blockquote>
+<p>Core thread-pool size that gets passed to ThreadPoolExecutor.setCorePoolSize(int)</p>
+</blockquote>
+</li>
+<li><font color="red"><code>10 </code></font></li>
+</ul>
+<h3 id="maximumPoolSize"><a href="#maximumPoolSize" class="headerlink" title="maximumPoolSize"></a>maximumPoolSize</h3><ul>
+<li><blockquote>
+<p>Maximum thread-pool size configured for threadpool. May conflict with other config, so if you need the actual value that gets passed to ThreadPoolExecutor.setMaximumPoolSize(int), use actualMaximumSize(). Given all of the thread pool configuration, what is the actual maximumSize applied to the thread pool via ThreadPoolExecutor.setMaximumPoolSize(int) Cases: 1) allowMaximumSizeToDivergeFromCoreSize &#x3D;&#x3D; false: maximumSize is set to coreSize 2) allowMaximumSizeToDivergeFromCoreSize &#x3D;&#x3D; true, maximumSize &gt;&#x3D; coreSize: thread pool has different core&#x2F;max sizes, so return the configured max 3) allowMaximumSizeToDivergeFromCoreSize &#x3D;&#x3D; true, maximumSize &lt; coreSize: threadpool incorrectly configured, use coreSize for max size</p>
+</blockquote>
+</li>
+<li>仅当allowMaximumSizeToDivergeFromCoreSize是true且maximumPoolSize大于coreSize时这里的值为实际传到线程池的maximumPoolSize，否则传到线程池的maximumPoolSize实际大小为coreSize</li>
+<li><font color="red"><code>10 </code></font></li>
+</ul>
+<h3 id="keepAliveTime"><a href="#keepAliveTime" class="headerlink" title="keepAliveTime"></a>keepAliveTime</h3><ul>
+<li><blockquote>
+<p>Keep-alive time in minutes that gets passed to ThreadPoolExecutor.setKeepAliveTime(long, TimeUnit)</p>
+</blockquote>
+</li>
+<li><font color="red"><code>1 </code></font></li>
+</ul>
+<h3 id="maxQueueSize"><a href="#maxQueueSize" class="headerlink" title="maxQueueSize"></a>maxQueueSize</h3><ul>
+<li><blockquote>
+<p>Max queue size that gets passed to BlockingQueue in HystrixConcurrencyStrategy.getBlockingQueue(int) This should only affect the instantiation of a threadpool - it is not eliglible to change a queue size on the fly. For that, use queueSizeRejectionThreshold(). -1 turns it off and makes us use SynchronousQueue</p>
+</blockquote>
+</li>
+<li>控制线程池的等待队列大小，不过为了能够在运行时修改这个值，hystrix往隔离线程池提交任务的时候实际参考的是queueSizeRejectionThreshold，这个值默认-1使用SynchronousQueue</li>
+<li><font color="red"><code>-1 </code></font></li>
+</ul>
+<h3 id="queueSizeRejectionThreshold"><a href="#queueSizeRejectionThreshold" class="headerlink" title="queueSizeRejectionThreshold"></a>queueSizeRejectionThreshold</h3><ul>
+<li><blockquote>
+<p>Queue size rejection threshold is an artificial “max” size at which rejections will occur even if maxQueueSize has not been reached. This is done because the maxQueueSize of a BlockingQueue can not be dynamically changed and we want to support dynamically changing the queue size that affects rejections. This is used by HystrixCommand when queuing a thread for execution.</p>
+</blockquote>
+</li>
+<li>实际控制等待队列大小的值，不过如果这个值小于maxQueueSize，那实际生效的还是maxQueueSize</li>
+<li><font color="red"><code>5 </code></font></li>
+</ul>
+<h3 id="allowMaximumSizeToDivergeFromCoreSize"><a href="#allowMaximumSizeToDivergeFromCoreSize" class="headerlink" title="allowMaximumSizeToDivergeFromCoreSize"></a>allowMaximumSizeToDivergeFromCoreSize</h3><ul>
+<li><blockquote>
+<p>should the maximumSize config value get read and used in configuring the threadPool. turning this on should be a conscious decision by the user, so we default it to false.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>false </code></font></li>
+</ul>
+<h3 id="threadPoolRollingNumberStatisticalWindowInMilliseconds"><a href="#threadPoolRollingNumberStatisticalWindowInMilliseconds" class="headerlink" title="threadPoolRollingNumberStatisticalWindowInMilliseconds"></a>threadPoolRollingNumberStatisticalWindowInMilliseconds</h3><ul>
+<li><blockquote>
+<p>Duration of statistical rolling window in milliseconds. This is passed into HystrixRollingNumber inside each HystrixThreadPoolMetrics instance.</p>
+</blockquote>
+</li>
+<li>滚动窗口的时间</li>
+<li><font color="red"><code>10000 </code></font></li>
+</ul>
+<h3 id="threadPoolRollingNumberStatisticalWindowBuckets"><a href="#threadPoolRollingNumberStatisticalWindowBuckets" class="headerlink" title="threadPoolRollingNumberStatisticalWindowBuckets"></a>threadPoolRollingNumberStatisticalWindowBuckets</h3><ul>
+<li><blockquote>
+<p>Number of buckets the rolling statistical window is broken into. This is passed into HystrixRollingNumber inside each HystrixThreadPoolMetrics instance.</p>
+</blockquote>
+</li>
+<li>滚动窗口的桶的数量</li>
+<li><font color="red"><code>10</code> &#96;&#96;&#96;</font></li>
+</ul>
+<h2 id="Command配置"><a href="#Command配置" class="headerlink" title="Command配置"></a>Command配置</h2><h3 id="circuitBreakerEnabled"><a href="#circuitBreakerEnabled" class="headerlink" title="circuitBreakerEnabled"></a>circuitBreakerEnabled</h3><ul>
+<li><blockquote>
+<p>Whether to use a HystrixCircuitBreaker or not. If false no circuit-breaker logic will be used and all requests permitted. This is similar in effect to circuitBreakerForceClosed() except that continues tracking metrics and knowing whether it should be open&#x2F;closed, this property results in not even instantiating a circuit-breaker.</p>
+</blockquote>
+</li>
+<li>是否启用熔断，跟circuitBreakerForceClosed的区别就是如果这个关掉的话也不会有统计数据出现</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h3 id="circuitBreakerErrorThresholdPercentage"><a href="#circuitBreakerErrorThresholdPercentage" class="headerlink" title="circuitBreakerErrorThresholdPercentage"></a>circuitBreakerErrorThresholdPercentage</h3><ul>
+<li><blockquote>
+<p>Error percentage threshold (as whole number such as 50) at which point the circuit breaker will trip open and reject requests. It will stay tripped for the duration defined in circuitBreakerSleepWindowInMilliseconds(); The error percentage this is compared against comes from HystrixCommandMetrics.getHealthCounts().</p>
+</blockquote>
+</li>
+<li>触发断路的请求数量百分比</li>
+<li><font color="red"><code>50 </code></font></li>
+</ul>
+<h3 id="circuitBreakerForceClosed"><a href="#circuitBreakerForceClosed" class="headerlink" title="circuitBreakerForceClosed"></a>circuitBreakerForceClosed</h3><ul>
+<li><blockquote>
+<p>If true the HystrixCircuitBreaker.allowRequest() will always return true to allow requests regardless of the error percentage from HystrixCommandMetrics.getHealthCounts(). The circuitBreakerForceOpen() property takes precedence so if it set to true this property does nothing.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>false </code></font></li>
+</ul>
+<h3 id="circuitBreakerForceOpen"><a href="#circuitBreakerForceOpen" class="headerlink" title="circuitBreakerForceOpen"></a>circuitBreakerForceOpen</h3><ul>
+<li><blockquote>
+<p>If true the HystrixCircuitBreaker.allowRequest() will always return false, causing the circuit to be open (tripped) and reject all requests. This property takes precedence over circuitBreakerForceClosed()</p>
+</blockquote>
+</li>
+<li><font color="red"><code>false </code></font></li>
+</ul>
+<h3 id="circuitBreakerRequestVolumeThreshold"><a href="#circuitBreakerRequestVolumeThreshold" class="headerlink" title="circuitBreakerRequestVolumeThreshold"></a>circuitBreakerRequestVolumeThreshold</h3><ul>
+<li><blockquote>
+<p>Minimum number of requests in the metricsRollingStatisticalWindowInMilliseconds() that must exist before the HystrixCircuitBreaker will trip. If below this number the circuit will not trip regardless of error percentage.</p>
+</blockquote>
+</li>
+<li>触发断路逻辑的最小阈值，在一个统计窗口内至少有一定数量的请求发生才会走断路判断逻辑</li>
+<li><font color="red"><code>20 </code></font></li>
+</ul>
+<h3 id="circuitBreakerSleepWindowInMilliseconds"><a href="#circuitBreakerSleepWindowInMilliseconds" class="headerlink" title="circuitBreakerSleepWindowInMilliseconds"></a>circuitBreakerSleepWindowInMilliseconds</h3><ul>
+<li><blockquote>
+<p>The time in milliseconds after a HystrixCircuitBreaker trips open that it should wait before trying requests again.</p>
+</blockquote>
+</li>
+<li>“半开”的尝试间隔，熔断触发之后在这个时间之后进入“半开”状态，观察请求是否恢复正常</li>
+<li><font color="red"><code>5000 </code></font></li>
+</ul>
+<h3 id="executionIsolationSemaphoreMaxConcurrentRequests"><a href="#executionIsolationSemaphoreMaxConcurrentRequests" class="headerlink" title="executionIsolationSemaphoreMaxConcurrentRequests"></a>executionIsolationSemaphoreMaxConcurrentRequests</h3><ul>
+<li><blockquote>
+<p>Number of concurrent requests permitted to HystrixCommand.run(). Requests beyond the concurrent limit will be rejected. Applicable only when executionIsolationStrategy() &#x3D;&#x3D; SEMAPHORE.</p>
+</blockquote>
+</li>
+<li>最大的并发请求提交数，只在“信号量”模式下生效</li>
+<li><font color="red"><code>10 </code></font></li>
+</ul>
+<h3 id="executionIsolationStrategy"><a href="#executionIsolationStrategy" class="headerlink" title="executionIsolationStrategy"></a>executionIsolationStrategy</h3><ul>
+<li><blockquote>
+<p>What isolation strategy HystrixCommand.run() will be executed with. If HystrixCommandProperties.ExecutionIsolationStrategy.THREAD then it will be executed on a separate thread and concurrent requests limited by the number of threads in the thread-pool. If HystrixCommandProperties.ExecutionIsolationStrategy.SEMAPHORE then it will be executed on the calling thread and concurrent requests limited by the semaphore count.</p>
+</blockquote>
+</li>
+<li>隔离策略</li>
+<li><font color="red"><code>ExecutionIsolationStrategy.THREAD </code></font></li>
+</ul>
+<h3 id="executionIsolationThreadInterruptOnTimeout"><a href="#executionIsolationThreadInterruptOnTimeout" class="headerlink" title="executionIsolationThreadInterruptOnTimeout"></a>executionIsolationThreadInterruptOnTimeout</h3><ul>
+<li><blockquote>
+<p>Whether the execution thread should attempt an interrupt (using Future.cancel) when a thread times out. Applicable only when executionIsolationStrategy() &#x3D;&#x3D; THREAD.</p>
+</blockquote>
+</li>
+<li>超时的时候是否尝试打断执行线程</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h3 id="executionIsolationThreadInterruptOnFutureCancel"><a href="#executionIsolationThreadInterruptOnFutureCancel" class="headerlink" title="executionIsolationThreadInterruptOnFutureCancel"></a>executionIsolationThreadInterruptOnFutureCancel</h3><ul>
+<li><blockquote>
+<p>Whether the execution thread should be interrupted if the execution observable is unsubscribed or the future is cancelled via Future.cancel(true)). Applicable only when executionIsolationStrategy() &#x3D;&#x3D; THREAD.</p>
+</blockquote>
+</li>
+<li>取消订阅或者调用future.cancel(true)时是否打断工作线程（结构化并发？）</li>
+<li><font color="red"><code>false </code></font></li>
+</ul>
+<h3 id="executionIsolationThreadPoolKeyOverride"><a href="#executionIsolationThreadPoolKeyOverride" class="headerlink" title="executionIsolationThreadPoolKeyOverride"></a>executionIsolationThreadPoolKeyOverride</h3><ul>
+<li><blockquote>
+<p>Allow a dynamic override of the HystrixThreadPoolKey that will dynamically change which HystrixThreadPool a HystrixCommand executes on. Typically this should return NULL which will cause it to use the HystrixThreadPoolKey injected into a HystrixCommand or derived from the HystrixCommandGroupKey. When set the injected or derived values will be ignored and a new HystrixThreadPool created (if necessary) and the HystrixCommand will begin using the newly defined pool. </p>
+</blockquote>
+</li>
+<li><font color="red"><code>null </code></font></li>
+</ul>
+<h3 id="executionTimeoutInMilliseconds"><a href="#executionTimeoutInMilliseconds" class="headerlink" title="executionTimeoutInMilliseconds"></a>executionTimeoutInMilliseconds</h3><ul>
+<li><blockquote>
+<p>Time in milliseconds at which point the command will timeout and halt execution. If executionIsolationThreadInterruptOnTimeout &#x3D;&#x3D; true and the command is thread-isolated, the executing thread will be interrupted. If the command is semaphore-isolated and a HystrixObservableCommand, that command will get unsubscribed. </p>
+</blockquote>
+</li>
+<li><font color="red"><code>1000 </code></font></li>
+</ul>
+<h3 id="executionTimeoutEnabled"><a href="#executionTimeoutEnabled" class="headerlink" title="executionTimeoutEnabled"></a>executionTimeoutEnabled</h3><ul>
+<li><blockquote>
+<p>Whether the timeout mechanism is enabled for this command</p>
+</blockquote>
+</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h3 id="fallbackIsolationSemaphoreMaxConcurrentRequests"><a href="#fallbackIsolationSemaphoreMaxConcurrentRequests" class="headerlink" title="fallbackIsolationSemaphoreMaxConcurrentRequests"></a>fallbackIsolationSemaphoreMaxConcurrentRequests</h3><ul>
+<li><blockquote>
+<p>Number of concurrent requests permitted to HystrixCommand.getFallback(). Requests beyond the concurrent limit will fail-fast and not attempt retrieving a fallback.</p>
+</blockquote>
+</li>
+<li>最大的并发执行fallback的请求数量，超过了就不执行fallback且抛出异常算“执行失败”</li>
+<li><font color="red"><code>10 </code></font></li>
+</ul>
+<h3 id="fallbackEnabled"><a href="#fallbackEnabled" class="headerlink" title="fallbackEnabled"></a>fallbackEnabled</h3><ul>
+<li><blockquote>
+<p>Whether HystrixCommand.getFallback() should be attempted when failure occurs.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h3 id="metricsHealthSnapshotIntervalInMilliseconds"><a href="#metricsHealthSnapshotIntervalInMilliseconds" class="headerlink" title="metricsHealthSnapshotIntervalInMilliseconds"></a>metricsHealthSnapshotIntervalInMilliseconds</h3><ul>
+<li><blockquote>
+<p>Time in milliseconds to wait between allowing health snapshots to be taken that calculate success and error percentages and affect HystrixCircuitBreaker.isOpen() status. On high-volume circuits the continual calculation of error percentage can become CPU intensive thus this controls how often it is calculated. </p>
+</blockquote>
+</li>
+<li>健康快照的执行间隔，健康快照是用来计算成功&#x2F;失败的百分比的</li>
+<li><font color="red"><code>500 </code></font></li>
+</ul>
+<h3 id="metricsRollingPercentileBucketSize"><a href="#metricsRollingPercentileBucketSize" class="headerlink" title="metricsRollingPercentileBucketSize"></a>metricsRollingPercentileBucketSize</h3><ul>
+<li><blockquote>
+<p>Maximum number of values stored in each bucket of the rolling percentile. This is passed into HystrixRollingPercentile inside HystrixCommandMetrics.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>100 </code></font></li>
+</ul>
+<h3 id="metricsRollingPercentileEnabled"><a href="#metricsRollingPercentileEnabled" class="headerlink" title="metricsRollingPercentileEnabled"></a>metricsRollingPercentileEnabled</h3><ul>
+<li><blockquote>
+<p>Whether percentile metrics should be captured using HystrixRollingPercentile inside HystrixCommandMetrics.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h3 id="metricsRollingPercentileWindowInMilliseconds"><a href="#metricsRollingPercentileWindowInMilliseconds" class="headerlink" title="metricsRollingPercentileWindowInMilliseconds"></a>metricsRollingPercentileWindowInMilliseconds</h3><ul>
+<li><blockquote>
+<p>Duration of percentile rolling window in milliseconds. This is passed into HystrixRollingPercentile inside HystrixCommandMetrics.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>60000 </code></font></li>
+</ul>
+<h3 id="metricsRollingPercentileWindowBuckets"><a href="#metricsRollingPercentileWindowBuckets" class="headerlink" title="metricsRollingPercentileWindowBuckets"></a>metricsRollingPercentileWindowBuckets</h3><ul>
+<li><blockquote>
+<p>Number of buckets the rolling percentile window is broken into. This is passed into HystrixRollingPercentile inside HystrixCommandMetrics.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>6 </code></font></li>
+</ul>
+<h3 id="metricsRollingStatisticalWindowInMilliseconds"><a href="#metricsRollingStatisticalWindowInMilliseconds" class="headerlink" title="metricsRollingStatisticalWindowInMilliseconds"></a>metricsRollingStatisticalWindowInMilliseconds</h3><ul>
+<li><blockquote>
+<p>Duration of statistical rolling window in milliseconds. This is passed into HystrixRollingNumber inside HystrixCommandMetrics.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>10000 </code></font></li>
+</ul>
+<h3 id="metricsRollingStatisticalWindowBuckets"><a href="#metricsRollingStatisticalWindowBuckets" class="headerlink" title="metricsRollingStatisticalWindowBuckets"></a>metricsRollingStatisticalWindowBuckets</h3><ul>
+<li><blockquote>
+<p>Number of buckets the rolling statistical window is broken into. This is passed into HystrixRollingNumber inside HystrixCommandMetrics.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>10 </code></font></li>
+</ul>
+<h3 id="requestCacheEnabled"><a href="#requestCacheEnabled" class="headerlink" title="requestCacheEnabled"></a>requestCacheEnabled</h3><ul>
+<li><blockquote>
+<p>Whether HystrixCommand.getCacheKey() should be used with HystrixRequestCache to provide de-duplication functionality via request-scoped caching.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h3 id="requestLogEnabled"><a href="#requestLogEnabled" class="headerlink" title="requestLogEnabled"></a>requestLogEnabled</h3><ul>
+<li><blockquote>
+<p>Whether HystrixCommand execution and events should be logged to HystrixRequestLog.</p>
+</blockquote>
+</li>
+<li><font color="red"><code>true </code></font></li>
+</ul>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>*实现AbstractCommand中的<code>getCacheKey()</code></p>
+<p>（HystrixRequestContext、略）</p>
+<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><p>*线程池的配置注意观察rejected数值</p>
+<p>（hystrix-metrics-event-stream、略）</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E5%A7%BF%E5%8A%BF/" class="category-chain-item">基础姿势</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E5%A7%BF%E5%8A%BF/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="category-chain-item">微服务</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java/">#Java</a>
+      
+        <a href="/tags/netflix-hystrix/">#Netflix Hystrix</a>
+      
+        <a href="/tags/spring-cloud/">#Spring Cloud</a>
+      
+        <a href="/tags/microservice/">#microservice</a>
+      
+        <a href="/tags/distributed-services/">#distributed services</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/23/jp-tokoro/" title="文法「ところ」">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文法「ところ」</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/18/blender-learning-memo0/" title="Blender (cycles/eevee) 着色器：原理化BSDF">
+                        <span class="hidden-mobile">Blender (cycles/eevee) 着色器：原理化BSDF</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <i class="iconfont icon-copyright"></i>2022  <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

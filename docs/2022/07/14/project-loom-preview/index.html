@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/me.png">
+  <link rel="icon" href="/images/me.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154de">
+  <meta name="author" content="attt">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="相关资源 主页：https:&#x2F;&#x2F;openjdk.org&#x2F;projects&#x2F;loom&#x2F; 提案：http:&#x2F;&#x2F;cr.openjdk.java.net&#x2F;~rpressler&#x2F;loom&#x2F;Loom-Proposal.html 预览：https:&#x2F;&#x2F;jdk.java.net&#x2F;loom&#x2F;  EA in JDK19 https:&#x2F;&#x2F;github.com&#x2F;Attt&#x2F;Loom-Preview  1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Loom 预览">
+<meta property="og:url" content="https://attt.github.io/2022/07/14/project-loom-preview/index.html">
+<meta property="og:site_name" content="Attt&#39;s ブログ">
+<meta property="og:description" content="相关资源 主页：https:&#x2F;&#x2F;openjdk.org&#x2F;projects&#x2F;loom&#x2F; 提案：http:&#x2F;&#x2F;cr.openjdk.java.net&#x2F;~rpressler&#x2F;loom&#x2F;Loom-Proposal.html 预览：https:&#x2F;&#x2F;jdk.java.net&#x2F;loom&#x2F;  EA in JDK19 https:&#x2F;&#x2F;github.com&#x2F;Attt&#x2F;Loom-Preview  1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-14T09:02:15.000Z">
+<meta property="article:modified_time" content="2022-07-26T14:46:26.244Z">
+<meta property="article:author" content="attt">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="asynchronization">
+<meta property="article:tag" content="concurrency">
+<meta property="article:tag" content="virtual threads">
+<meta property="article:tag" content="fiber">
+<meta property="article:tag" content="continuations">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Project Loom 预览 - Attt&#39;s ブログ</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/fix-input-shadow.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"attt.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":10,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Attt&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首 页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归 档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分 类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标 签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关 于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/eye.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Project Loom 预览"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        attt
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-14 17:02" pubdate>
+          2022年7月14日 星期四 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Project Loom 预览</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h2><blockquote>
+<p>主页：<a target="_blank" rel="noopener" href="https://openjdk.org/projects/loom/">https://openjdk.org/projects/loom/</a></p>
+<p>提案：<a target="_blank" rel="noopener" href="http://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html">http://cr.openjdk.java.net/~rpressler&#x2F;loom&#x2F;Loom-Proposal.html</a></p>
+<p>预览：<a target="_blank" rel="noopener" href="https://jdk.java.net/loom/">https://jdk.java.net/loom/</a></p>
+</blockquote>
+<h2 id="EA-in-JDK19"><a href="#EA-in-JDK19" class="headerlink" title="EA in JDK19"></a>EA in JDK19</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Attt/Loom-Preview">https://github.com/Attt/Loom-Preview</a></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建builder</span><br>Thread.Builder.<span class="hljs-type">OfVirtual</span> <span class="hljs-variable">ofVirtual</span> <span class="hljs-operator">=</span> Thread.ofVirtual()<br>        <span class="hljs-comment">// 名称，start表示种子1步进递增</span><br>        .name(<span class="hljs-string">&quot;virtual-thread-&quot;</span>, <span class="hljs-number">0</span>)<br>        <span class="hljs-comment">// 是否允许set threadLocal</span><br>        .allowSetThreadLocals(<span class="hljs-literal">true</span>)<br>        <span class="hljs-comment">// 是否允许使用可继承的threadLocal</span><br>        .inheritInheritableThreadLocals(<span class="hljs-literal">true</span>)<br>        <span class="hljs-comment">// 未捕获异常处理器</span><br>        .uncaughtExceptionHandler((t, e) -&gt; &#123;<br>            System.out.println(t);<br>            e.printStackTrace();<br>        &#125;);<br><br><span class="hljs-comment">// 执行</span><br>ofVirtual.start(() -&gt; &#123;<br>    <span class="hljs-comment">// do something</span><br>    System.out.println(Thread.currentThread().getName());<br>    System.out.println(Thread.currentThread().isDaemon());<br>    System.out.println(Thread.currentThread().isVirtual());<br>&#125;).join();<br><br><span class="hljs-comment">// 预设任务，返回Thread实例</span><br><span class="hljs-type">Thread</span> <span class="hljs-variable">unstarted</span> <span class="hljs-operator">=</span> ofVirtual<br>        .unstarted(() -&gt; &#123;<br>            System.out.println(Thread.currentThread().getName());<br>            System.out.println(<span class="hljs-string">&quot;Wooooow!&quot;</span>);<br>        &#125;);<br><span class="hljs-comment">// 开启任务</span><br>unstarted.start();<br><br><span class="hljs-comment">// 基于Executors#newThreadPerTaskExecutor，使用VirtualThreadFactory作为线程工厂</span><br><span class="hljs-comment">// 为每个提交的任务开启一个thread，无界</span><br><span class="hljs-type">ExecutorService</span> <span class="hljs-variable">virtualThreadPerTaskExecutor</span> <span class="hljs-operator">=</span> Executors.newVirtualThreadPerTaskExecutor();<br>virtualThreadPerTaskExecutor.submit(() -&gt; &#123;<br>    System.out.printf(<span class="hljs-string">&quot;%s-newVirtualThreadPerTaskExecutor %n&quot;</span>, Thread.currentThread().getName());<br>&#125;);<br><br><span class="hljs-comment">// 使用builder的设置值创建的perTaskExecutor</span><br><span class="hljs-type">ExecutorService</span> <span class="hljs-variable">perTaskExecutor</span> <span class="hljs-operator">=</span> Executors.newThreadPerTaskExecutor(ofVirtual.factory());<br>perTaskExecutor.submit(() -&gt; &#123;<br>    System.out.printf(<span class="hljs-string">&quot;%s-newThreadPerTaskExecutor %n&quot;</span>, Thread.currentThread().getName());<br>&#125;);<br><br><span class="hljs-comment">// 结构化并发</span><br>StructuredTaskScope.<span class="hljs-type">ShutdownOnFailure</span> <span class="hljs-variable">shutdownOnFailure</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StructuredTaskScope</span>.ShutdownOnFailure();<br>shutdownOnFailure.fork(() -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;taskA&quot;</span>);<br>    TimeUnit.SECONDS.sleep(<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;error occurred in taskA&quot;</span>);<br>&#125;);<br><br>shutdownOnFailure.fork(() -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;taskB...&quot;</span>);<br>    TimeUnit.SECONDS.sleep(<span class="hljs-number">5</span>);<br>    System.out.println(<span class="hljs-string">&quot;taskB is finished.&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;);<br><br><span class="hljs-keyword">try</span> &#123;<br>    shutdownOnFailure.joinUntil(LocalDateTime.now().plusSeconds(<span class="hljs-number">10</span>).toInstant(ZoneOffset.UTC));<br>&#125; <span class="hljs-keyword">catch</span> (TimeoutException e) &#123;<br>    e.printStackTrace();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Benchmark                                  Mode  Cnt     Score     Error   Units<br>ThreadThroughputBenchmark.platformThread  thrpt    <span class="hljs-number">5</span>    <span class="hljs-number">10.788</span> ±   <span class="hljs-number">0.677</span>  ops/ms<br>ThreadThroughputBenchmark.virtualThread   thrpt    <span class="hljs-number">5</span>  <span class="hljs-number">4201.740</span> ± <span class="hljs-number">475.806</span>  ops/ms<br></code></pre></td></tr></table></figure>
+
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><ol>
+<li>命名</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mail.openjdk.org/pipermail/loom-dev/2019-November/000864.html">Virtual Threads: A Short Note about Naming</a></li>
+</ul>
+<ol start="2">
+<li>为什么不用类似于await&#x2F;async提供的协作调度？协作调度能够明确调度点在哪里，也能简化并发编程？</li>
+</ol>
+<ul>
+<li>Java已经有基于抢占式调度的线程，增加协作调度只会增加兼容问题</li>
+<li>协作调度是一种较差的调度方案，协作调度意味着每个操作都是在临界区发生的不能互相交错，明确定义了交错的点，抢占式调度正相反，明确了不能交错的地方，使得交错能够发生在其他的任何地方，对于服务端来说大多数操作对调度点并不敏感不明确的交错可以更高效，而且每一次添加调度点也需要考虑更多的事情</li>
+</ul>
+<h2 id="关于并发编程的吐槽：函数颜色问题"><a href="#关于并发编程的吐槽：函数颜色问题" class="headerlink" title="关于并发编程的吐槽：函数颜色问题"></a>关于并发编程的吐槽：函数颜色问题</h2><p><a target="_blank" rel="noopener" href="http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">what-color-is-your-function</a>，假设某种语言中一种函数是<font color='red'>红色</font>的，另一种函数是<font color='#0099ff'>蓝色</font>的：</p>
+<p>那么这种语言实际存在两种<code>function</code>关键字：<code>blue_func</code>和<code>red_func</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">blue_func <span class="hljs-title function_">sync</span>(<span class="hljs-params"></span>)&#123;...&#125;<br><br>red_func <span class="hljs-title function_">async</span>(<span class="hljs-params">callback</span>)&#123;...&#125;<br></code></pre></td></tr></table></figure>
+<p>其中，<font color='red'>红色</font>函数的结果不通过方法返回，而是传递给参数中的函数，那么就会有这样的问题：</p>
+<ul>
+<li>在<font color='red'>红色</font>函数中可以调用<font color='#0099ff'>蓝色</font>函数，因为<font color='#0099ff'>蓝色</font>函数的返回值通过方法返回能够拿到。</li>
+<li>而在<font color='#0099ff'>蓝色</font>函数中是不能轻易调用<font color='red'>红色</font>函数的，因为结果已经传递到<font color='red'>红色</font>函数的参数函数里了，在<font color='#0099ff'>蓝色</font>函数线性执行过程中不能保证能够从<font color='red'>红色</font>函数的参数函数里获取结果。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">red_func <span class="hljs-title function_">async</span>(<span class="hljs-params">callback</span>)&#123;<br>    <span class="hljs-title function_">sync</span>() <span class="hljs-comment">// 可以调用</span><br>&#125;<br><br>blue_func <span class="hljs-title function_">sync</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">async</span>(callback) <span class="hljs-comment">// 不能调用</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>所谓的<font color='red'>红色</font>函数就是异步函数，上面的这个“颜色问题”就是“回调地狱”(“callback hell”)的另一种感受方法😅。</p>
+<p>在函数式编程中，异步存在两个比较炸裂的问题：1. 回调地狱😅；2. 一个被广泛使用的同步函数的异步化所需要的大量的修改和重写量可以让任何一个开发直接爆炸：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript">func <span class="hljs-title function_">syncC</span>(<span class="hljs-params">shit</span>)&#123;<br>    printf <span class="hljs-string">&quot;shit is %s&quot;</span>, shit<br>&#125;<br><br>func <span class="hljs-title function_">asyncB</span>(<span class="hljs-params">callbackB</span>)&#123;<br>    <span class="hljs-keyword">var</span> b<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackB</span>(b)<br>&#125;<br><br>func <span class="hljs-title function_">syncB</span>(<span class="hljs-params">fart</span>)&#123;<br>    printf <span class="hljs-string">&quot;fart is %s&quot;</span>, fart<br>    <span class="hljs-title function_">asyncB</span>(syncC)<br>&#125;<br><br>func <span class="hljs-title function_">asyncA</span>(<span class="hljs-params">callbackA</span>)&#123;<br>    <span class="hljs-keyword">var</span> a<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackA</span>(a)<br>&#125;<br><br>func <span class="hljs-title function_">syncA</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">asyncA</span>(syncB)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>看到这段代码已经开始焦虑了，如果简化一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript">func <span class="hljs-title function_">asyncB</span>(<span class="hljs-params">callbackB</span>)&#123;<br>    <span class="hljs-keyword">var</span> b<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackB</span>(b)<br>&#125;<br><br>func <span class="hljs-title function_">asyncA</span>(<span class="hljs-params">callbackA</span>)&#123;<br>    <span class="hljs-keyword">var</span> a<br>    <span class="hljs-comment">// do something</span><br>    <span class="hljs-title function_">callbackA</span>(a)<br>&#125;<br><br>func <span class="hljs-title function_">syncA</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title function_">asyncA</span>(fart -&gt; &#123;<br>        printf <span class="hljs-string">&quot;fart is %s&quot;</span>, fart<br>        <span class="hljs-title function_">asyncB</span>(shit -&gt; &#123;<br>            printf <span class="hljs-string">&quot;shit is %s&quot;</span>, shit<br>        &#125;)<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>有人可以看出是现有fart还是现有shit吗…</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E5%A7%BF%E5%8A%BF/" class="category-chain-item">基础姿势</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E5%A7%BF%E5%8A%BF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="category-chain-item">并发编程</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/java/">#Java</a>
+      
+        <a href="/tags/asynchronization/">#asynchronization</a>
+      
+        <a href="/tags/concurrency/">#concurrency</a>
+      
+        <a href="/tags/virtual-threads/">#virtual threads</a>
+      
+        <a href="/tags/fiber/">#fiber</a>
+      
+        <a href="/tags/continuations/">#continuations</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/20/url-parsing-issue/" title="用Spring工具解析带fragment的Url时异常">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">用Spring工具解析带fragment的Url时异常</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/14/java-security-issue/" title="Class签名信息不匹配引起的依赖冲突">
+                        <span class="hidden-mobile">Class签名信息不匹配引起的依赖冲突</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <i class="iconfont icon-copyright"></i>2022  <a href="https://github.com/Attt" target="_blank" rel="nofollow noopener"><span>Attt</span></a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
