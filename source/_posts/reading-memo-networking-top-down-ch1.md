@@ -10,7 +10,7 @@ tags:
 password: atpex24
 ---
 
->流水账笔记。
+>好记性不如流水账
 
 ## Principles of Network Applications
 
@@ -363,12 +363,12 @@ DNS分三类：
 
 ***root DNS server***
 
-全世界1000+的DNS服务器（2020），提供下一层TLD DNS server的IP地址。
+全世界1000+的root DNS服务器（2020），提供下一层TLD DNS server的IP地址。
 ![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2014.27.20.png)
 
 ***TLD DNS server***
 
-顶级域DNS服务器。国家fr、jp这种级别
+顶级域DNS服务器。com或者国家fr、jp这种级别
 
 ***local DNS server***
 
@@ -397,57 +397,156 @@ DNS查询的递归+迭代：查询local DNS是递归，因为local DNS还要查�
 
 *这种实现有个问题：图中local DNS到root DNS的请求也就是2那个请求，需要等到3456请求都完成了才能返回，root DNS在这种实现模型下负载会更高*
 
-冷知识：
-[域名服务器缓存污染](https://zh.wikipedia.org/zh-hans/%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%93%E5%AD%98%E6%B1%A1%E6%9F%93)
-
-[2014年中国大陆网络异常事件](https://zh.wikipedia.org/zh-hans/2014%E5%B9%B4%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E7%BD%91%E7%BB%9C%E5%BC%82%E5%B8%B8%E4%BA%8B%E4%BB%B6)
-
-所以说年轻人还是要学习一个
-
 **DNS Caching**
 
 顾名思义。
 
 ### DNS Records and Messages
 
+resource record(RR)的格式：
 ```
 (Name, Value, Type, TTL)
 ```
 
-name和value要看type是什么：
+name和value的含义要看type是什么：
 - Type=A
   - name是hostname
   - value是IPv4
   - 比如(relay1.bar.foo.com, 145.37.93.126, A)
 - Type=NS
-  - name是域名
-  - value是dns的hostname
+  - name是domain
+  - value是负责解析这个domain的dns的hostname
   - 比如(foo.com, dns.foo.com, NS)
 - Type=CNAME
-  - name是aliased别名
+  - name是别名hostname（aliased hostname）
   - value是hostname
   - 比如(foo.com, relay1.bar.foo.com, CNAME)
 - Type=MX（看起来和CNAME一样，但是单独有这个类型的的话，邮件服务器的别名就可以跟CNAME的别名重复了）
-  - name是aliased别名
+  - name是别名hostname
   - value是邮件的hostname
   - 比如(foo.com, mail.bar.foo.com, MX)
 
-A记录是存在于权威DNS上的，比如aaa.always.fuxk.com，如果dns.fuxk.com不是这个domain的权威DNS，那么他会有一条NS记录指向比如说dns.always.fuxk.com，而在dns.always.fuxk.com上面应该就是aaa.always.fuxk.com对应于某个IP的A记录了。（如果是IPv6，那就是AAAA记录，都差不多。）
+A记录是存在于authoritative DNS上的，比如aaa.always.fuxk.com，如果dns.fuxk.com不是这个domain的authoritative DNS，那么他会有一条NS记录指向比如说dns.always.fuxk.com，而在dns.always.fuxk.com上面应该就是aaa.always.fuxk.com对应于某个IP的A记录了。（如果是IPv6，那就是AAAA记录，都差不多。）
 
-#### DNS Messages
-#### Inserting Records into the DNS Database
+**DNS Messages**
+
+看图说话
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2020.41.47.png)
+
+查询和回复的message格式一致
+
+- 最前面的header section占12 bytes
+  - identification用来关联查询和回复
+  - flags
+    - 1 bit表示是查询（0）还是回复（1）
+    - 1 bit表示回复的消息是authoritative DNS回复的（1）
+    - 1 bit表示client要求DNS server在查不到的时候进行递归查询（1）
+    - 1 bit表示DNS server是（1）否支持递归查询
+  - 4个number表示question section的四种出现次数
+- question section部分包含查询的name和type，比如aaa.bbb.com, A
+- answer section部分包含回复的value、type、TTL，可以有多条
+- authority section是authoritative DNS回复的内容（贵宾待遇。）
+- additional section包含额外的信息，比如查询MX记录，回复在answer section的是MX对应的hostname记录，那这里就可能是这个hostname对应的IP的A记录。
+
+**Inserting Records into the DNS Database**
+
+注册域名的时候，域名注册商会将这个域名写到DNS，一般的域名注册商也提供authoritative DNS，大多数会有两个一个主要的一个备用的。
+比如dns1.aaa.com和dns2.aaa.com，然后要配置自己刚注册域名的A记录（至少有个A记录），最后提供这个DNS的服务商会把记录写到TLD DNS里：
+```
+(你的域名.com, dns1.aaa.com, NS) 
+(dns1.aaa.com, 212.212.212.1, A)
+```
+
+最后来一点小小的震撼：
+[2014年中国大陆网络异常事件](https://zh.wikipedia.org/zh-hans/2014%E5%B9%B4%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E7%BD%91%E7%BB%9C%E5%BC%82%E5%B8%B8%E4%BA%8B%E4%BB%B6)
+
+[域名服务器缓存污染](https://zh.wikipedia.org/zh-hans/%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%93%E5%AD%98%E6%B1%A1%E6%9F%93)
+
+所以说年轻人还是要学习一个
+
 ## Peer-to-Peer File Distribution
-#### Scalability of P2P Architectures
-#### BitTorrent
+
+对等网络
+
+熟悉的协议：BT
+
+那可太熟悉了。
+
+**Scalability of P2P Architectures**
+
+扩展性，不同与server-client模式，P2P随着参与peer的增多不会明显增加分发耗时。
+
+**BitTorrent**
+
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2021.46.11.png)
+
+trade algorithm（tit-for-tat）：
+- 参与某个torrent下载分发的peer会向tracker服务器上报自己的存在。新加入的peer会从tracker获取正在分发的peer list，并尝试建立连接。
+- peer会从连接的peers获取对方的chunk信息，优先下载那些比较稀有的chunk。
+- 某些个peer申请下载chunk的时候，通过这个peer给自己提供chunk的速率来决定，优先选几个速率高的。
+- 每隔一段时间，重新测量一下速率。
+- 同样的隔一段时间，找一个随机的peer，向这个peer传他需要的chunk，假如在这个peer中自己变成了他的前几个最高速率的peer之一，那这个peer也会反向传chunk过来，也就有可能变成这边新的最高速率的peer。等于说是打破了江局。
+
+DHT网络
+
 ## Video Streaming and Content Distribution Networks
 ### Internet Video
+
 ### HTTP Streaming and DASH
+
+Dynamic Adaptive Streaming over HTTP (DASH)
+
+视频的码率，通过对原始视频进行不同参数的压缩，产生多个码率的视频，根据变化的网络条件分发不同码率的视频保证流畅。
+
 ### Content Distribution Networks
-#### CDN Operation
-#### Cluster Selection Strategies
+
+1. 人民日益增长的网络请求和server捉急的带宽之间的矛盾
+2. 可以增加server或者带宽，得加钱
+3. 大部分资源会被重复请求
+
+Content Distribution Networks (CDNs)这年头几乎没有不用的。可以看做是一个分布式静态资源的缓存，有效的减轻了server的压力。
+
+两个部署理念：
+- Enter Deep：把CDN部署到ISP内部，离用户越近越好
+- Bring Home：把CDN部署在ISP外部比如IXP，每个部署点搞一个集群
+
+各有好处。第一个有点贵，ISP那得多少个啊，第二个会比第一多些延迟，毕竟远了点。
+
+**CDN Operation**
+
+1. 决定具体某个CDN集群
+2. 将请求发送到这个CDN集群的server
+
+一种可行的方法：对静态资源的请求通过DNS解析到CDN
+
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2022.17.56.png)
+
+**Cluster Selection Strategies**
+
+集群选择策略：
+- geographically closest，地理优先，就是用地理库找离Local DNS最近的，不过不一定地理最近的就是网络最近，而且Local DNS也可能距离client较远。
+- real-time measurements，实时测量，有些测量的消息不一定会被响应（ICMP过滤）
+
 ### Case Studies: Netflix and YouTube
-#### Netflix
-#### YouTube
-## Socket Programming: Creating Network Applications
-### Socket Programming with UDP
-### Socket Programming with TCP
+
+激动人心的案例教学
+
+**Netflix**
+
+![](reading-memo-networking-top-down-ch1/截屏2023-03-16%2022.29.19.png)
+
+全用AWS，但CDN是私有搭建的
+- Content ingestion. 把原始内容上传到Amazon cloud
+- Content processing. 转码，生产不同码率的内容
+- Uploading versions to its CDN. 上传到CDN
+
+关于CDN
+- 网飞在200多个IXP点都有自己的机架，几百个ISP也有自己的机架，Enter Deep和Bring Home结合。
+- 不使用pull的缓存方式，而是在非高峰时期上传内容到CDN。没有足够容量的点就上传热点内容。
+- 由于简化了CDN的设计（只有视频），不需要通过DNS的方式转发到CDN。在AWS中的netflix服务会直接让client去CDN的域名请求。
+
+**YouTube**
+
+- 也是用的私人CDN，基本和网飞的部署策略一样。中西药结合疗效好。
+- 区别是使用了pull的缓存方式，访问的内容miss的时候CDN会去server拉取内容。分配CDN的方式是DNS转发，且基于RTT的测量来分配具体的集群，如果负载高可能会调整分配到远一点的集群。
+- 不是用自适应流媒体，而是要用户自己选择不同的分辨率（码率）。（YouTube看起来也像是自适应，但应该是client完成的，实际上可供消费的不同码率视频版本就那几个，不需要自适应的那么多。网飞的那个自适应可是真的分辨率连选都不让选的。）
