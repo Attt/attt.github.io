@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Rust Notes</title>
+      <link href="/2023/06/16/rust-notes/"/>
+      <url>/2023/06/16/rust-notes/</url>
+      
+        <content type="html"><![CDATA[<p><code>char</code> is <strong>always</strong> 4 bytes</p><p><img src="/2023/06/16/rust-notes/char-size-1.png"><br><img src="/2023/06/16/rust-notes/char-size-2.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础姿势 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> rust </tag>
+            
+            <tag> programing </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Computer Networking - Transport Layer</title>
       <link href="/2023/03/16/reading-memo-networking-top-down-ch2/"/>
       <url>/2023/03/16/reading-memo-networking-top-down-ch2/</url>
