@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Google image search cause firefox crash</title>
+    <link href="/2023/06/28/google-image-search-cause-firefox-crash/"/>
+    <url>/2023/06/28/google-image-search-cause-firefox-crash/</url>
+    
+    <content type="html"><![CDATA[<p>复现：</p><p><img src="/image.png" alt="用例"></p><p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1839669">1839669 - Google Images search reproducibly causes tab crash - bugzilla</a></p><p>原因：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">Google Images creates a huge stack frame with more than 19550 slots (more than 150 KB)<br>and then uses OSR to enter Baseline Interpreter code.<br><br>The stack probing we do there caused crashes because older kernels don&#x27;t like it when<br>the distance between the address and RSP is more than about 64 KB.<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>BUG草集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>bug</tag>
+      
+      <tag>AI</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Rust Notes</title>
     <link href="/2023/06/16/rust-notes/"/>
     <url>/2023/06/16/rust-notes/</url>
@@ -225,9 +252,9 @@
     
     <tags>
       
-      <tag>Spring</tag>
-      
       <tag>URI</tag>
+      
+      <tag>Spring</tag>
       
       <tag>issue</tag>
       
@@ -295,6 +322,8 @@
       
       <tag>Java</tag>
       
+      <tag>bug</tag>
+      
       <tag>maven</tag>
       
       <tag>dependencies confliction</tag>
@@ -302,8 +331,6 @@
       <tag>class load</tag>
       
       <tag>class security check</tag>
-      
-      <tag>bug</tag>
       
     </tags>
     
@@ -530,9 +557,9 @@
     
     <tags>
       
-      <tag>Spring</tag>
-      
       <tag>URI</tag>
+      
+      <tag>Spring</tag>
       
     </tags>
     
@@ -559,9 +586,9 @@
     
     <tags>
       
-      <tag>RabbitMQ</tag>
-      
       <tag>Spring</tag>
+      
+      <tag>RabbitMQ</tag>
       
     </tags>
     

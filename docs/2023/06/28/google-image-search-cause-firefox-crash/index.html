@@ -16,23 +16,37 @@
   <meta name="author" content="attt">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归 档">
-<meta property="og:url" content="https://attt.github.io/archives/2022/page/2/index.html">
+    <meta name="description" content="复现：  1839669 - Google Images search reproducibly causes tab crash - bugzilla 原因： 12345Google Images creates a huge stack frame with more than 19550 slots (more than 150 KB)and then uses OSR to enter B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google image search cause firefox crash">
+<meta property="og:url" content="https://attt.github.io/2023/06/28/google-image-search-cause-firefox-crash/index.html">
 <meta property="og:site_name" content="Attt&#39;s ブログ">
+<meta property="og:description" content="复现：  1839669 - Google Images search reproducibly causes tab crash - bugzilla 原因： 12345Google Images creates a huge stack frame with more than 19550 slots (more than 150 KB)and then uses OSR to enter B">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://attt.github.io/image.png">
+<meta property="article:published_time" content="2023-06-28T03:27:56.000Z">
+<meta property="article:modified_time" content="2023-06-29T02:30:16.047Z">
 <meta property="article:author" content="attt">
+<meta property="article:tag" content="bug">
+<meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://attt.github.io/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>归 档 - Attt&#39;s ブログ</title>
+  <title>Google image search cause firefox crash - Attt&#39;s ブログ</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -193,9 +207,62 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归 档"></span>
+            <span id="subtitle" data-typed-text="Google image search cause firefox crash"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        attt
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-28 11:27" pubdate>
+          2023年6月28日 星期三 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          318 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          4 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
 
         
       </div>
@@ -211,94 +278,147 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 23 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2022</p>
-    
-    <a href="/2022/06/22/hystrix/" class="list-group-item list-group-item-action">
-      <time>06-22</time>
-      <div class="list-group-item-title">Hystrix</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Google image search cause firefox crash</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>复现：</p>
+<p><img src="/image.png" srcset="/img/loading.gif" lazyload alt="用例"></p>
+<p><a target="_blank" rel="noopener" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1839669">1839669 - Google Images search reproducibly causes tab crash - bugzilla</a></p>
+<p>原因：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">Google Images creates a huge stack frame with more than 19550 slots (more than 150 KB)<br>and then uses OSR to enter Baseline Interpreter code.<br><br>The stack probing we do there caused crashes because older kernels don&#x27;t like it when<br>the distance between the address and RSP is more than about 64 KB.<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/2022/06/18/blender-learning-memo0/" class="list-group-item list-group-item-action">
-      <time>06-18</time>
-      <div class="list-group-item-title">Blender (cycles/eevee) 着色器：原理化BSDF</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/bug%E8%8D%89%E9%9B%86/" class="category-chain-item">BUG草集</a>
   
-    
-    <a href="/2022/06/17/case-sensitive-collation-in-mysql/" class="list-group-item list-group-item-action">
-      <time>06-17</time>
-      <div class="list-group-item-title">MySQL中的大小写敏感排序规则</div>
-    </a>
   
+
+      </span>
     
-    <a href="/2022/06/14/useful-utils/" class="list-group-item list-group-item-action">
-      <time>06-14</time>
-      <div class="list-group-item-title">一些好用的工具</div>
-    </a>
   
-    
-    <a href="/2022/06/14/spring-rabbitmq-binding-trap/" class="list-group-item list-group-item-action">
-      <time>06-14</time>
-      <div class="list-group-item-title">Spring rabbitMQ binding配置的“陷阱”</div>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a href="/2022/04/19/arch-linux-setup-guide/" class="list-group-item list-group-item-action">
-      <time>04-19</time>
-      <div class="list-group-item-title">Arch Linux 安装笔记</div>
-    </a>
   
-    
-    <a href="/2022/03/19/shell-some-memos-for-shell-script/" class="list-group-item list-group-item-action">
-      <time>03-19</time>
-      <div class="list-group-item-title">Shell脚本笔记</div>
-    </a>
-  
-    
-    <a href="/2022/03/17/jvm-metaspace-leakage-caused-by-loading-dynamic-class/" class="list-group-item list-group-item-action">
-      <time>03-17</time>
-      <div class="list-group-item-title">错误的动态类加载方式引发的metaspace内存泄漏</div>
-    </a>
-  
-    
-    <a href="/2022/03/17/fgo-frida-il2cpp-bridge/" class="list-group-item list-group-item-action">
-      <time>03-17</time>
-      <div class="list-group-item-title">Frida-il2cpp-bridge script for fate/go</div>
-    </a>
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/bug/">#bug</a>
+      
+        <a href="/tags/ai/">#AI</a>
+      
+    </div>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2022/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span>
-    </span>
-  </nav>
+              
 
-
-
-
-              </div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/16/rust-notes/" title="Rust Notes">
+                        <span class="hidden-mobile">Rust Notes</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-          </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -416,6 +536,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
