@@ -1,4 +1,0 @@
-[submodule "themes/fluid"]
-	path = themes/fluid
-	url = https://github.com/Attt/hexo-theme-fluid.git
-	update = merge
