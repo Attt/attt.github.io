@@ -45,25 +45,19 @@ disableXML = true
 minifyOutput = true
 
 [[menu.main]]
-identifier = "categories"
-name = "archives"
+identifier = "archives"
+name = "Archives"
 url = "/archives/"
 weight = 10
 
 [[menu.main]]
 identifier = "search"
-name = "search"
+name = "Search"
 url = "/search/"
 weight = 20
 
 [[menu.main]]
 identifier = "tags"
-name = "tags"
+name = "Tags"
 url = "/tags/"
 weight = 30
-
-[[menu.main]]
-identifier = "Github"
-name = "attt"
-url = "https://github.com/attt"
-weight = 40
