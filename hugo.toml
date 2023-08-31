@@ -1,4 +1,69 @@
 baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+languageCode = 'zh-cn'
+title = "Tichia's blog"
 theme = 'PaperMod'
+
+[params]
+defaultTheme = "auto"
+env = "production"
+description = "blog blog blog"
+keywords = [ "Blog", "Tichia", "PaperMod" ]
+author = "Tichia"
+ShowReadingTime = true
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+disableSpecial1stPost = false
+disableScrollToTop = false
+comments = false
+hidemeta = false
+hideSummary = false
+showtoc = false
+tocopen = false
+
+[outputs]
+home = [ "HTML", "RSS", "JSON" ]
+
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+distance = 1_000
+threshold = 0.4
+minMatchCharLength = 0
+keys = [ "title", "permalink", "summary", "content" ]
+
+[params.assets]
+favicon = "/images/favicon.png"
+
+[minify]
+disableXML = true
+minifyOutput = true
+
+[[menu.main]]
+identifier = "categories"
+name = "archives"
+url = "/archives/"
+weight = 10
+
+[[menu.main]]
+identifier = "search"
+name = "search"
+url = "/search/"
+weight = 20
+
+[[menu.main]]
+identifier = "tags"
+name = "tags"
+url = "/tags/"
+weight = 30
+
+[[menu.main]]
+identifier = "Github"
+name = "attt"
+url = "https://github.com/attt"
+weight = 40
