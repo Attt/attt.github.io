@@ -92,6 +92,7 @@ options:
 
 - large model
 ![large model](/images/whisper_cpp_manual/scrshot03.jpg)
+
 --- 
 
 **[参考]*
