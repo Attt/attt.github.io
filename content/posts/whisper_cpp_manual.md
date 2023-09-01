@@ -85,6 +85,13 @@ options:
 ./main -osrt -m ./models/ggml-large.bin -f ~/audio_lesson_01_output.wav -l ja
 ```
 
+### 效果
+
+- base model
+![base model](/images/whisper_cpp_manual/scrshot02.jpg)
+
+- large model
+![large model](/images/whisper_cpp_manual/scrshot03.jpg)
 --- 
 
 **[参考]*
