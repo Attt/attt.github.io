@@ -25,8 +25,9 @@ hideSummary = false
 showtoc = false
 tocopen = false
 
-[outputs]
-home = [ "HTML", "RSS", "JSON" ]
+[params.homeInfoParams]
+Title = "👀"
+Content = ""
 
 [params.fuseOpts]
 isCaseSensitive = false
@@ -39,6 +40,10 @@ keys = [ "title", "permalink", "summary", "content" ]
 
 [params.assets]
 favicon = "/images/favicon.png"
+
+
+[outputs]
+home = [ "HTML", "RSS", "JSON" ]
 
 [minify]
 disableXML = true
