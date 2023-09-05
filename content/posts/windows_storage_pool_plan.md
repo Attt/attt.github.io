@@ -6,11 +6,11 @@ tags: ["windows server", "storage pool"]
 draft: false
 ---
 
-### 目标
+## 目标
 - SSD分层加速的raid1存放重要文件
 - 大容量raid0存放HTPC的媒体文件
 
-### 物理磁盘
+## 物理磁盘
 |#|容量 | 类型|
 |--| -- | -- |
 | #1| 128 GB | SSD |
@@ -22,7 +22,7 @@ draft: false
 
 ![scrshot](/images/windows_storage_pool_plan/scrshot02.png)
 
-### 目标存储布局
+## 目标存储布局
 |#| 可用容量 | 虚拟类型| 物理磁盘(组合) |
 |--| -- | -- | -- |
 | #1| ~120 GB | simple (简单raid0) | #2(130 GB) + #1(18 GB)|
@@ -31,7 +31,7 @@ draft: false
 
 ![scrshot](/images/windows_storage_pool_plan/scrshot01.png)
 
-### 实现步骤
+## 实现步骤
 **序号为物理磁盘序号*
 1. 创建pool
 2. 按照Manual方式添加#5到pool中
@@ -46,15 +46,18 @@ draft: false
 
 ![scrshot](/images/windows_storage_pool_plan/scrshot03.png)
 
-### 使用命令
+---
+
+***[备注]***
+
 1. 修改pool中的磁盘使用类型
 ```powershell
 Get-PhysicalDisk -SerialNumber "{serial_number}" | Set-PhysicalDisk -Usage "AutoSelect"
 Get-PhysicalDisk -SerialNumber "{serial_number}" | Set-PhysicalDisk -Usage "ManualSelect"
 ```
 
----------
+---
 
-**[参考]*
+***[参考]***
 
 - [https://learn.microsoft.com/zh-cn/powershell/module/storage/set-physicaldisk?view=windowsserver2022-ps](https://learn.microsoft.com/zh-cn/powershell/module/storage/set-physicaldisk?view=windowsserver2022-ps)

@@ -5,20 +5,20 @@ tags: ["whisper.cpp", "ggml", "audio to text", "asr", "manual"]
 draft: false
 ---
 
-### 输出16bit原始音频
+## 输出16bit原始音频
 
 ```bash
 ffmpeg -i audio.mp4 -ar 16000 -ac 1 -c:a pcm_s16le audio_output.wav
 ```
 
-### clone & cd
+## clone & cd
 
 ```bash
 git clone https://github.com/ggerganov/whisper.cpp.git
 cd whisper.cpp
 ```
 
-### ggml模型下载
+## ggml模型下载
 
 ```bash
 bash ./models/download-ggml-model.sh {model}
@@ -29,7 +29,7 @@ bash ./models/download-ggml-model.sh {model}
 
 *带en的model仅支持英文*
 
-### 使用
+## 使用
 
 ```bash
 $ ./main -h
@@ -78,14 +78,14 @@ options:
   -ls,       --log-score         [false  ] log best decoder scores of tokens
 ```
 
-### 例
+## 例
 
 ```bash
 # 输入audio_lesson_01_output.wav, 日语, ggml-large模型, srt文件输出
 ./main -osrt -m ./models/ggml-large.bin -f ~/audio_lesson_01_output.wav -l ja
 ```
 
-### 效果
+## 效果
 
 - base model
 ![base model](/images/whisper_cpp_manual/scrshot02.jpg)
@@ -95,6 +95,6 @@ options:
 
 --- 
 
-**[参考]*
+***[参考]***
 
 - [https://github.com/ggerganov/whisper.cpp](https://github.com/ggerganov/whisper.cpp)
