@@ -1,5 +1,5 @@
 ---
-title: "Hyper-V搭Google One VPN全局代理"
+title: "Hyper-V搭Google One VPN局域网代理"
 date: 2023-09-05T20:29:47+08:00
 searchHidden: false
 tags: ["vpn", "proxy", "Google One", "Google One VPN"]
@@ -18,17 +18,23 @@ draft: false
 ### 方法
 - 在Hyper-V中部署[android-x86](https://www.android-x86.org)
 
-始终自动启动:
+配置始终自动启动:
 ![auto boot](/images/google_one_vpn/scrshot02.png)
 
-强制停止:
+配置强制停止:
 ![auto stop](/images/google_one_vpn/scrshot03.png)
 
 - 在androidx86中安装Google One, Every Proxy
 
 ![every proxy](/images/google_one_vpn/scrshot04.png)
 
+配置自动启动
+![auto start](/images/google_one_vpn/scrshot04-1.png)
+
 - 在路由器配置规则, 目的是让Google One VPN地区检测通过
+
+**Google One VPN会在初次连接/每消耗10G流量时检测当前的地区是否合法**
+
 ```yaml
 # clash
 rules:
@@ -40,7 +46,7 @@ rules:
 
 - 启动Google One VPN, Every Proxy
 
-- 在代理中配置
+- 在局域网客户端的代理中配置
 ```javascript
 // clash for windows mixin in javascript
 module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
@@ -78,6 +84,7 @@ module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
 ![ip test](/images/google_one_vpn/scrshot06.png)
 
 速度的话，湾湾的还行，小日子的延迟高些
+
 ![speed test](/images/google_one_vpn/scrshot07.png)
 ---
 
