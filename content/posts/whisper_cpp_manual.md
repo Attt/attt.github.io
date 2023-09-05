@@ -1,5 +1,5 @@
 ---
-title: "使用whisper_cpp听译字幕"
+title: "使用whisper.cpp听译字幕"
 date: 2023-09-01T14:56:18+08:00
 tags: ["whisper.cpp", "ggml", "audio to text", "asr", "manual"]
 draft: false
@@ -96,4 +96,5 @@ options:
 --- 
 
 **[参考]*
-[https://github.com/ggerganov/whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+
+- [https://github.com/ggerganov/whisper.cpp](https://github.com/ggerganov/whisper.cpp)

@@ -55,5 +55,6 @@ Get-PhysicalDisk -SerialNumber "{serial_number}" | Set-PhysicalDisk -Usage "Manu
 
 ---------
 
-*[参考]*
+**[参考]*
+
 - [https://learn.microsoft.com/zh-cn/powershell/module/storage/set-physicaldisk?view=windowsserver2022-ps](https://learn.microsoft.com/zh-cn/powershell/module/storage/set-physicaldisk?view=windowsserver2022-ps)
