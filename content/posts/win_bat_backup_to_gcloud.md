@@ -48,6 +48,8 @@ echo finished!
 ### 解释
 脚本首先复制了`files_dir`，等于创建了一个快照，防止文件的handler被占用。然后使用7z对这个快照压缩打包，打包的目的地还是当前工作目录`work_dir`，不直接写到cloud是因为打包过程中可能会产生部分写入。最后将打包完成的文件移动到cloud并且清理中间文件和cloud上的历史备份。
 
+
+
 --- 
 
 ***[备注]***
@@ -56,6 +58,7 @@ echo finished!
 ```bat
 set "archive_date=%date:~3,4%%date:~8,2%%date:~11,2%"
 ```
+![echo date](/images/win_bat_backup_to_gcloud/scrshot03.png)
 
 2. `xcopy`命令中`/i`表示目标文件夹不存在则会创建，`/s`拷贝非空的文件夹和子文件`/e`拷贝包含空文件夹和子文件，通常组合使用。
 ```bat
