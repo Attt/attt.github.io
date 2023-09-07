@@ -46,6 +46,12 @@ cloudflared.exe service install {token}
 "C:\Program Files (x86)\cloudflared\cloudflared.exe" tunnel --protocol quic --logfile "C:\Program Files (x86)\cloudflared\info.log" --loglevel info --retries 10 run --token {token}
 ```
 
+或者使用config文件:
+```cmd
+:: run with config file
+"C:\Program Files (x86)\cloudflared\cloudflared.exe" tunnel --config "C:\Program Files (x86)\cloudflared\config.yml" run
+```
+
 ## rdp服务
 
 ### 在客户端下载cloudflared
