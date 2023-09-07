@@ -43,7 +43,7 @@ cloudflared.exe service install {token}
 *参数参考[tunnel arguments](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/install-and-setup/tunnel-guide/local/local-management/arguments/)*，例：
 ```cmd
 :: quic协议/info logging/logging to file/10 times retries
-"C:\Program Files (x86)\cloudflared\cloudflared.exe" tunnel run --protocol quic --logfile "C:\Program Files (x86)\cloudflared\info.log" --loglevel info --retries 10 --token {token}
+"C:\Program Files (x86)\cloudflared\cloudflared.exe" tunnel --protocol quic --logfile "C:\Program Files (x86)\cloudflared\info.log" --loglevel info --retries 10 run --token {token}
 ```
 
 ## rdp服务
