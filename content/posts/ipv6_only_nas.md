@@ -2,7 +2,7 @@
 title: "通过cf zero trust tunnel访问windows server内网服务"
 date: 2023-09-01T09:28:53+08:00
 searchHidden: false
-tags: ["cloud flare", "zero trust tunnel", "NAT traversal", "windows server"]
+tags: ["cloud flare", "zero trust tunnel", "NAT traversal", "windows server", "manual"]
 draft: false
 ---
 

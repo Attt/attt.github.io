@@ -2,7 +2,7 @@
 title: "windows下通过7z打包备份文件到Google drive"
 date: 2023-09-06T22:32:14+08:00
 searchHidden: false
-tags: ["backup", "batch", "Google Drive", "7z"]
+tags: ["backup", "batch", "Google Drive", "7z", "manual"]
 draft: false
 ---
 ## Google drive客户端设置

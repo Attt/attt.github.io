@@ -2,7 +2,7 @@
 title: "在windows server中创建混合布局的storage pool"
 date: 2023-08-31T15:12:40+08:00
 searchHidden: false
-tags: ["windows server", "storage pool"]
+tags: ["windows server", "storage pool", "manual"]
 draft: false
 ---
 

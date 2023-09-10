@@ -2,7 +2,7 @@
 title: "Hyper-V搭Google One VPN局域网代理"
 date: 2023-09-05T20:29:47+08:00
 searchHidden: false
-tags: ["vpn", "proxy", "Google One", "Google One VPN"]
+tags: ["vpn", "proxy", "Google One", "Google One VPN", "manual"]
 draft: false
 ---
 
