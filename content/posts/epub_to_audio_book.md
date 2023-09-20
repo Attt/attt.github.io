@@ -1,13 +1,13 @@
 ---
-title: "EPUB to audio book"
+title: "epub电子书按章节转为audio book"
 date: 2023-09-20T17:10:34+08:00
-tags: ["epub", "audio book", "tts", "text to speech"]
+tags: ["epub", "audio book", "tts", "text to speech", "manual"]
 draft: false
 ---
 
 ## epub to text
 
-### clone epub-to-text
+### clone *epub-to-text*
 
 ```shell
 git clone https://github.com/Projet-TAMIS/epub-to-text.git
@@ -27,21 +27,23 @@ epubToText.extractTo('xxx/xxx.epub', 'xxx/output/', (err) => {
 })
 ```
 
-### run with node
+### run with *node*
 
 ```shell
 node main.js
 ```
 
-## text to speech (Microsoft Edge TTS service)
+## text to speech
 
-### install edge-tts
+*edge-tts*基于Microsoft Edge TTS service
+
+### install *edge-tts*
 
 ```shell
 pip3 install edge-tts
 ```
 
-### list avaiable voices(optional)
+### list avaiable voices (optional)
 
 ```shell
 edge-tts --list-voices
