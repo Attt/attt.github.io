@@ -26,17 +26,7 @@ npm install
 
 ### create `main.js`
 
-```javascript
-'use strict';
-
-var EPUBToText = require('./index');
-
-var epubToText = new EPUBToText;
-epubToText.extractTo('xxx/xxx.epub', 'xxx/output/', (err) => {
-  // files are in folder, name according to the following convention:
-  // sequence number + original epub file name + .txt
-})
-```
+{{< gist Attt 189815c084d51964c3de9980d40d909b >}}
 
 ### run with *node*
 

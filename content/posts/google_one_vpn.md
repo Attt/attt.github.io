@@ -33,46 +33,10 @@ draft: false
 
 **Google One VPN会在初次连接/每消耗10G流量时检测当前的地区是否合法**, 总之`cloud.cupronickel.goog`这个规则很重要, 并且如果不想消耗机场流量UDP流量最好直连。
 
-```yaml
-# clash
-rules:
-  - DOMAIN-KEYWORD,cloud.cupronickel.goog,🇯🇵 日本
-  - DOMAIN-KEYWORD,-pa.googleapis.com,🇯🇵 日本
-  - DOMAIN-KEYWORD,g-tun,🇯🇵 日本
-  - DOMAIN-KEYWORD,gstatic,🇯🇵 日本
-```
+{{< gist Attt 6c984cd973ec13ef8d404aab414273b9 >}}
 
 ### 添加到局域网客户端的代理配置
-```javascript
-// clash for windows mixin in javascript
-module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
-  // content.rules.unshift("DOMAIN-KEYWORD,bilibili,DIRECT"); // domain keyword
-  // content.rules.unshift("PROCESS-NAME,qbittorrent.exe,DIRECT"); // process name
-  content.rules.unshift("GEOIP,CN,DIRECT"); // geoip
-
-  // add google one proxy
-  googleOneProxies = []
-  
-  content.proxies.push({
-    "name": "Google One",
-    "type": "socks5", // every proxy 协议
-    "port": "1080", // every proxy 端口
-    "server": "192.168.2.231" // androidx86局域网地址
-  })
-  googleOneProxies.push("Google One")
-
-  content['proxy-groups'].push({
-      'name': 'Google One G',
-      'type': 'fallback',
-      'proxies': googleOneProxies,
-      'interval': 300,
-      'url': 'http://cp.cloudflare.com/generate_204'
-  })
-  content['proxy-groups'][0].proxies.unshift("Google One G");
-
-  return content;
-}
-```
+{{< gist Attt 5f40e4a20537cc1f516043bf025a654f >}}
 
 ## 检查
 
