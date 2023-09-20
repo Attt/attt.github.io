@@ -13,6 +13,15 @@ draft: false
 git clone https://github.com/Projet-TAMIS/epub-to-text.git
 ```
 
+### install dependencies
+
+先安装nodeJS。
+
+再拉依赖
+```shell
+npm install
+```
+
 ### create `main.js`
 
 ```javascript
@@ -23,7 +32,7 @@ var EPUBToText = require('./index');
 var epubToText = new EPUBToText;
 epubToText.extractTo('xxx/xxx.epub', 'xxx/output/', (err) => {
   // files are in folder, name according to the following convention:
-  //   sequence number + original epub file name + .txt
+  // sequence number + original epub file name + .txt
 })
 ```
 
