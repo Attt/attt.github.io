@@ -68,7 +68,7 @@ To manage a service:
 - directory = 运行环境，配置文件或者日志一类的如果用相对路径的话，这个目录就是相对路径的起始路径
 - arguments = 参数(Unix: -x, GNU: --xx, BSD: xy)
 
-### 可执、脚本行文件服务化（exe、bat、ps）
+### 可执行文件/脚本服务化（exe、bat、ps）
 
 ![exe](/images/nssm_manual/scrshot01.png)
 
