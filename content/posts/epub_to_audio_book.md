@@ -102,6 +102,8 @@ edge-tts --voice ja-JP-NanamiNeural --text "$(cat xxx/ouput/chapter1.txt)" --wri
 
 the female Japanese voice and US voice of MS Edge is almost perfect. 🥸
 
+{{< gist Attt e1d071f123411f0accb07def46be47d6 >}}
+
 ---
 
 ***[参考]***
