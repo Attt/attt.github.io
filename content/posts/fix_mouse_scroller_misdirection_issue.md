@@ -1,7 +1,7 @@
 ---
 title: "修复鼠标滚轮方向错乱的毛病"
 date: 2023-09-26T17:04:49+08:00
-tags: ["trial", "fix", "hardware", "device"]
+tags: ["trial", "fix", "hardware", "device", "mouse"]
 draft: false
 ---
 ## 现象
