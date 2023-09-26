@@ -8,6 +8,8 @@ draft: false
 
 快速滚动滚轮方向会突然反一下，调节滚轮速度和方向无法修复。
 
+![repetition side step](/images/fix_mouse_scroller_misdirection_issue/WWDn0kw.gif)
+
 ## 方法
 
 向滚轮缝隙疯狂吹气。（用吹尘枪除尘器吹气炝吹灰枪吹风枪除尘气动工具套装气泵喷枪或者嘴都可以）
