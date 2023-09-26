@@ -56,7 +56,7 @@ make & make install
 
 ### convert
 
-*epub2txt2*的参数`-a`(`--ascii`)可以忽略注音，这在很多语言里还是很实用的，比如日文的假名注音。这些注音如果不忽略的话在后续的tts处理时会影响效果（同样的词读两遍）。
+~~*epub2txt2*的参数`-a`(`--ascii`)可以忽略注音，这在很多语言里还是很实用的，比如日文的假名注音。这些注音如果不忽略的话在后续的tts处理时会影响效果（同样的词读两遍）。~~（实测不灵🙅）
 
 ```shell
 epub2txt -a xxx.epub > xxx.txt
@@ -75,6 +75,31 @@ split -l 888 output.txt -d -a 2 output__
 - `-l`: 单个文件行数
 - `-d`: 以数字命名输出文件
 - `-a`: 数字位数
+
+## 使用[epub2splittxt](https://github.com/gtas5/epub2splittxt.git)转epub文本
+
+这个仓库比较老，使用的是python2，而且不支持epub3。（epub3中不强制要求有toc.ncx作为目录）
+
+功能上也不支持指定输出目录。
+
+### clone *epub2splittxt*
+
+```shell
+git clone https://github.com/gtas5/epub2splittxt.git
+```
+
+### install pip2 for python2
+
+```shell
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+```
+
+### convert
+
+```shell
+python2 epub2splittxt.py a.epub
+```
+
 
 ## text to speech
 
@@ -98,11 +123,37 @@ edge-tts --list-voices
 edge-tts --voice ja-JP-NanamiNeural --text "$(cat xxx/ouput/chapter1.txt)" --write-media  xxx/ouput/chapter1.mp3 --write-subtitles xxx/ouput/chapter1.vtt
 ```
 
-## conclusion
+## 整合版
 
-the female Japanese voice and US voice of MS Edge is almost perfect. 🥸
+### clone [Attt/epub2audiobook](https://github.com/Attt/epub2audiobook)
+
+```shell
+git clone https://github.com/Attt/epub2audiobook
+```
+
+主要是优化了下[epub2splittxt](https://github.com/gtas5/epub2splittxt.git)：
+
+1. 用python3重写
+2. 支持epub3
+3. 删除注音
+4. 支持指定目录
+5. 过滤掉可能的目录文本以及链接或者图片标记
+
+### convert
+
+一条龙转换：
+
+```shell
+./epub-tts.sh /path/to/epub.epub /path/to/output/
+```
+
+脚本：
 
 {{< gist Attt e1d071f123411f0accb07def46be47d6 >}}
+
+## conclusion
+
+有一说一，MS的TTS是真的吊。 🥸
 
 ---
 
@@ -111,3 +162,5 @@ the female Japanese voice and US voice of MS Edge is almost perfect. 🥸
 - [Projet-TAMIS/epub-to-text](https://github.com/Projet-TAMIS/epub-to-text.git)
 - [kevinboone/epub2txt2](https://github.com/kevinboone/epub2txt2.git)
 - [rany2/edge-tts](https://github.com/rany2/edge-tts)
+- [epub2splittxt](https://github.com/gtas5/epub2splittxt.git)
+- [Attt/epub2audiobook](https://github.com/Attt/epub2audiobook)
