@@ -123,7 +123,9 @@ edge-tts --list-voices
 edge-tts --voice ja-JP-NanamiNeural --text "$(cat xxx/ouput/chapter1.txt)" --write-media  xxx/ouput/chapter1.mp3 --write-subtitles xxx/ouput/chapter1.vtt
 ```
 
-## 整合版
+## 升级版
+
+因为现有的工具用起来实在太麻烦，所以我这里写了一个升级版
 
 ### clone [Attt/epub2audiobook](https://github.com/Attt/epub2audiobook)
 
@@ -131,25 +133,17 @@ edge-tts --voice ja-JP-NanamiNeural --text "$(cat xxx/ouput/chapter1.txt)" --wri
 git clone https://github.com/Attt/epub2audiobook
 ```
 
-主要是优化了下[epub2splittxt](https://github.com/gtas5/epub2splittxt.git)：
+**feature**:
 
 1. 用python3重写
-2. 支持epub3
-3. 删除注音
-4. 支持指定目录
-5. 过滤掉可能的目录文本以及链接或者图片标记
-
-### convert
-
-一条龙转换：
-
-```shell
-./epub-tts.sh /path/to/epub.epub /path/to/output/
-```
-
-脚本：
-
-{{< gist Attt e1d071f123411f0accb07def46be47d6 >}}
+2. 兼容epub3
+3. 纯文本提取
+4. 删除注音
+5. 支持自动语言选择
+6. 支持apple tts
+7. 支持选择输入/输出目录
+8. 输出音频带ID3Tag
+9. 封面提取
 
 ## conclusion
 
