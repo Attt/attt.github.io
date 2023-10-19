@@ -25,6 +25,11 @@ bash ./models/download-ggml-model.sh {model}
 ```
 *可用模型*
 
+```bash
+# 查看可用模型
+bash ./models/download-ggml-model.sh
+```
+
 ![available model](/images/whisper_cpp_manual/scrshot01.png)
 
 *带en的model仅支持英文*
@@ -32,6 +37,8 @@ bash ./models/download-ggml-model.sh {model}
 ## 使用
 
 ```bash
+make
+
 $ ./main -h
 
 usage: ./main [options] file0.wav file1.wav ...
