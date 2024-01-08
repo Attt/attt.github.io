@@ -18,10 +18,29 @@ sandisk在存储池中的分配为：10G simple + 100G mirror ssd tier，其中s
 
 删除逻辑卷必须通过powershell操作，图形操作会报错。
 
-2. 删除simple类型的虚拟磁盘(virtual disk)
-3. 删除失联的物理磁盘(physical disk)
-4. 修复其他报⚠️的虚拟磁盘
+![scrshot02](/images/windows_storage_pool_repair/scr02.png)
 
+1. 删除simple类型的虚拟磁盘(virtual disk)
+2. 删除失联的物理磁盘(physical disk)
+3. 修复其他报⚠️的虚拟磁盘
+
+修复前要把物理盘切为'auto'模式
+
+![scrshot03](/images/windows_storage_pool_repair/scr03.png)
+
+开始修复：
+
+![scrshot01](/images/windows_storage_pool_repair/scr01.png)
+
+powershell查看进度
+
+```powershell
+Get-StorageJob
+```
+
+4. 创建新的simple盘
+
+创建前最好还是把相关物理盘切回'manual'模式
 
 ---
 
