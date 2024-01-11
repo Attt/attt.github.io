@@ -1,8 +1,8 @@
 ---
-title: "希捷硬盘PowerChoice电源管理"
+title: "希捷硬盘PowerChoice(EPC)电源管理"
 date: 2024-01-11T12:11:51+08:00
 searchHidden: false
-tags: ["linux", "seagate", "power management", "shell", "manual"]
+tags: ["linux", "seagate", "power management", "PowerChoice", "EPC", "shell", "manual"]
 draft: false
 ---
 
@@ -36,6 +36,13 @@ link: [https://www.seagate.com/ca/en/support/software/seachest/](https://www.sea
 ```
 
 ![scr03](/images/seagate_power_management/scr03.png)
+
+
+4. 实践
+
+如果在pve中`/dev/sdb`整块作为冷储存设备直通给`VM1`这个虚拟机，可以在pve宿主机设置待机后进入`standby_z`模式，这个模式下磁盘电机也会停转。达到的效果是当冷储存处理专用的VM关机状态时，磁盘最终完全停转，降噪+节能。
+
+![scr05](/images/seagate_power_management/scr05.png)
 
 
 ps. seagate的EXOS盘都是不支持APM的
