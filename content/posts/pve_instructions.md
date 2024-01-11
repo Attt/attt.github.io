@@ -69,8 +69,8 @@ iface vmbr0 inet static
  
 ![scr01](/images/pve_instructions/scr01.png)
 ![scr02](/images/pve_instructions/scr02.png)
-![scr03](/images/pve_instructions/scr02.png)
-![scr04](/images/pve_instructions/scr02.png)
+![scr03](/images/pve_instructions/scr03.png)
+![scr04](/images/pve_instructions/scr04.png)
 
 ## 系统安装
 基本和物理机安装没区别。
@@ -78,6 +78,17 @@ iface vmbr0 inet static
 开机安装，安装到选择磁盘的时候选择加载驱动，然后找到virtio那个盘，选`{架构}`目录下对应的系统版本目录，比如:`amd64/win11`。
 
 最后启动进入系统后，执行virtio盘中的可执行文件，打上其他驱动。
+
+## 其他
+如果通过远程桌面登录过，那么pve的acpi关机指令不会生效，需要通过QEMU guest agent来完成关机。
+
+安装：
+
+执行virtio盘中的`guest-agent`目录对应安装程序。
+
+VM设置guest agent启用：
+
+![scr05](/images/pve_instructions/scr05.png)
 
 ---
 ***[参考]***
