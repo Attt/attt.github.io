@@ -21,7 +21,7 @@ echo "deb [arch=amd64] http://download.proxmox.com/debian/pve buster pve-no-subs
 改为：
 
 ```bash
-echo "deb [arch=amd64] deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-install-repo.list
+echo "deb [arch=amd64] https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-install-repo.list
 ```
 
 gpg版本改为：
