@@ -90,6 +90,19 @@ VM设置guest agent启用：
 
 ![scr05](/images/pve_instructions/scr05.png)
 
+
+# 配置debian/ubuntu
+
+## Serial Terminal
+
+宿主机执行:
+```bash
+# 101是vm的序号
+qm set 101 -serial0 socket
+```
+接下来参考：[Serial Terminal - Configuration on the guest](https://pve.proxmox.com/wiki/Serial_Terminal#Configuration_on_the_guest)
+
+
 ---
 ***[参考]***
 
@@ -98,3 +111,4 @@ VM设置guest agent启用：
 - [https://pve.proxmox.com/wiki/Network_Configuration#_default_configuration_using_a_bridge](https://pve.proxmox.com/wiki/Network_Configuration#_default_configuration_using_a_bridge)
 - [https://github.com/bravomail/tinier11](https://github.com/bravomail/tinier11)
 - [https://github.com/virtio-win/virtio-win-pkg-scripts](https://github.com/virtio-win/virtio-win-pkg-scripts)
+- [https://pve.proxmox.com/wiki/Serial_Terminal](https://pve.proxmox.com/wiki/Serial_Terminal)
