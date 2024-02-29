@@ -102,6 +102,25 @@ qm set 101 -serial0 socket
 ```
 接下来参考：[Serial Terminal - Configuration on the guest](https://pve.proxmox.com/wiki/Serial_Terminal#Configuration_on_the_guest)
 
+# 硬件直通
+
+参考: [Proxmox VE pve硬盘直通](https://foxi.buduanwang.vip/virtualization/1754.html/)
+
+## 硬盘
+
+备忘：
+```bash
+ls -la /dev/disk/by-id/|grep -v dm|grep -v lvm|grep -v part
+qm set <vmid> --scsiX /dev/disk/by-id/xxxxxxx
+qm set <vmid> --delete scsiX
+```
+
+## 硬盘控制器
+
+备忘：
+```bash
+ls -la /sys/dev/block/|grep -v loop |grep -v dm
+```
 
 ---
 ***[参考]***
