@@ -7,11 +7,11 @@ draft: false
 
 ## 下载&安装[Charles Proxy](https://www.charlesproxy.com/download/)
 
-![charles proxy download page](/images/crack_charles_proxy/scrshot01.png)
+![charles proxy download page](/images/crack_charles_proxy/scrshot01.jpg)
 
 ## 下载[JDI_GUI](https://java-decompiler.github.io/)
 
-![JDI_GUI download page](/images/crack_charles_proxy/scrshot02.png)
+![JDI_GUI download page](/images/crack_charles_proxy/scrshot02.jpg)
 
 ## crack
 
@@ -29,11 +29,11 @@ draft: false
 
 看逻辑定位到认证类：
 
-![JDI_GUI Main.class](/images/crack_charles_proxy/scrshot03.png)
+![JDI_GUI Main.class](/images/crack_charles_proxy/scrshot03.jpg)
 
 比如这里是`p.b()`:
 
-![JDI_GUI p.class](/images/crack_charles_proxy/scrshot04.png)
+![JDI_GUI p.class](/images/crack_charles_proxy/scrshot04.jpg)
 (no thx :D )
 
 ### `p.class`の中身を書き換え
@@ -77,7 +77,7 @@ javac --source 11  --target 11 -encoding UTF-8 p.java -d .
 `--source`和`--target`用来指定编译的java版本
 
 
-![java version](/images/crack_charles_proxy/scrshot05.png)
+![java version](/images/crack_charles_proxy/scrshot05.jpg)
 
 
 3. 打包好的`p.class`拷贝回`charles.jar`
@@ -90,7 +90,7 @@ jar -uvf ./charles.jar com/xk72/charles/p.class
 
 再用`JDI_GUI`检查一下，没问题就覆盖掉原来的`charles.jar`
 
-![JDI_GUI modified p.class](/images/crack_charles_proxy/scrshot06.png)
+![JDI_GUI modified p.class](/images/crack_charles_proxy/scrshot06.jpg)
 
 
 ***MacOS***
@@ -103,7 +103,7 @@ sudo xattr -rd com.apple.quarantine '/Applications/Charles.app'
 
 ## conclusion
 
-![charles proxy](/images/crack_charles_proxy/scrshot07.png)
+![charles proxy](/images/crack_charles_proxy/scrshot07.jpg)
 
 ---
 
