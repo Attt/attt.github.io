@@ -1,64 +1,60 @@
-baseURL = 'http://example.org/'
-languageCode = 'zh-cn'
-title = "Tichia's blog"
-theme = 'PaperMod'
+theme = "minindieMod"
+title = "Attt's Blog"
+baseURL = "https://attt.github.io"
+copyright = "2024 Attt's blog Powered by Hugo & minindie"
 
+# Parameters
 [params]
-defaultTheme = "auto"
-env = "production"
-description = "blog blog blog"
-keywords = [ "Blog", "Tichia", "PaperMod" ]
-author = "Tichia"
-ShowReadingTime = true
-ShowShareButtons = false
-ShowPostNavLinks = true
-ShowBreadCrumbs = false
-ShowCodeCopyButtons = true
-ShowWordCount = true
-ShowRssButtonInSectionTermList = true
-UseHugoToc = true
-disableSpecial1stPost = false
-disableScrollToTop = false
-comments = false
-hidemeta = false
-hideSummary = false
-showtoc = false
-tocopen = false
+  subtitle = "Tech otakus save the world"
+  dateFmt = "Monday, January 2, 2006"
+  # tagPostOlderThanXDays = 555 # To display a message if the post is older than this number of days.
+  # xslpath = "/rss.xsl" # If you want to theme your RSS feed. Optional.
 
-[params.fuseOpts]
-isCaseSensitive = false
-shouldSort = true
-location = 0
-distance = 1_000
-threshold = 0.4
-minMatchCharLength = 0
-keys = [ "title", "permalink", "summary", "content" ]
+[params.author]
+  name = "Attt's blog" # required for h-card
+  email = "atpexgo@gmail.com"
+  avatar = "/images/favicon.png"
+  bio = "A bio description<br />Html is accepted."
 
-[params.assets]
-favicon = "/images/favicon.png"
+# [params.indieweb]
+#   authorizationEndpoint = "https://indieauth.com/auth"
+#   tokenEndpoint = "https://tokens.indieauth.com/token"
+#   webmentionEndpoint = "https://webmention.io/your.domain.tld/webmention"
+#   relmepgp = "/path/to//public/key.asc"
+#   [[params.indieweb.relme]]
+#       url = "https://"
+#   [[params.indieweb.relme]]
+#       url = "https://"
 
+# Menus:
+## Header
+[menu]
+  [[menu.main]]
+        identifier = "posts"
+        name = "Posts"
+        url = "/posts/"
+        weight = 1
 
-[outputs]
-home = [ "HTML", "RSS", "JSON" ]
+#   [[menu.main]]
+#         identifier = "categories"
+#         name = "Categories"
+#         url = "/categories/"
+#         weight = 2
 
-[minify]
-disableXML = true
-minifyOutput = true
+  [[menu.main]]
+        identifier = "tags"
+        name = "Tags"
+        url = "/tags/"
+        weight = 3
 
-[[menu.main]]
-identifier = "archives"
-name = "Archives"
-url = "/archives/"
-weight = 10
+#   [[menu.main]]
+#         identifier = "about"
+#         name = "About"
+#         url = "/about/"
+#         weight = 4
 
-[[menu.main]]
-identifier = "search"
-name = "Search"
-url = "/search/"
-weight = 20
-
-[[menu.main]]
-identifier = "tags"
-name = "Tags"
-url = "/tags/"
-weight = 30
+## Footer
+  [[menu.footer]]
+        name = "Github"
+        url = "https://github.com/Attt"
+        weight = 1
